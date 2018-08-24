@@ -1,3 +1,5 @@
+package day7;
+
 /**
  * 은행 계좌 관리 어플리케이션
  * 
@@ -15,13 +17,21 @@ public class AMS {
 		manager.add(account);
 		manager.add(new Account("2222-2222-3333", "박지성", 1111, 200000));
 		manager.add(new Account("2222-3333-3333", "김기정", 1234, 300000));
-		manager.add(new Account("2222-3333-4444", "정지원", 1234, 100000));
-		manager.add(new Account("2222-2222-4444", "정지원", 1234, 200000));
+
+		// Up Casting
+		manager.add(new MinusAccount("9999-8888-7777", "김대출", 1111, 1000, 1000000));
+		manager.add(new MinusAccount("9999-8888-5555", "홍길동", 1111, 1000, 1000000));
+
+		manager.add(new Account("2222-5555-3333", "박찬호", 1111, 300000));
 
 		// 매니저의 리스트 기능 실행
 		Account[] list = manager.list();
 		for (Account account2 : list) {
-			System.out.println(account2.toString());
+			if (account2 instanceof MinusAccount) {
+				System.out.println("마이너스계좌\t"+account2.toString());
+			}else {
+				System.out.println("입출금계좌\t"+account2.toString());
+			}
 		}
 		System.out.println();
 

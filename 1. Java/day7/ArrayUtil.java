@@ -1,3 +1,4 @@
+package day7;
 /**
  * 배열 관련한 공통 기능 정의
  * 
@@ -52,19 +53,6 @@ public class ArrayUtil {
 			temp = src[i];
 			src[i] = src[src.length - i - 1];
 			src[src.length - i - 1] = temp;
-		}
-	}
-
-	public static void main(String[] args) {
-		int[] arr = { 1, 9, 23, 6, 7 };
-		int[] copy = ArrayUtil.duplicate(arr, 5);
-		for (int i : copy) {
-			System.out.print(i + " ");
-		}
-		System.out.println();
-		ArrayUtil.sort(arr);
-		for (int i : arr) {
-			System.out.print(i + " ");
 		}
 	}
 }
