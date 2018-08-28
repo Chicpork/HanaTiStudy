@@ -1,4 +1,6 @@
-package day7;
+package day9;
+
+import day7.ArrayUtil;
 
 public class LottoManager {
 	private int[][] lottos;
@@ -11,6 +13,13 @@ public class LottoManager {
 	public LottoManager() {
 		this(2000, 1);
 		this.totalNum = money / lottoPrice;
+		this.lottos = new int[totalNum][7];
+	}
+	
+	public LottoManager(int money) {
+		this.money = money;
+		this.totalNum = money / lottoPrice;
+		this.manualNum = totalNum;
 		this.lottos = new int[totalNum][7];
 	}
 
@@ -70,5 +79,15 @@ public class LottoManager {
 			}
 		}
 		return error;
+	}
+	
+	public void printLotto() {
+		System.out.println("구매한 로또 번호 :");
+		for(int[] i : lottos) {
+			for(int j : i) {
+				System.out.print(j+" ");
+			}
+			System.out.println();
+		}
 	}
 }

@@ -55,4 +55,12 @@ public class ArrayUtil {
 			src[src.length - i - 1] = temp;
 		}
 	}
+	public static int[] stringToInt(String string,String type) {
+		String[] arr = string.split(type);
+		int[] number = new int[arr.length];
+		for(int i=0;i<number.length;i++) {
+			number[i] = Integer.parseInt(arr[i]);
+		}
+		return number;
+	}
 }
