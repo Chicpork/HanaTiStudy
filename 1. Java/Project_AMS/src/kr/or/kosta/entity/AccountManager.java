@@ -7,12 +7,14 @@ import java.util.Hashtable;
 import java.util.List;
 
 /**
- * 배열을 이용한 은행 계좌 관리
+ * 해쉬테이블을 이용한 은행 계좌 관리<br>
+ * 해쉬테이블에 <계좌번호, 해당 계좌 정보> 순으로 저장한다.
  * 
  * @author 정지원
- *
  */
 public class AccountManager {
+	
+	// 계좌를 저장할 공간을 해쉬 테이블로 선언
 	private Hashtable<String, Account> accounts;
 
 	/**
@@ -32,30 +34,32 @@ public class AccountManager {
 	}
 
 	/**
-	 * 계좌를 추가하는 메소드
+	 * 계좌를 추가하는 기능
 	 * 
 	 * @param account 입력하고자 하는 계좌 정보
+	 * @throws AccountException 예외 발생시 전달할 예외클래스
 	 */
-	public void add(Account account) throws AccountException {
+	public void open(Account account) throws AccountException {
 		if (accounts.containsKey(account.getAccountNum())) {
-			throw new AccountException("이미 등록되어 있는 계좌 번호입니다.", -4);
+			throw new AccountException("이미 등록되어 있는 계좌 번호입니다.", -10);
 		}
 		accounts.put(account.getAccountNum(), account);
 	}
 
 	/**
-	 * 실제 들어 있는 계좌 전체를 반환해주는 메소드
+	 * 실제 들어 있는 계좌 전체를 반환해주는 기능
 	 * 
 	 * @return
+	 * @throws AccountException 예외 발생시 전달할 예외클래스
 	 */
-	public List<Account> list() throws AccountException {
+	public List<Account> listAll() throws AccountException {
 		Enumeration<Account> e = accounts.elements();
 		List<Account> lists = new ArrayList<Account>(accounts.size());
 		while (e.hasMoreElements()) {
 			lists.add(e.nextElement());
 		}
 		if(lists.isEmpty()) {
-			throw new AccountException("해당하는 이름으로 만들어진 계좌가 존재하지 않습니다.",-4);
+			throw new AccountException("은행에 만들어진 계좌가 존재하지 않습니다.",-11);
 		}
 		Collections.sort(lists, new NumberCompare());
 		return lists;
@@ -66,10 +70,11 @@ public class AccountManager {
 	 * 
 	 * @param accountNum 사용자가 입력하는 계좌 번호
 	 * @return
+	 * @throws AccountException 예외 발생시 전달할 예외클래스
 	 */
 	public Account get(String accountNum) throws AccountException {
 		if (!accounts.containsKey(accountNum)) {
-			throw new AccountException("해당하는 계좌가 존재하지 않습니다.", -3);
+			throw new AccountException("해당하는 계좌가 존재하지 않습니다.", -12);
 		}
 		return accounts.get(accountNum);
 	}
@@ -79,6 +84,7 @@ public class AccountManager {
 	 * 
 	 * @param accountOwner 사용자가 입력한 계좌명
 	 * @return
+	 * @throws AccountException 예외 발생시 전달할 예외클래스
 	 */
 	public List<Account> search(String accountOwner) throws AccountException {
 		Enumeration<Account> e = accounts.elements();
@@ -91,10 +97,29 @@ public class AccountManager {
 			}
 		}
 		if(lists.isEmpty()) {
-			throw new AccountException("해당하는 이름으로 만들어진 계좌가 존재하지 않습니다.",-4);
+			throw new AccountException("해당하는 이름으로 만들어진 계좌가 존재하지 않습니다.",-13);
 		}
 		Collections.sort(lists, new NumberCompare());
 		return lists;
+	}
+	
+	/**
+	 * 해당 이름으로 만들어진 계좌 개수를 알려주는 기능
+	 * 
+	 * @param accountOwner 계좌 소유주 명
+	 * @return
+	 */
+	private int searchCount(String accountOwner) {
+		Enumeration<Account> e = accounts.elements();
+		int count=0;
+		Account account;
+		while (e.hasMoreElements()) {
+			account = e.nextElement();
+			if (account.getAccountOwner().equals(accountOwner)) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	/**
