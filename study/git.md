@@ -18,6 +18,12 @@
     * git add 된 파일 전체 삭제
   * git reset HEAD
     * git commit 된 파일 전체 삭제
+  * git diff --stat --cached [remote/branch]
+    * Push하지 않은 파일 목록 확인
+    * 예) git diff --stat --cached origin/master
+  * git log [since]..[until]
+    * Push하지 않은 Commit 확인
+    * 예) git log origin/master..master
 
 
 
