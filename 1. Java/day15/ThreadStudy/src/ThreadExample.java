@@ -21,6 +21,10 @@ public class ThreadExample {
 						System.out.println("헐...");
 					}
 				}).start();
+				
+				new Thread(() -> {
+						System.out.println("헐...");
+				}).start();
 			}
 		}
 		
