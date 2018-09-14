@@ -1,7 +1,7 @@
 package kr.or.kosta.common;
 
 public interface Protocol {
-	public static final String DELEMETER = "★";
+	public static final String DELEMETER = ",J,H,J,W,J,J,";
 
 	public static final int LOGIN = 1000;
 

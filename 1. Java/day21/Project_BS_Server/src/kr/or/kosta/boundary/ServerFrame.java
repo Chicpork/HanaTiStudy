@@ -206,6 +206,7 @@ public class ServerFrame extends Frame {
 			roomInfoList.removeAll();
 			allUserList.removeAll();
 			seletedUserList.removeAll();
+			chatServer = null;
 		}
 	}
 

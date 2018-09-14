@@ -179,7 +179,7 @@ public class Client extends Thread {
 		case Protocol.CS_NEW_ROOM:
 
 			chatRoom = chatServer.makeChatRoom(tokens[2], Integer.parseInt(tokens[3]));
-
+			chatRoom.setRoomMaster(nickName);
 			try {
 
 				chatRoom.addClient(this);
