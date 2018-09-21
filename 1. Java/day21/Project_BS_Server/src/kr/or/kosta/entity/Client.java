@@ -169,7 +169,6 @@ public class Client extends Thread {
 		switch (protocol) {
 
 		case Protocol.CS_ROOM_INFO:
-			// 여기 수정
 			chatRoom = ((ChatRoom) chatServer.getRoom().get(Integer.parseInt(tokens[2])));
 
 			sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_ROOM_INFO + Protocol.DELEMETER
@@ -179,10 +178,9 @@ public class Client extends Thread {
 		case Protocol.CS_NEW_ROOM:
 
 			chatRoom = chatServer.makeChatRoom(tokens[2], Integer.parseInt(tokens[3]));
-			chatRoom.setRoomMaster(nickName);
 			try {
-
 				chatRoom.addClient(this);
+				chatRoom.setRoomMaster(nickName);
 				waitingRoom.removeClient(nickName);
 				waitingRoom.sendMessageToAll(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_NEW_ROOM_TO_WAIT
 						+ chatRoom.getChatRoomInfo());
@@ -200,8 +198,10 @@ public class Client extends Thread {
 			break;
 
 		case Protocol.CS_ENTER_ROOM:
-
-			try {
+			if (chatRoom.isFullRoom()) {
+				sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_ENTER_ROOM + Protocol.DELEMETER
+						+ Protocol.FAIL);
+			} else {
 				sendMessage(Protocol.CHATTING + Protocol.DELEMETER + Protocol.USER_LIST + chatRoom.getClientsList());
 				chatRoom.addClient(this);
 				sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_ENTER_ROOM + Protocol.DELEMETER
@@ -213,10 +213,6 @@ public class Client extends Thread {
 						Protocol.CHATTING + Protocol.DELEMETER + Protocol.SC_NEW_USER + Protocol.DELEMETER + nickName);
 				chatRoom.sendMessageToAll(Protocol.CHATTING + Protocol.DELEMETER + Protocol.SC_MESSAGE
 						+ Protocol.DELEMETER + ("**** " + nickName + "님이 입장하셨습니다 ****"));
-
-			} catch (Exception e) {
-				sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_ENTER_ROOM + Protocol.DELEMETER
-						+ Protocol.FAIL);
 			}
 			break;
 
@@ -231,23 +227,22 @@ public class Client extends Thread {
 					}
 				}
 
-				try {
+				if (chatRoom.isFullRoom()) {
+					sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_ENTER_ROOM + Protocol.DELEMETER
+							+ Protocol.FAIL);
+				} else {
 					sendMessage(
 							Protocol.CHATTING + Protocol.DELEMETER + Protocol.USER_LIST + chatRoom.getClientsList());
 					chatRoom.addClient(this);
+					waitingRoom.removeClient(nickName);
 					sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_ENTER_ROOM + Protocol.DELEMETER
 							+ Protocol.SUCCESS);
-					waitingRoom.removeClient(nickName);
 					waitingRoom.sendMessageToAll(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_DELETE_USER
 							+ Protocol.DELEMETER + nickName);
 					chatRoom.sendMessageToAll(Protocol.CHATTING + Protocol.DELEMETER + Protocol.SC_NEW_USER
 							+ Protocol.DELEMETER + nickName);
 					chatRoom.sendMessageToAll(Protocol.CHATTING + Protocol.DELEMETER + Protocol.SC_MESSAGE
 							+ Protocol.DELEMETER + ("**** " + nickName + "님이  " + tokens[3] + "님의 초대 받아 입장하셨습니다 ****"));
-
-				} catch (Exception e) {
-					sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.SC_ENTER_ROOM + Protocol.DELEMETER
-							+ Protocol.FAIL);
 				}
 				break;
 			case Protocol.FAIL:
@@ -316,7 +311,11 @@ public class Client extends Thread {
 					+ Protocol.DELEMETER + ("[Whisper] " + nickName + " : " + tokens[3]));
 			break;
 		case Protocol.EXIT_ROOM:
-			try {
+			if (waitingRoom.isFullRoom()) {
+			} else {
+				sendMessage(Protocol.CHATTING + Protocol.DELEMETER + Protocol.EXIT_ROOM);
+				sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.USER_LIST + waitingRoom.getClientsList());
+				sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.ROOM_LIST + getChatRoomList());
 				waitingRoom.addClient(this);
 				chatRoom.removeClient(nickName);
 				waitingRoom.sendMessageToAll(
@@ -325,11 +324,6 @@ public class Client extends Thread {
 						+ Protocol.DELEMETER + ("@@@@ " + nickName + "님이 퇴장하셨습니다 @@@@"));
 				chatRoom.sendMessageToAll(Protocol.CHATTING + Protocol.DELEMETER + Protocol.SC_DELETE_USER
 						+ Protocol.DELEMETER + nickName);
-				sendMessage(Protocol.CHATTING + Protocol.DELEMETER + Protocol.EXIT_ROOM);
-				sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.USER_LIST + waitingRoom.getClientsList());
-				sendMessage(Protocol.WAITING + Protocol.DELEMETER + Protocol.ROOM_LIST + getChatRoomList());
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 
 			if (chatRoom.getUserNum() <= 0) {

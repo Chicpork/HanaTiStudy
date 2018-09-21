@@ -80,12 +80,17 @@ public class ChatRoom extends Room {
 	public Client findClient(String nickName) {
 		return clients.get(nickName);
 	}
+	
+	@Override
+	public boolean isFullRoom() {
+		if (userNum >= userLimit) {
+			return true;
+		} 
+		return false;
+	}
 
 	@Override
-	public void addClient(Client client) throws Exception {
-		if (userNum >= userLimit) {
-			throw new Exception("채팅방이 가득 찼습니다.");
-		}
+	public void addClient(Client client) {
 		clients.put(client.getNickName(), client);
 		userNum++;
 	}

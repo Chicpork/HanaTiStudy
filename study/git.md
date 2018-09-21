@@ -10,6 +10,8 @@
     * 설명을 추가 하면서 올릴 파일들을 중간 저장지로 보내는 작업 
   * git remote add origin [github 주소]
     * 이를 이용해 내 github에 파일들을 업로드 가능함.
+  * git remote -v
+    * 이때까지 저장된 저장지 주소들 확인.
   * git push -u origin master
     * 하면 중간 저장지의 파일들이 보내짐
   * git status

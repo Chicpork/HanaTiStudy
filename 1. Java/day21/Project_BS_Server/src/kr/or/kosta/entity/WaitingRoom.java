@@ -29,10 +29,15 @@ public class WaitingRoom extends Room {
 	}
 
 	@Override
-	public void addClient(Client client) throws Exception {
+	public boolean isFullRoom() {
 		if (userNum >= userLimit) {
-			throw new Exception("대기실 인원이 가득 찼습니다.");
-		}
+			return true;
+		} 
+		return false;
+	}
+	
+	@Override
+	public void addClient(Client client){
 		clients.put(client.getNickName(), client);
 		userNum++;
 	}
