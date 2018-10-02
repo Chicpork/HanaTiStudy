@@ -1,0 +1,22 @@
+1. Java/old/
+1. Java/day1~5/classes/
+1. Java/day6/classes/
+study/1. java/LectureNote/
+study/Spring/Inflearn_LectureNote/
+study/2. Database/Lecture/
+study/2. Database/project/
+study/3. Web/Lecture
+desktop.ini
+*.class
+.settings/
+*.tmp
+*.bak
+.metadata
+.classpath
+.recommenders/
+.project
+*.bmp
+*.gif
+*.png
+*.jpg
+.dropbox
