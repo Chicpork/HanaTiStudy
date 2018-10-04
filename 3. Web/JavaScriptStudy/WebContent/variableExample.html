@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    for (var i = 0; i < 10; i++) {
+      console.log(i);
+    }
+
+  console.log('for문 밖에서 '+i);
+  
+  // 전역변수
+  var message = '전역변수';
+
+  console.log('message : ' + message);
+  console.log('message : ' + window.message);
+  
+
+  function x() {
+    // 지역변수
+    var message2 = '지역변수';
+    message3 = '전역변수';
+  }
+
+  function y() {
+    console.log('message : ' + message);
+    console.log('message2 : ' + message2);
+    console.log('message3 : ' + message3);
+  }
+  x();
+  y();
+  </script>
+
+</body>
+
+</html>

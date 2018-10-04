@@ -1,0 +1,10 @@
+/*@charset "utf-8";*/
+body {
+	font-family: 굴림;
+}
+
+pre {
+	font-size: 11px; 
+	color: tomato;
+	background-color: gold;
+}

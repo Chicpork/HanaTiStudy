@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>제어문</title>
+</head>
+
+<body>
+  <script>
+    var score = prompt('성적을 입력하세요', 0);
+    score = parseInt(score / 10);
+    console.log(typeof score);
+    switch (score) {
+      case 10:
+        console.log('수');
+
+        break;
+      case 9:
+        console.log('우');
+
+        break;
+      case 8:
+        console.log('미');
+
+        break;
+      case 7:
+        console.log('양');
+
+        break;
+      case 6:
+        console.log('가');
+
+        break;
+
+      default:
+        break;
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>자바스크립트 함수</title>
+  <script>
+
+    // 에러 나지 않음
+    sum(1, 2, 3);
+
+    // #1. 선언형 함수 정의
+    function sum(x, y, z) {
+      return x + y + z;
+    }
+
+    // #2. 익명 함수 정의
+    var show = function (message) {
+      document.write(message);
+    }
+
+    function some(callback) {
+      callback();
+    }
+
+    function some2() {
+      // ...
+      return function () {
+        document.write('리턴 함수요...<br>');
+      };
+    }
+
+    // #3. 중첩 함수
+    function hypotenus(a, b) {
+      function square(x) {
+        // return x*x;
+        return Math.pow(x, 2);
+      }
+      return Math.sqrt(square(a) + square(b));
+    }
+
+    // #4. 비정형 함수 정의
+    function sum2() {
+      var result = 0;
+      for (const key in arguments) {
+        result += arguments[key];
+      }
+      return result;
+    }
+    
+</script>
+</head>
+
+<body>
+  <script>
+    // window 객체에 등록된 sum 메소드 호출
+    var result = sum(10, 20, 30);
+    // var result = sum(10, 20);
+    document.write('결과 : ' + result + '<br>');
+
+    show('스크립트 어렵지 않아요...<br>');
+    some(function () {
+      document.write('익명함수 콜이요...<br>');
+    });
+
+    some2()();
+
+    document.write(hypotenus(30, 20) + '<br>');
+
+    document.write(sum2(10) + '<br>');
+    document.write(sum2(10, 20) + '<br>');
+    document.write(sum2(10, 20, 30) + '<br>');
+
+  </script>
+</body>
+
+</html>
