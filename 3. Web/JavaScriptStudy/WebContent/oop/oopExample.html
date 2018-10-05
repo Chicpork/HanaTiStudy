@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+
+<script>
+/** 사용자 정의 객체(생성자) */
+function Student(name,korean,math,english,science) {
+    this.name = name;
+    this.korean = korean;
+    this.math = math;
+    this.english = english;
+    this.science = science;
+
+    this.getSum = function(){
+        return this.korean + this.math + this.english + this.science;
+    }
+
+    this.getAverage = function(){
+        return (this.getSum()/4);
+    }
+    
+    this.toString = function(){
+        return this.name +'\t'+this.korean +'\t'+this.math +'\t'+this.english +'\t'+ this.science;
+    }
+}
+
+Student.schoolName = 'KOSTA 대학교';
+
+</script>
+</head>
+<body>
+<script>
+var student = new Student('정지원',90,89,86,90);
+console.log(student.name);
+console.log(student.korean);
+console.log(student['math']);
+console.log(student['english']);
+
+console.log(typeof Student);
+console.log(typeof student);
+
+console.log(student.toString());
+console.log(student);
+
+console.log('총점은 '+student.getSum());
+console.log('평균은 '+student.getAverage());
+
+console.log('Student.schoolName :', Student.schoolName);
+
+
+</script>
+
+
+</body>
+</html>

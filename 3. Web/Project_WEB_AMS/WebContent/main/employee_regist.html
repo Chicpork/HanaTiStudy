@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script>
+	function email_listener(selectedIndex) {
+		if (selectedIndex == 0) {
+			document.getElementById('email_userwrite').disabled = false;
+		} else {
+			document.getElementById('email_userwrite').disabled = true;
+		}
+
+	}
+</script>
+<style>
+table {
+	text-align: left;
+	align-self: center;
+}
+th {
+  text-align: center;
+}
+</style>
+</head>
+<body>
+  <form style="width: 50%;">
+    <fieldset>
+      <legend>
+        <strong>신규 사원 등록</strong>
+      </legend>
+      <section>
+        <table border="1">
+          <tr>
+            <th>사원번호</th>
+            <td><input type="text" required autofocus></td>
+          </tr>
+          <tr>
+            <th>이름</th>
+            <td><input type="text" required></td>
+          </tr>
+          <tr>
+            <th>성</th>
+            <td><input type="text" required></td>
+          </tr>
+          <tr>
+            <th>이메일</th>
+            <td><input type="text" required
+              pattern="[A-Za-z0-9]{1,}"> <label>@</label> <select
+              name="email"
+              onchange="email_listener(this.selectedIndex);" required>
+                <option value="0">직접 입력</option>
+                <option>naver.com</option>
+                <option>nate.com</option>
+                <option>gmail.com</option>
+                <option selected disabled hidden>선택하세요</option>
+            </select> <input type="text" disabled id="email_userwrite" required
+              pattern="[a-zA-Z]{1,}(.)[a-zA-Z]{1,}"></td>
+          </tr>
+          <tr>
+            <th>전화번호</th>
+            <td><input type="tel" required title="예) 010-3335-7614"
+              pattern="\d{2,3}(-)\d{3,4}(-)\d{4}"></td>
+          </tr>
+          <tr>
+            <th>입사일자</th>
+            <td><input type="date" required title="예) 2018-10-01"></td>
+          </tr>
+          <tr>
+            <th>부서</th>
+            <td><select name="department">
+                <option>인사
+                <option>재무
+                <option>IT
+                <option>기타
+                <option selected disabled hidden>선택하세요</option>
+            </select></td>
+          </tr>
+          <tr>
+            <th>업무</th>
+            <td><select name="department">
+                <option>잡무
+                <option>업무
+                <option>뭔가
+                <option>기타
+                <option selected disabled hidden>선택하세요</option>
+            </select></td>
+          </tr>
+          <tr>
+            <th>부서장</th>
+            <td><select name="department">
+                <option>너
+                <option>나
+                <option>우리
+                <option>기타
+                <option selected disabled hidden>선택하세요</option>
+            </select></td>
+          </tr>
+          <tr>
+            <th>급여</th>
+            <td><input type="text" title="숫자만 입력가능합니다."
+              pattern="\d{1,}"></td>
+          </tr>
+        </table>
+        <p align="center">
+          <button>가입</button>
+          <button>취소</button>
+        </p>
+      </section>
+    </fieldset>
+  </form>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+table {
+	clear: both;
+	/* display: grid; */
+	/* border-collapse: collapse; */
+	border: none;
+	font: normal 1em helvetica, verdana, arial, sans-serif;
+	width: 100%;
+}
+
+thead, thead tr {
+	width: auto;
+}
+
+td, th {
+	border: none;
+	color: #6E6E6E;
+	width: auto;
+}
+
+thead th, tfoot th {
+	font: bold 1em helvetica, verdana, arial, sans-serif;
+	border: none;
+	text-align: center;
+	background: lightgray;
+	color: tomato;
+}
+
+tbody td a {
+	background: transparent;
+	text-decoration: none;
+	color: #9F9F9F;
+}
+
+tbody td a:hover {
+	background: transparent;
+	color: #00FF0C;
+}
+
+tbody th a {
+	font: bold 1em helvetica, verdana, arial, sans-serif;
+	background: transparent;
+	text-decoration: none;
+	font-weight: normal;
+	color: #9F9F9F;
+}
+
+tbody th a:hover {
+	background: transparent;
+	color: #00FF0C;
+}
+
+tbody th, tbody td {
+	vertical-align: top;
+	text-align: center;
+}
+
+tbody tr:hover {
+	background: #0E0E0E;
+}
+
+tbody tr:hover th, tbody tr.odd:hover th {
+	background: #0E0E0E;
+}
+
+.show_info>span {
+	font-size: 0.8em;
+}
+
+#account_lists {
+	margin-left: 0.2em;
+	float: left;
+}
+
+#money_unit {
+	margin-right: 0.2em;
+	float: right;
+}

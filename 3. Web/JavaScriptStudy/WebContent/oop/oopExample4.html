@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <script>
+    function Shape(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+    Shape.prototype.getArea = function () {
+      return 0;
+    }
+    Shape.prototype.getRound = function () {
+      return 0;
+    }
+
+    function Rectangle(x, y, width, height) {
+      Shape.call(this, x, y);
+      this.width = width;
+      this.height = height;
+    }
+
+    Rectangle.prototype = Object.create(Shape.prototype);
+    Rectangle.prototype.constructor = Rectangle;
+
+    Rectangle.prototype.getArea = function () {
+      return this.width * this.height;
+    }
+    Rectangle.prototype.getRound = function () {
+      return (this.width + this.height) * 2;
+    }
+    
+
+  </script>
+</head>
+
+<body>
+  <script>
+    var shape = new Shape(10, 20);
+    console.log('shape.getArea() :', shape.getArea());
+
+    var rectangle = new Rectangle(20, 10, 100, 200);
+    console.log('rectangle.getArea() :', rectangle.getArea());
+
+    for(var temp in rectangle){
+      console.log('temp :', temp);
+      console.log('rectangle[temp] :', rectangle[temp]);
+    }
+  </script>
+</body>
+
+</html>

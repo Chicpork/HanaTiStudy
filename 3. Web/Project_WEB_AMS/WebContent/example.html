@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> </title>
+<script type="text/javascript" src='js/Account.js'></script>
+<script type="text/javascript" src='js/MinusAccount.js'></script>
+<script src="js/AccountManager.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+var acc=new Account('111-111-111','김기정',1111,2000);
+console.log('acc.toString :', acc.toString());
+var macc= new MinusAccount('1111-2222-2222','마기정',1111,2000,5000);
+console.log('macc.toString :', macc.toString());
+
+var manager = new AccountManager();
+console.log(manager.open(new Account('111-111-111','김기정',1111,2000)));
+console.log(manager.open(new Account('111-111-111','김기정',1111,2000)));
+console.log(manager.open(new Account('111-111-222','정지원',1111,2000)));
+console.log(manager.open(new MinusAccount('1111-2222-2222','정지원',1111,2000,5000)));
+
+console.log('manager.get("111-111-222") :', manager.get('111-111-222'));
+
+var lists = manager.listAll();
+for(var key in lists){
+    console.log(key+':', lists[key]);
+}
+
+var lists2 = manager.search('정지원');
+for(var key in lists2){
+    console.log(key+':', lists2[key]);
+}
+
+console.log('manager.remove("111-111-222") :', manager.remove('111-111-222'));
+
+var lists2 = manager.search('정지원');
+for(var key in lists2){
+    console.log(key+':', lists2[key]);
+}
+
+</script>
+
+</body>
+</html>
