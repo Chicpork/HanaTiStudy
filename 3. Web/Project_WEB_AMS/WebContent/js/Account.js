@@ -14,20 +14,20 @@ Account.bankName = '하나은행';
 Account.prototype.deposit = function (money) {
     this.restMoney += money;
     return this.restMoney;
-}
+};
 
 Account.prototype.withdraw = function (money) {
     this.restMoney -= money;
     return this.restMoney;
-}
+};
 
 Account.prototype.checkPasswd = function (pw) {
-    if (this.passwd === pw) {
+    if (this.passwd == pw) {
         return true;
     } else {
         return false;
     }
-}
+};
 
 Account.prototype.toString = function () {
     var output = '';
@@ -37,12 +37,11 @@ Account.prototype.toString = function () {
         }
     }
     return output;
-}
+};
 
 Account.prototype.equals = function (account) {
-    if (this.toString() === account.toString()) {
+    if (this.toString() == account.toString()) {
         return true;
     }
     return false;
-}
-
+};

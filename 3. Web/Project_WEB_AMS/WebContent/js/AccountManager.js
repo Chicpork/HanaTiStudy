@@ -18,11 +18,11 @@ AccountManager.prototype.open = function (account) {
     } else {
         return false;
     }
-}
+};
 
 AccountManager.prototype.listAll = function () {
     return this.accounts;
-}
+};
 
 AccountManager.prototype.get = function (accountNum) {
     for (var key in this.accounts) {
@@ -31,7 +31,7 @@ AccountManager.prototype.get = function (accountNum) {
         }
     }
     return null;
-}
+};
 
 AccountManager.prototype.search = function (accountOwner) {
     var output = Array();
@@ -41,7 +41,7 @@ AccountManager.prototype.search = function (accountOwner) {
         }
     }
     return output;
-}
+};
 
 AccountManager.prototype.remove = function (accountNum) {
     for (var key in this.accounts) {
@@ -51,4 +51,4 @@ AccountManager.prototype.remove = function (accountNum) {
         }
     }
     return false;
-}
+};

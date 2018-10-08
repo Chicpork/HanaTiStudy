@@ -11,6 +11,10 @@ thead, thead tr {
 	width: auto;
 }
 
+thead tr {
+	font-size: 1.25em;
+}
+
 td, th {
 	border: none;
 	color: #6E6E6E;

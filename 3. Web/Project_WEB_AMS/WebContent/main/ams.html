@@ -2,60 +2,81 @@
 <html>
 
 <head>
-<meta charset="utf-8">
-<title></title>
-<script type="text/javascript">
-	function accountType_listener(selectedIndex) {
-		if (selectedIndex == 1) {
-			document.getElementById('borrowMoney').disabled = false;
-		} else {
-			document.getElementById('borrowMoney').disabled = true;
-		}
-	}
-	
-</script>
+  <meta charset="utf-8">
+  <title>계좌 조회</title>
 
-<link rel="stylesheet" href="../css/common.css">
-<link rel="stylesheet" href="../css/table.css">
+  <script src="../js/AccountManager.js"></script>
+  <script src="../js/Account.js"></script>
+  <script src="../js/MinusAccount.js"></script>
+  <script src="../js/common.js"></script>
+
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/table.css">
 
 </head>
+
 <body>
   <div class="mainbody">
     <div class="user_info">
       <div>
-        <label>계좌종류</label> <select name="accountType"
-          onchange="accountType_listener(this.selectedIndex);">
+        <label>계좌종류</label> <select id="accountType">
           <option>입출금계좌</option>
           <option>마이너스계좌</option>
           <option selected disabled hidden>선택하세요</option>
         </select>
       </div>
-
-      <div>
-        <label>계좌번호</label> <input type="text">
-
-        <button>조회</button>
-        <button>삭제</button>
+      <div class="inputError">
+        <label class="hidden">히든글자</label>
+        계좌 종류를 선택해 주세요.
       </div>
-
       <div>
-        <label>예금주명</label> <input type="text">
-        <button>검색</button>
+        <label>계좌번호</label> <input type="text" placeholder="예) 123-456-789">
+        <button id='getAccount'>조회</button>
+        <button id='removeAccount'>삭제</button>
       </div>
-
+      <div class="inputError">
+        <label class="hidden">히든글자</label>
+        해당하는 계좌가 없거나 잘못된 계좌 번호를 입력하셨습니다.
+      </div>
       <div>
-        <label>비밀번호</label> <input type="text"> <label>입금금액</label>
-        <input type="text">
+        <label>예금주명</label> <input type="text" placeholder="예) 홍길동">
+        <button id='searchAccount'>검색</button>
       </div>
-
+      <div class="inputError">
+        <label class="hidden">히든글자</label>
+        해당하는 이름으로 만들어진 계좌가 없거나 잘못된 이름을 입력하셨습니다.
+      </div>
       <div>
-        <label>대출금액</label> <input type="text" id="borrowMoney" disabled>
-        <button>신규등록</button>
-        <button>전체조회</button>
+        <label>비밀번호</label>
+        <input type="password" placeholder="예) a1b2c3d4" id="passwd">
       </div>
-
+      <div class="inputError">
+          <label class="hidden">히든글자</label>
+          비밀번호를 입력해주세요.
+        </div>
+      <div>
+        <label>입금금액</label>
+        <input type="number" placeholder="예) 150000" id="depositMoney" pattern="\d*">
+      </div>
+      <div class="inputError">
+        <label class="hidden">히든글자</label>
+        해당하는 계좌가 없거나 잘못된 계좌 번호를 입력하셨습니다.
+      </div>
+      <div>
+        <label>대출금액</label>
+        <input type="number" id="borrowMoney" disabled id="borrowMoney" pattern="\d*">
+      </div>
+      <div class="inputError">
+        <label class="hidden">히든글자</label>
+        해당하는 계좌가 없거나 잘못된 계좌 번호를 입력하셨습니다.
+      </div>
+      <div>
+        <label class="hidden">히든글자</label>
+        <button id='openAccount'>신규등록</button>
+        <button id='listAllAccount'>전체조회</button>
+      </div>
     </div>
-    <iframe src="ams_table.html"></iframe>
+    <iframe src="ams_table.html" id="table"></iframe>
   </div>
 </body>
 

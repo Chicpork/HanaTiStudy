@@ -5,17 +5,25 @@
 
 .mainbody {
 	margin: 0px auto;
-	width: 60%;
+	width: 40%;
 	height: 800px;
 }
 
 .user_info {
 	margin: 2em auto;
 	line-height: 2em;
+	font-size: 1em;
 }
 
-.user_info div {
-	font-size: 1em;
+.inputError {
+	font-size: 0.8em;
+	display: none;
+}
+
+.hidden {
+	font-size: 1.25em;
+	padding-right: 5px;
+	visibility: hidden;
 }
 
 iframe {
@@ -24,7 +32,8 @@ iframe {
 	border-color: transparent;
 }
 
-input[type=text], select {
+input[type=text],
+select {
 	display: inline-block;
 	padding: 3px 6px;
 	border: 1px solid #ccc;
