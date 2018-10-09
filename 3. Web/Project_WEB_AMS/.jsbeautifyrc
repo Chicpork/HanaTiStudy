@@ -1,0 +1,7 @@
+{
+  "indent_size": 2,
+  "indent_char": " ",
+  "jslint_happy": true,
+  "newline_between_rules": true,
+  "space_after_named_function": true
+}

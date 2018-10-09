@@ -5,25 +5,39 @@
 
 .mainbody {
 	margin: 0px auto;
-	width: 40%;
 	height: 800px;
 }
 
+h1 {
+	text-align: center;
+}
+
 .user_info {
-	margin: 2em auto;
-	line-height: 2em;
+	margin: 1em auto;
+	line-height: 2.4em;
 	font-size: 1em;
+	width: fit-content;
+}
+
+#show_info {
+	margin: 0px auto;
+	width: 40rem;
 }
 
 .inputError {
 	font-size: 0.8em;
 	display: none;
+	line-height: normal;
 }
 
 .hidden {
 	font-size: 1.25em;
 	padding-right: 5px;
 	visibility: hidden;
+}
+
+#message {
+	margin-top: 10px;
 }
 
 iframe {
@@ -33,6 +47,7 @@ iframe {
 }
 
 input[type=text],
+input[type=password],
 select {
 	display: inline-block;
 	padding: 3px 6px;

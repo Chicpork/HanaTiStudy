@@ -13,9 +13,7 @@
 
   <script type="text/javascript">
     var acc = new Account('111-111-111', '김기정', 1111, 2000);
-    console.log('acc.toString :', acc.toString());
     var macc = new MinusAccount('1111-2222-2222', '마기정', 1111, 2000, 5000);
-    console.log('macc.toString :', macc.toString());
 
     var manager = new AccountManager();
     // 콘솔 출력
@@ -24,29 +22,29 @@
     console.log(manager.open(new Account('111-111-222', '정지원', 1111, 2000)));
     console.log(manager.open(new MinusAccount('1111-2222-2222', '정지원', 1111, 2000, 5000)));
 
-    console.log('manager.get("111-111-222") :', manager.get('111-111-222'));
+    // console.log('manager.get("111-111-222") :', manager.get('111-111-222'));
 
-    var lists = manager.listAll();
-    for (var key in lists) {
-      console.log(key + ':', lists[key]);
-      document.write(key + ':', lists[key], '<br>');
-    }
-    for (var element in array) {
+    // var lists = manager.listAll();
+    // for (var key in lists) {
+    //   console.log(key + ':', lists[key]);
+    //   document.write(key + ':', lists[key], '<br>');
+    // }
 
-    }
-    var lists2 = manager.search('정지원');
-    for (var key in lists2) {
-      console.log(key + ':', lists2[key]);
-      document.write(key + ':', lists2[key], '<br>');
-    }
+    // var lists2 = manager.search('정지원');
+    // for (var key in lists2) {
+    //   console.log(key + ':', lists2[key]);
+    //   document.write(key + ':', lists2[key], '<br>');
+    // }
 
-    console.log('manager.remove("111-111-222") :', manager.remove('111-111-222'));
+    // console.log('manager.remove("111-111-222") :', manager.remove('111-111-222'));
 
-    var lists2 = manager.search('정지원');
-    for (var key in lists2) {
-      console.log(key + ':', lists2[key]);
-      document.write(key + ':', lists2[key], '<br>');
-    }
+    // var lists2 = manager.search('정지원');
+    // for (var key in lists2) {
+    //   console.log(key + ':', lists2[key]);
+    //   document.write(key + ':', lists2[key], '<br>');
+    // }
+
+    console.log(manager.accounts[0].toString());
   </script>
 
 </body>

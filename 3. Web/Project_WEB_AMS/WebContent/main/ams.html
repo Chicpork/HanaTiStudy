@@ -9,6 +9,7 @@
   <script src="../js/Account.js"></script>
   <script src="../js/MinusAccount.js"></script>
   <script src="../js/common.js"></script>
+  <script src="../js/validator.js"></script>
 
   <link rel="stylesheet" href="../css/common.css">
   <link rel="stylesheet" href="../css/table.css">
@@ -17,6 +18,7 @@
 
 <body>
   <div class="mainbody">
+    <h1>계좌 관리 어플리케이션</h1>
     <div class="user_info">
       <div>
         <label>계좌종류</label> <select id="accountType">
@@ -30,7 +32,7 @@
         계좌 종류를 선택해 주세요.
       </div>
       <div>
-        <label>계좌번호</label> <input type="text" placeholder="예) 123-456-789">
+        <label>계좌번호</label> <input type="text" placeholder="예) 123-456-789" title="'xxx-xxx-xxx' 의 3 - 3 - 3 형식으로 숫자를 입력해주세요">
         <button id='getAccount'>조회</button>
         <button id='removeAccount'>삭제</button>
       </div>
@@ -44,11 +46,11 @@
       </div>
       <div class="inputError">
         <label class="hidden">히든글자</label>
-        해당하는 이름으로 만들어진 계좌가 없거나 잘못된 이름을 입력하셨습니다.
+        해당하는 이름으로 만들어진 계좌가 없습니다.
       </div>
       <div>
         <label>비밀번호</label>
-        <input type="password" placeholder="예) a1b2c3d4" id="passwd">
+        <input type="password" placeholder="예) a1b2c3@#" id="passwd" title="숫자, 영문자, 특수문자를 적어도 하나 포함하는 8자 이상의 비밀번호를 입력하세요">
       </div>
       <div class="inputError">
         <label class="hidden">히든글자</label>
@@ -56,7 +58,7 @@
       </div>
       <div>
         <label>입금금액</label>
-        <input type="number" placeholder="예) 150000" id="depositMoney" pattern="\d*">
+        <input type="text" placeholder="예) 150000" id="depositMoney" pattern="\d*" title="0 이상의 정수를 입력해주세요">
       </div>
       <div class="inputError">
         <label class="hidden">히든글자</label>
@@ -64,7 +66,7 @@
       </div>
       <div>
         <label>대출금액</label>
-        <input type="number" id="borrowMoney" disabled id="borrowMoney" pattern="\d*">
+        <input type="text" id="borrowMoney" disabled id="borrowMoney" pattern="\d*" title="0 이상의 정수를 입력해주세요">
       </div>
       <div class="inputError">
         <label class="hidden">히든글자</label>
@@ -75,8 +77,14 @@
         <button id='openAccount'>신규등록</button>
         <button id='listAllAccount'>전체조회</button>
       </div>
+      <div id="message">
+        <span>메시지 : </span>
+        안녕?
+      </div>
     </div>
-    <iframe src="ams_table.html" id="table"></iframe>
+    <div id="show_info">
+      <iframe src="ams_table.html" id="table"></iframe>
+    </div>
   </div>
 </body>
 
