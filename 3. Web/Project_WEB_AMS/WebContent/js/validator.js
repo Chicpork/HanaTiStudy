@@ -15,15 +15,28 @@ function isValidAccountNum(value) { // eslint-disable-line no-unused-vars
   return pattern.test(value);
 }
 
+function isValidAccountOwner(value) { // eslint-disable-line no-unused-vars
+  const pattern = /^[a-zA-Zㄱ-힣0-9]*$/;
+  return pattern.test(value);
+}
+
 function isValidPasswd(value) { // eslint-disable-line no-unused-vars
   const pattern = /(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,}$/;
   return pattern.test(value);
 }
 
-function isValidMoney(value) { // eslint-disable-line no-unused-vars
+function isValidDepositMoney(value) { // eslint-disable-line no-unused-vars
   if (value < 0) {
     return false;
   }
-  const pattern = /(^\d{1,})[^.]$/;
+  const pattern = /^\d*[^.]$/;
+  return pattern.test(value);
+}
+
+function isValidBorrowMoney(value) { // eslint-disable-line no-unused-vars
+  if (value < 0) {
+    return false;
+  }
+  const pattern = /^\d*[^.]$/;
   return pattern.test(value);
 }

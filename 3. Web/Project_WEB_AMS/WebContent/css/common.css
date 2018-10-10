@@ -10,34 +10,56 @@
 
 h1 {
 	text-align: center;
+	margin: 40px auto;
+}
+
+#upperbody {
+	margin: 0px auto;
+	width: fit-content;
+}
+
+#messages {
+	margin: 1em auto;
+	width: 400px;
+	display: block;
+	border-right: 1px solid #ccc;
+	text-align: center;
+	float: left;
+}
+
+#messages textarea {
+	width: 360px;
+	height: 250px;
+	margin: 10px 0px;
+	resize: none;
+	line-height: 20pt;
+	font-size: 12pt;
 }
 
 .user_info {
-	margin: 1em auto;
+	margin: 1em 10px;
 	line-height: 2.4em;
 	font-size: 1em;
-	width: fit-content;
+	width: 380px;
+	display: inline-block;
 }
 
 #show_info {
 	margin: 0px auto;
-	width: 40rem;
+	width: 800px;
 }
 
 .inputError {
 	font-size: 0.8em;
 	display: none;
 	line-height: normal;
+	color: crimson;
 }
 
 .hidden {
 	font-size: 1.25em;
-	padding-right: 5px;
+	padding-right: 7px;
 	visibility: hidden;
-}
-
-#message {
-	margin-top: 10px;
 }
 
 iframe {

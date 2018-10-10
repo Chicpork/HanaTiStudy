@@ -12,7 +12,9 @@ module.exports = {
         "isEmpty": true,
         "isValidAccountNum": true,
         "isValidPasswd": true,
-        "isValidMoney": true
+        "isValidDepositMoney": true,
+        "isValidBorrowMoney": true,
+        "ErrorMessage": true
     },
     "rules": {
         "max-len": 'off'

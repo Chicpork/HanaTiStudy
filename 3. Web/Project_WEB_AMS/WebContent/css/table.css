@@ -29,30 +29,6 @@ thead th, tfoot th {
 	color: tomato;
 }
 
-tbody td a {
-	background: transparent;
-	text-decoration: none;
-	color: #9F9F9F;
-}
-
-tbody td a:hover {
-	background: transparent;
-	color: #00FF0C;
-}
-
-tbody th a {
-	font: bold 1em helvetica, verdana, arial, sans-serif;
-	background: transparent;
-	text-decoration: none;
-	font-weight: normal;
-	color: #9F9F9F;
-}
-
-tbody th a:hover {
-	background: transparent;
-	color: #00FF0C;
-}
-
 tbody th, tbody td {
 	vertical-align: top;
 	text-align: center;
@@ -62,8 +38,9 @@ tbody tr:hover {
 	background: #0E0E0E;
 }
 
-tbody tr:hover th, tbody tr.odd:hover th {
+tbody tr:hover td {
 	background: #0E0E0E;
+	color: white;
 }
 
 .show_info>span {

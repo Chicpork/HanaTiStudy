@@ -1,5 +1,7 @@
 let tables;
 let manager;
+const borderColorDefault = '#ccc';
+const borderColorError = 'crimson';
 
 function init() {
   tables = document.getElementById('table').contentWindow.document.getElementById('accounts');
@@ -13,6 +15,15 @@ function hiddenAllhidden() {
   const inputE = document.getElementsByClassName('inputError');
   for (let i = 0; i < inputE.length; i += 1) {
     inputE[i].style.display = 'none';
+  }
+}
+
+function resetColor() {
+  const inputT = document.querySelectorAll('input[type=text]');
+  document.getElementById('accountType').style.borderColor = borderColorDefault;
+  document.getElementById('passwd').style.borderColor = borderColorDefault;
+  for (let i = 0; i < inputT.length; i += 1) {
+    inputT[i].style.borderColor = borderColorDefault;
   }
 }
 
@@ -57,147 +68,248 @@ function addAccountInfo(account) {
   }
 }
 
-function showListAll() {
-  hiddenAllhidden();
-  resetAccount();
-  const lists = manager.listAll();
-  for (let i = 0; i < lists.length; i += 1) {
-    addAccountInfo(lists[i]);
+function clearInput(...args) {
+  const inputs = args;
+  for (let i = 0; i < inputs.length; i += 1) {
+    inputs[i].value = '';
   }
 }
 
+function resizeHeight() {
+  document.getElementById('messages').style.height = `${document.getElementsByClassName('user_info')[0].offsetHeight}px`;
+  document.getElementById('message').style.height = `${document.getElementsByClassName('user_info')[0].offsetHeight - 20}px`;
+}
+
+function showListAll() {
+  hiddenAllhidden();
+  resetColor();
+  resetAccount();
+
+  const lists = manager.listAll();
+  if (document.getElementById('accountType').selectedIndex === 0) {
+    for (let i = 0; i < lists.length; i += 1) {
+      addAccountInfo(lists[i]);
+    }
+  } else if (document.getElementById('accountType').selectedIndex === 1) {
+    for (let i = 0; i < lists.length; i += 1) {
+      if (lists[i].constructor.name === 'Account') {
+        addAccountInfo(lists[i]);
+      }
+    }
+  } else if (document.getElementById('accountType').selectedIndex === 2) {
+    for (let i = 0; i < lists.length; i += 1) {
+      if (lists[i].constructor.name === 'MinusAccount') {
+        addAccountInfo(lists[i]);
+      }
+    }
+  } else {
+    document.getElementById('accountType').style.borderColor = borderColorError;
+    document.getElementsByClassName('inputError')[0].style.display = 'block';
+  }
+  resizeHeight();
+}
+
 function accountTypeListener(e) {
-  if (e.target.selectedIndex === 1) {
+  if (e.target.selectedIndex === 2) {
     document.getElementById('borrowMoney').disabled = false;
     document.getElementById('borrowMoney').placeholder = '예) 1000000';
   } else {
     document.getElementById('borrowMoney').disabled = true;
     document.getElementById('borrowMoney').placeholder = '';
   }
+  document.getElementById('accountType').style.borderColor = borderColorDefault;
   document.getElementsByClassName('inputError')[0].style.display = 'none';
+  resizeHeight();
 }
 
 function getAccount() {
   hiddenAllhidden();
+  resetColor();
   resetAccount();
-  const accountNum = document.getElementById('getAccount').parentElement.children[1].value;
+
+  const accountNumIT = document.getElementById('getAccount').parentElement.children[1];
+  const accountNum = accountNumIT.value;
   if (isValidAccountNum(accountNum)) {
-    const account = manager.get(document.getElementById('getAccount').parentElement.children[1].value);
+    const account = manager.get(accountNum);
     if (account == null) {
-      document.getElementsByClassName('inputError')[1].lastChild.nodeValue = '해당하는 계좌가 없습니다.';
+      accountNumIT.style.borderColor = borderColorError;
+      document.getElementsByClassName('inputError')[1].lastChild.nodeValue = ErrorMessage.accountNotExist;
       document.getElementsByClassName('inputError')[1].style.display = 'block';
     } else {
+      accountNumIT.style.borderColor = borderColorDefault;
       document.getElementsByClassName('inputError')[1].style.display = 'none';
       addAccountInfo(account);
-      document.getElementById('message').lastChild.nodeValue = `${accountNum} 계좌 조회 완료`;
+      clearInput(accountNumIT);
+      document.getElementById('message').value += `${accountNum} 계좌 조회 완료\r\n`;
     }
   } else {
-    document.getElementsByClassName('inputError')[1].lastChild.nodeValue = '잘못된 계좌 번호를 입력하셨습니다.';
+    accountNumIT.style.borderColor = borderColorError;
+    document.getElementsByClassName('inputError')[1].lastChild.nodeValue = ErrorMessage.accountNumWrong;
     document.getElementsByClassName('inputError')[1].style.display = 'block';
   }
 }
 
 function removeAccount() {
   hiddenAllhidden();
+  resetColor();
   resetAccount();
-  const accountNum = document.getElementById('getAccount').parentElement.children[1].value;
+
+  const accountNumIT = document.getElementById('getAccount').parentElement.children[1];
+  const accountNum = accountNumIT.value;
   if (isValidAccountNum(accountNum)) {
-    if (manager.remove(document.getElementById('getAccount').parentElement.children[1].value)) {
+    if (manager.remove(accountNum)) {
+      accountNumIT.style.borderColor = borderColorDefault;
       document.getElementsByClassName('inputError')[1].style.display = 'none';
-      document.getElementById('message').lastChild.nodeValue = `${accountNum} 계좌 삭제 완료`;
+      clearInput(accountNumIT);
+      document.getElementById('message').value += `${accountNum} 계좌 삭제 완료\r\n`;
     } else {
-      document.getElementsByClassName('inputError')[1].lastChild.nodeValue = '해당하는 계좌가 없습니다.';
+      accountNumIT.style.borderColor = borderColorError;
+      document.getElementsByClassName('inputError')[1].lastChild.nodeValue = ErrorMessage.accountNotExist;
       document.getElementsByClassName('inputError')[1].style.display = 'block';
     }
   } else {
-    document.getElementsByClassName('inputError')[1].lastChild.nodeValue = '잘못된 계좌 번호를 입력하셨습니다.';
+    accountNumIT.style.borderColor = borderColorError;
+    document.getElementsByClassName('inputError')[1].lastChild.nodeValue = ErrorMessage.accountNumWrong;
     document.getElementsByClassName('inputError')[1].style.display = 'block';
   }
 }
 
 function searchAccount() {
   hiddenAllhidden();
+  resetColor();
   resetAccount();
 
-  const accountOwner = document.getElementById('searchAccount').parentElement.children[1].value;
+  const accountOwnerIT = document.getElementById('searchAccount').parentElement.children[1];
+  const accountOwner = accountOwnerIT.value;
+  if (accountOwner.length === 0) {
+    accountOwnerIT.style.borderColor = borderColorError;
+    document.getElementsByClassName('inputError')[2].lastChild.nodeValue = ErrorMessage.accountOwnerEmpty;
+    document.getElementsByClassName('inputError')[2].style.display = 'block';
+    return;
+  }
   const accounts = manager.search(accountOwner);
   if (accounts.length === 0) {
+    accountOwnerIT.style.borderColor = borderColorError;
+    document.getElementsByClassName('inputError')[2].lastChild.nodeValue = ErrorMessage.accountOwnerNotExist;
     document.getElementsByClassName('inputError')[2].style.display = 'block';
   } else {
+    accountOwnerIT.style.borderColor = borderColorDefault;
     document.getElementsByClassName('inputError')[2].style.display = 'none';
     for (let i = 0; i < accounts.length; i += 1) {
       addAccountInfo(accounts[i]);
     }
-    document.getElementById('message').lastChild.nodeValue = `${accountOwner}님 계좌 조회 완료`;
+    clearInput(accountOwnerIT);
+    document.getElementById('message').value += `${accountOwner}님 계좌 조회 완료\r\n`;
   }
 }
 
 function openAccount() {
   hiddenAllhidden();
+  resetColor();
 
-  const accountNum = document.getElementById('getAccount').parentElement.children[1].value;
-  const accountOwner = document.getElementById('searchAccount').parentElement.children[1].value;
-  const passwd = document.getElementById('passwd').value;
-  const restMoney = document.getElementById('depositMoney').value;
-  const borrowMoney = document.getElementById('borrowMoney').value;
+  const accountNumIT = document.getElementById('getAccount').parentElement.children[1];
+  const accountOwnerIT = document.getElementById('searchAccount').parentElement.children[1];
+  const passwdIT = document.getElementById('passwd');
+  const restMoneyIT = document.getElementById('depositMoney');
+  const borrowMoneyIT = document.getElementById('borrowMoney');
   const inputE = document.getElementsByClassName('inputError');
 
-  if (document.getElementById('accountType').selectedIndex === 2) {
+  if (document.getElementById('accountType').selectedIndex === 3 || document.getElementById('accountType').selectedIndex === 0) {
+    document.getElementById('accountType').style.borderColor = borderColorError;
     inputE[0].style.display = 'block';
-  } else if (isEmpty(accountNum)) {
-    inputE[1].lastChild.nodeValue = '계좌 번호를 입력해주세요.';
+  } else if (isEmpty(accountNumIT.value)) {
+    accountNumIT.style.borderColor = borderColorError;
+    inputE[1].lastChild.nodeValue = ErrorMessage.accountNumEmpty;
     inputE[1].style.display = 'block';
     document.getElementById('getAccount').parentElement.children[1].focus();
-  } else if (!isValidAccountNum(accountNum)) {
-    inputE[1].lastChild.nodeValue = '잘못된 계좌 번호를 입력하셨습니다.';
+  } else if (!isValidAccountNum(accountNumIT.value)) {
+    accountNumIT.style.borderColor = borderColorError;
+    inputE[1].lastChild.nodeValue = ErrorMessage.accountNumWrong;
     inputE[1].style.display = 'block';
     document.getElementById('getAccount').parentElement.children[1].focus();
-  } else if (isEmpty(accountOwner)) {
-    inputE[2].lastChild.nodeValue = '이름을 입력해 주세요.';
+  } else if (isEmpty(accountOwnerIT.value)) {
+    accountOwnerIT.style.borderColor = borderColorError;
+    inputE[2].lastChild.nodeValue = ErrorMessage.accountOwnerEmpty;
     inputE[2].style.display = 'block';
     document.getElementById('searchAccount').parentElement.children[1].focus();
-  } else if (isEmpty(passwd)) {
-    inputE[3].lastChild.nodeValue = '비밀 번호를 입력해주세요.';
+  } else if (isEmpty(passwdIT.value)) {
+    passwdIT.style.borderColor = borderColorError;
+    inputE[3].lastChild.nodeValue = ErrorMessage.passwdEmpty;
     inputE[3].style.display = 'block';
     document.getElementById('passwd').focus();
-  } else if (!isValidPasswd(passwd)) {
-    inputE[3].lastChild.nodeValue = '비밀 번호 형식에 맞춰 입력해주세요.';
+  } else if (!isValidPasswd(passwdIT.value)) {
+    passwdIT.style.borderColor = borderColorError;
+    inputE[3].lastChild.nodeValue = ErrorMessage.passwdWrong;
     inputE[3].style.display = 'block';
     document.getElementById('passwd').focus();
-  } else if (isEmpty(restMoney)) {
-    inputE[4].lastChild.nodeValue = '입금금액을 입력해주세요.';
+  } else if (isEmpty(restMoneyIT.value)) {
+    restMoneyIT.style.borderColor = borderColorError;
+    inputE[4].lastChild.nodeValue = ErrorMessage.depositMoneyEmpty;
     inputE[4].style.display = 'block';
     document.getElementById('depositMoney').focus();
-  } else if (!isValidMoney(restMoney)) {
-    inputE[4].lastChild.nodeValue = '입금금액은 양의 정수여야 합니다.';
+  } else if (!isValidDepositMoney(restMoneyIT.value)) {
+    restMoneyIT.style.borderColor = borderColorError;
+    inputE[4].lastChild.nodeValue = ErrorMessage.depositMoneyWrong;
     inputE[4].style.display = 'block';
     document.getElementById('depositMoney').focus();
-  } else if (document.getElementById('accountType').selectedIndex === 1) {
-    if (isEmpty(borrowMoney)) {
-      inputE[5].lastChild.nodeValue = '대출금액을 입력해주세요.';
+  } else if (document.getElementById('accountType').selectedIndex === 2) {
+    if (isEmpty(borrowMoneyIT.value)) {
+      borrowMoneyIT.style.borderColor = borderColorError;
+      inputE[5].lastChild.nodeValue = ErrorMessage.borrowMoneyEmpty;
       inputE[5].style.display = 'block';
       document.getElementById('borrowMoney').focus();
-    } else if (!isValidMoney(borrowMoney)) {
-      inputE[5].lastChild.nodeValue = '대출금액은 양의 정수여야 합니다.';
+    } else if (!isValidBorrowMoney(borrowMoneyIT.value)) {
+      borrowMoneyIT.style.borderColor = borderColorError;
+      inputE[5].lastChild.nodeValue = ErrorMessage.borrowMoneyWrong;
       inputE[5].style.display = 'block';
       document.getElementById('borrowMoney').focus();
-    } else if (!manager.open(new MinusAccount(accountNum, accountOwner, passwd, restMoney - borrowMoney, borrowMoney))) {
-      inputE[1].lastChild.nodeValue = '이미 존재하는 계좌 번호입니다.';
+    } else if (!manager.open(new MinusAccount(accountNumIT.value, accountOwnerIT.value, passwdIT.value, restMoneyIT.value - borrowMoneyIT.value, borrowMoneyIT.value))) {
+      accountNumIT.style.borderColor = borderColorError;
+      inputE[1].lastChild.nodeValue = ErrorMessage.accountExist;
       inputE[1].style.display = 'block';
       document.getElementById('borrowMoney').focus();
     } else {
-      document.getElementById('message').lastChild.nodeValue = '마이너스 계좌 개설 완료!';
+      clearInput(accountNumIT, accountOwnerIT, passwdIT, restMoneyIT, borrowMoneyIT);
+      document.getElementById('message').value += '마이너스 계좌 개설 완료!\r\n';
     }
-  } else if (document.getElementById('accountType').selectedIndex === 0) {
-    if (!manager.open(new Account(accountNum, accountOwner, passwd, restMoney))) {
-      inputE[1].lastChild.nodeValue = '이미 존재하는 계좌 번호입니다.';
+  } else if (document.getElementById('accountType').selectedIndex === 1) {
+    if (!manager.open(new Account(accountNumIT.value, accountOwnerIT.value, passwdIT.value, restMoneyIT.value))) {
+      accountNumIT.style.borderColor = borderColorError;
+      inputE[1].lastChild.nodeValue = ErrorMessage.accountExist;
       inputE[1].style.display = 'block';
       document.getElementById('borrowMoney').focus();
     } else {
-      document.getElementById('message').lastChild.nodeValue = '입출금 계좌 개설 완료!';
+      clearInput(accountNumIT, accountOwnerIT, passwdIT, restMoneyIT);
+      document.getElementById('message').value += '입출금 계좌 개설 완료!\r\n';
     }
   } else {
-    document.getElementById('message').lastChild.nodeValue = '여기까지 오다니';
+    document.getElementById('message').value += '계좌 개설에 실패하였습니다.\r\n';
+  }
+}
+
+function isValid(event) {
+  const eventTarget = event.target;
+  const textId = event.target.id;
+  const textValue = event.target.value;
+  const fname = `isValid${textId.slice(0, 1).toUpperCase() + textId.slice(1)}`;
+  const errortarget = event.target.parentElement.children;
+  resizeHeight();
+
+  if (textValue.length === 0) {
+    const empty = `${textId}Empty`;
+    eventTarget.style.borderColor = borderColorError;
+    errortarget[errortarget.length - 1].lastChild.nodeValue = ErrorMessage[empty];
+    errortarget[errortarget.length - 1].style.display = 'block';
+    return;
+  }
+  if (window[fname](textValue)) {
+    eventTarget.style.borderColor = borderColorDefault;
+    errortarget[errortarget.length - 1].style.display = 'none';
+  } else {
+    const wrong = `${textId}Wrong`;
+    eventTarget.style.borderColor = borderColorError;
+    errortarget[errortarget.length - 1].lastChild.nodeValue = ErrorMessage[wrong];
+    errortarget[errortarget.length - 1].style.display = 'block';
   }
 }
 
@@ -208,6 +320,11 @@ function eventRegist() {
   document.getElementById('removeAccount').onclick = removeAccount;
   document.getElementById('searchAccount').onclick = searchAccount;
   document.getElementById('openAccount').onclick = openAccount;
+  document.getElementById('accountNum').onkeyup = isValid;
+  document.getElementById('accountOwner').onkeyup = isValid;
+  document.getElementById('passwd').onkeyup = isValid;
+  document.getElementById('depositMoney').onkeyup = isValid;
+  document.getElementById('borrowMoney').onkeyup = isValid;
 }
 
 window.onload = function onload() {
