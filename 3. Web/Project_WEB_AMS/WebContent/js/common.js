@@ -3,6 +3,9 @@ let manager;
 const borderColorDefault = '#ccc';
 const borderColorError = 'crimson';
 
+/**
+ * ams 문서 실행시 해야할 초기 작업들
+ */
 function init() {
   tables = document.getElementById('table').contentWindow.document.getElementById('accounts');
   manager = new AccountManager();
@@ -11,6 +14,9 @@ function init() {
   manager.open(new MinusAccount('1111-222-222', '정지원', 1111, 2000, 5000));
 }
 
+/**
+ * 화면에 나온 경고 메시지 숨기는 기능
+ */
 function hiddenAllhidden() {
   const inputE = document.getElementsByClassName('inputError');
   for (let i = 0; i < inputE.length; i += 1) {
@@ -18,6 +24,9 @@ function hiddenAllhidden() {
   }
 }
 
+/**
+ * 화면 색을 초기 색으로 돌리는 기능
+ */
 function resetColor() {
   const inputT = document.querySelectorAll('input[type=text]');
   document.getElementById('accountType').style.borderColor = borderColorDefault;
@@ -27,10 +36,17 @@ function resetColor() {
   }
 }
 
+/**
+ * 화면에 출력된 계좌 정보 초기화
+ */
 function resetAccount() {
   tables.innerHTML = '';
 }
 
+/**
+ * 계좌 정보를 받아 화면에 출력해주는 기능
+ * @param {*} account 출력하고 싶은 계좌
+ */
 function addAccountInfo(account) {
   let output = '';
   if (account instanceof MinusAccount) {
@@ -68,6 +84,10 @@ function addAccountInfo(account) {
   }
 }
 
+/**
+ * 화면 input text를 받아 그 안의 내용을 초기화 해주는 기능
+ * @param  {...any} args 초기화 하고자 하는 input text타입
+ */
 function clearInput(...args) {
   const inputs = args;
   for (let i = 0; i < inputs.length; i += 1) {
@@ -75,11 +95,17 @@ function clearInput(...args) {
   }
 }
 
+/**
+ * 화면에 메시지 출력창과 정보 입력창의 높이를 조정하기 위한 기능
+ */
 function resizeHeight() {
   document.getElementById('messages').style.height = `${document.getElementsByClassName('user_info')[0].offsetHeight}px`;
   document.getElementById('message').style.height = `${document.getElementsByClassName('user_info')[0].offsetHeight - 20}px`;
 }
 
+/**
+ * 현재 만들어진 계좌 정보 전체를 보여주는 기능
+ */
 function showListAll() {
   hiddenAllhidden();
   resetColor();
@@ -109,6 +135,10 @@ function showListAll() {
   resizeHeight();
 }
 
+/**
+ * 계좌타입 변경 시 확인할 요소 검증 기능
+ * @param {*} e 이벤트발생 소스
+ */
 function accountTypeListener(e) {
   if (e.target.selectedIndex === 2) {
     document.getElementById('borrowMoney').disabled = false;
@@ -122,6 +152,9 @@ function accountTypeListener(e) {
   resizeHeight();
 }
 
+/**
+ * 계좌번호로 계좌 정보를 얻어오는 기능
+ */
 function getAccount() {
   hiddenAllhidden();
   resetColor();
@@ -147,8 +180,12 @@ function getAccount() {
     document.getElementsByClassName('inputError')[1].lastChild.nodeValue = ErrorMessage.accountNumWrong;
     document.getElementsByClassName('inputError')[1].style.display = 'block';
   }
+  resizeHeight();
 }
 
+/**
+ * 계좌번호로 계좌를 삭제하는 기능
+ */
 function removeAccount() {
   hiddenAllhidden();
   resetColor();
@@ -172,8 +209,12 @@ function removeAccount() {
     document.getElementsByClassName('inputError')[1].lastChild.nodeValue = ErrorMessage.accountNumWrong;
     document.getElementsByClassName('inputError')[1].style.display = 'block';
   }
+  resizeHeight();
 }
 
+/**
+ * 계좌이름으로 계좌 정보를 검색하는 기능
+ */
 function searchAccount() {
   hiddenAllhidden();
   resetColor();
@@ -201,8 +242,12 @@ function searchAccount() {
     clearInput(accountOwnerIT);
     document.getElementById('message').value += `${accountOwner}님 계좌 조회 완료\r\n`;
   }
+  resizeHeight();
 }
 
+/**
+ * 계좌를 새로 개설하는 기능
+ */
 function openAccount() {
   hiddenAllhidden();
   resetColor();
@@ -285,15 +330,19 @@ function openAccount() {
   } else {
     document.getElementById('message').value += '계좌 개설에 실패하였습니다.\r\n';
   }
+  resizeHeight();
 }
 
+/**
+ * 계좌 관련 정보 입력시 유효성 검증하는 기능
+ * @param {*} event 입력시 발생하는 이벤트 소스와 관련된 정보
+ */
 function isValid(event) {
   const eventTarget = event.target;
   const textId = event.target.id;
   const textValue = event.target.value;
   const fname = `isValid${textId.slice(0, 1).toUpperCase() + textId.slice(1)}`;
   const errortarget = event.target.parentElement.children;
-  resizeHeight();
 
   if (textValue.length === 0) {
     const empty = `${textId}Empty`;
@@ -311,8 +360,12 @@ function isValid(event) {
     errortarget[errortarget.length - 1].lastChild.nodeValue = ErrorMessage[wrong];
     errortarget[errortarget.length - 1].style.display = 'block';
   }
+  resizeHeight();
 }
 
+/**
+ * 이벤트 등록을 위한 함수
+ */
 function eventRegist() {
   document.getElementById('accountType').onchange = accountTypeListener;
   document.getElementById('getAccount').onclick = getAccount;
@@ -327,6 +380,9 @@ function eventRegist() {
   document.getElementById('borrowMoney').onkeyup = isValid;
 }
 
+/**
+ * ams가 시작된 이후 모든 기능들이 동작하기 위해서 만들어진 기능
+ */
 window.onload = function onload() {
   init();
   eventRegist();

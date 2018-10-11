@@ -1,4 +1,8 @@
-function ErrorMessage() {}
+/**
+ * 에러 메시지를 모아놓은 함수
+ */
+
+function ErrorMessage() { }
 
 ErrorMessage.accountNotExist = '해당하는 계좌가 없습니다.';
 ErrorMessage.accountExist = '이미 존재하는 계좌 번호입니다.';

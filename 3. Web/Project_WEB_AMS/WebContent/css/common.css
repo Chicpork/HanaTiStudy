@@ -21,6 +21,7 @@ h1 {
 #messages {
 	margin: 1em auto;
 	width: 400px;
+	height: 270px;
 	display: block;
 	border-right: 1px solid #ccc;
 	text-align: center;
