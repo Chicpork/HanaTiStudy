@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+
+  <h2>폼 관련 태그들...</h2>
+
+  <form action="/servlet/receive.do" method="post"
+    enctype="application/x-www-form-urlencoded">
+
+    <fieldset>
+      <legend>로그인 정보</legend>
+      <label for="userid"> 아이디 : </label><input type="text"
+        name="userid" id="userid" autocomplete="off"><br> <label>
+        비밀번호 : <input type="password" name="userpw">
+      </label><br>
+      <!-- <input type="button" value="login"> -->
+      <input type="submit" value="login"> <input type="reset"
+        value="cancel"> <select name="teams" multiple>
+        <option value="tigers">두산
+        <option value="lions">SK
+        <option value="giants">기아
+      </select>
+
+      <textarea rows="5" cols="50" name="message">점심 먹고 합시다.</textarea>
+
+      <p>
+        <label>남자<input type="radio" name="gender" value="m"></label>
+        <label>여자<input type="radio" name="gender" checked
+          value="f"></label>
+      </p>
+
+      <p>
+        <input type="file" name="file">
+      </p>
+
+
+      <input type="image"
+        src="http://192.168.0.121/html/images/like.png">
+
+      <label>등산<input type="checkbox" name="hobby" value="h"></label>
+      <label>워킹<input type="checkbox" name="hobby" value="w"></label>
+      <label>독서<input type="checkbox" name="hobby" value="r"></label>
+
+      <button>버튼</button>
+
+
+    </fieldset>
+
+  </form>
+
+</body>
+</html>

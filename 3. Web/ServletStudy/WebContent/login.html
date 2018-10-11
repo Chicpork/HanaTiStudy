@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<style>
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit], input[type=button] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    width: 30%;
+    margin: 0px auto;
+}
+
+h3 {
+  text-align: center;
+}
+
+</style>
+<script type="text/javascript">
+window.onload = function onload() {
+	eventRegist();
+}
+
+function eventRegist() {
+	document.getElementById('loginButton').onclick = sendServer;
+}
+
+function sendServer() {
+	var firstName = document.getElementById('fname').value;
+	document.getElementById('fname').value = '';
+	if (!firstName || firstName.trim().length === 0) {
+		alert("이름을 입력하세요");
+	} else {
+		document.loginForm.action = "/servlet/receive.do";
+		document.loginForm.method = "get";
+		document.loginForm.submit();
+	}
+}
+</script>
+
+</head>
+<body>
+
+<h3>로그인 화면</h3>
+
+<div>
+  <form name="loginForm">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="country">Country</label>
+    <select id="country" name="country">
+      <option value="australia">Australia</option>
+      <option value="canada">Canada</option>
+      <option value="usa">USA</option>
+    </select>
+  
+    <!-- 
+    <input type="submit" value="Submit">
+    <input type="image" src="">
+    <button>로그인</button>
+    -->
+    
+    <input type="button" value="로그인" id="loginButton">
+  </form>
+</div>
+
+</body>
+</html>
