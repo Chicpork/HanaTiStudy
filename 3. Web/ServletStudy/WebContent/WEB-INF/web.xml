@@ -5,6 +5,42 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  
+  <!-- 서블릿 컨테이너에 등록된 모든 서블릿을 위한 초기 파라메터 -->
+  <context-param>
+  	<param-name>Location</param-name>
+  	<param-value>C:/KOSTA187/workspace/ServletStudy/uploadFiles/</param-value>
+  </context-param>
+  
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.Index</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/index.html</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout.do</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>HelloServlet</servlet-name>
     <servlet-class>kr.or.kosta.servlet.HelloServlet</servlet-class>
@@ -45,6 +81,7 @@
     <servlet-name>LifecycleServlet</servlet-name>
     <url-pattern>/cycle.do</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>HttpServletRequestServlet</servlet-name>
     <servlet-class>kr.or.kosta.servlet.HttpServletRequestServlet</servlet-class>
@@ -53,6 +90,7 @@
     <servlet-name>HttpServletRequestServlet</servlet-name>
     <url-pattern>/request.do</url-pattern>
   </servlet-mapping>
+  
    <servlet>
     <servlet-name>ReceiveServlet</servlet-name>
     <servlet-class>kr.or.kosta.servlet.ReceiveServlet</servlet-class>
@@ -61,6 +99,7 @@
     <servlet-name>ReceiveServlet</servlet-name>
     <url-pattern>/receive.do</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>HttpServletResponseServlet</servlet-name>
     <servlet-class>kr.or.kosta.servlet.HttpServletResponseServlet</servlet-class>
@@ -68,5 +107,117 @@
   <servlet-mapping>
     <servlet-name>HttpServletResponseServlet</servlet-name>
     <url-pattern>/response.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DatabaseServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.DatabaseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DatabaseServlet</servlet-name>
+    <url-pattern>/database.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DatabaseServlet2</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.DatabaseServlet2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DatabaseServlet2</servlet-name>
+    <url-pattern>/database2.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ServletConfigServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.ServletConfigServlet</servlet-class>
+    <init-param>
+    	<param-name>driver</param-name>
+    	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletConfigServlet</servlet-name>
+    <url-pattern>/configs.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DispatchServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.DispatchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DispatchServlet</servlet-name>
+    <url-pattern>/dispatch.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ServletContextServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.ServletContextServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletContextServlet</servlet-name>
+    <url-pattern>/context.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>HttpSessionServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.HttpSessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpSessionServlet</servlet-name>
+    <url-pattern>/session.do</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>CookieServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.CookieServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CookieServlet</servlet-name>
+    <url-pattern>/cookie.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CookieServletExcercise</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.CookieServletExcercise</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CookieServletExcercise</servlet-name>
+    <url-pattern>/counter.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login1.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FileDownloadServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.FileDownloadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileDownloadServlet</servlet-name>
+    <url-pattern>/download.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.FileUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileUploadServlet</servlet-name>
+    <url-pattern>/upload.do</url-pattern>
+  </servlet-mapping>
+  
+ <servlet>
+    <servlet-name>FileList</servlet-name>
+    <servlet-class>kr.or.kosta.servlet.FileList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FileList</servlet-name>
+    <url-pattern>/list.do</url-pattern>
   </servlet-mapping>
 </web-app>

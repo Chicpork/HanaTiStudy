@@ -35,6 +35,8 @@ public class ReceiveServlet extends HttpServlet {
 
 		// 출력하기 위한 클래스 로드
 		PrintWriter out = response.getWriter();
+		
+		request.setCharacterEncoding("utf-8");
 
 		// 요청 파라미터 수신
 		String userId = request.getParameter("userid");

@@ -2,7 +2,6 @@ package kr.or.kosta.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +23,8 @@ public class HttpServletResponseServlet extends HttpServlet {
 
 //		response.setStatus(400);
 //		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+		
+		/*
 		String name = request.getParameter("name");
 		if (name != null && name.length() != 0) {
 			if (name.equals("bangry")) {
@@ -49,6 +50,13 @@ public class HttpServletResponseServlet extends HttpServlet {
 		html += "</html>";
 
 		out.println(html);
+		*/
+		
+		// Dispatch 기술
+//		response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+//		response.setHeader("Location", "/servlet/hello.do");
+		response.sendRedirect("hello.do");
+		
 	}
 
 }
