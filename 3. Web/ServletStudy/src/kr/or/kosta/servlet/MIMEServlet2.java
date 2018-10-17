@@ -37,7 +37,7 @@ public class MIMEServlet2 extends HttpServlet {
 	          }
 	     }finally{
 	          if(out != null) out.close();
-	          if(in != null) in.close();
+	          if(in != null) in.close(); 
 	     }
 		
 	}

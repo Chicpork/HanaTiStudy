@@ -9,13 +9,10 @@ study/3. Web/Lecture
 desktop.ini
 node_modules/
 *.class
-.settings/
 *.tmp
 *.bak
 .metadata
-.classpath
 .recommenders/
-.project
 *.bmp
 *.gif
 *.png
