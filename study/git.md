@@ -26,15 +26,11 @@
   * git log [since]..[until]
     * Push하지 않은 Commit 확인
     * 예) git log origin/master..master
-
-
-
-# Trello
-
-* 프로젝트 관리 사이트
-
-
-
-# slack
-
-* 코드 보내기 편한 사이트
+  * git pull
+    * 원격 저장소의 내용을 가져오기
+  * git stash
+    * 내가 commit할 내용들을 잠깐 임시 저장해놓고 싶을 때
+  * git stash list
+    * stash 된 리스트 확인
+  * git stash drop stash@{??}
+    * stash 된 내용 삭제
