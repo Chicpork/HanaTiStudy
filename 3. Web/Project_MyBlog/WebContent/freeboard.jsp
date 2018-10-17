@@ -50,7 +50,7 @@
 
 
   <%-- ****** 메인 바디 작성 시작 ****** --%>
-  <div class="table-board">
+  <div class="free-board">
     <table>
       <thead>
         <tr>
@@ -105,18 +105,25 @@
         </tr>
       </tbody>
     </table>
-  </div>
-  <div class="page-number">
-    <a href="" class="page-button"><i class="fa fa-angle-double-left"></i></a>
-    <a href="" class="page-button"><i class="fa fa-angle-left"></i></a>
-    <a href="" class="page-button">1</a>
-    <a href="" class="page-button">2</a>
-    <a href="" class="page-button">3</a>
-    <a href="" class="page-button">4</a>
-    <a href="" class="page-button">5</a>
-    <a href="" class="page-button">6</a>
-    <a href="" class="page-button"><i class="fa fa-angle-right"></i></a>
-    <a href="" class="page-button"><i class="fa fa-angle-double-right"></i></a>
+    <div class="board-bottom">
+      <div class="bottom-buttons">
+        <input type="button" value="홈으로">
+        <input type="button" value="글 쓰기">
+      </div>
+      <div class="page-number">
+        <a href="" class="page-button"><i class="fa fa-angle-double-left"></i></a>
+        <a href="" class="page-button"><i class="fa fa-angle-left"></i></a>
+        <a href="" class="page-button">1</a>
+        <a href="" class="page-button">2</a>
+        <a href="" class="page-button">3</a>
+        <a href="" class="page-button">4</a>
+        <a href="" class="page-button">5</a>
+        <a href="" class="page-button">6</a>
+        <a href="" class="page-button"><i class="fa fa-angle-right"></i></a>
+        <a href="" class="page-button"><i class="fa fa-angle-double-right"></i></a>
+      </div>
+    </div>
+
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 

@@ -21,7 +21,6 @@
   <!-- Responsive CSS -->
   <link href="/css/responsive/responsive.css" rel="stylesheet">
 
-  <script src="/js/mycommon.js"></script>
 </head>
 
 <body>
@@ -42,38 +41,53 @@
   <jsp:include page="/include/top_header_area.jsp" />
   <%-- <%@ include file="/include/top_header_area.jsp"%> --%>
   <!-- ****** Top Header Area End ****** -->
-
-  <!-- ****** Header Area Start ****** -->
-  <jsp:include page="/include/header_area.jsp" />
-  <%-- <%@ include file="/include/header_area.jsp"%> --%>
-  <!-- ****** Header Area End ****** -->
-
+  <h2></h2>
+  <div class="logo_area text-center">
+    <label class="yummy-logo">R e g i s t</label>
+  </div>
 
   <%-- ****** 메인 바디 작성 시작 ****** --%>
-  <div class="user_info">
-    <form>
+  <div class="user-info">
+    <form class="user-info-form">
       <dl>
         <dt>아이디</dt>
-        <dd>안녕!</dd>
+        <dd>
+          <input type="text">
+          <label>아이디를 입력해주세요</label>
+        </dd>
       </dl>
       <dl>
         <dt>비밀번호</dt>
-        <dd>안녕!</dd>
+        <dd>
+            <input type="text">
+            <label>아이디를 입력해주세요</label>
+          </dd>
       </dl>
       <dl>
         <dt>비밀번호 확인</dt>
-        <dd>안녕!</dd>
+        <dd>
+            <input type="text">
+            <label>아이디를 입력해주세요</label>
+          </dd>
       </dl>
       <dl>
         <dt>이름</dt>
-        <dd>안녕!</dd>
+        <dd>
+            <input type="text">
+            <label>아이디를 입력해주세요</label>
+          </dd>
       </dl>
       <dl>
         <dt>이메일</dt>
-        <dd>안녕!</dd>
+        <dd>
+            <input type="text">
+            <label>아이디를 입력해주세요</label>
+          </dd>
       </dl>
-      <input type="submit" value="가입">
-      <input type="submit" value="취소">
+      <div class="user-submit">
+        <input type="submit" value="가입">
+        <a href="/"><input type="button" value="취소"></a>
+      </div>
     </form>
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>

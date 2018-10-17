@@ -50,6 +50,7 @@ body {
     font-family: 'Poppins', sans-serif;
     position: relative;
     z-index: auto;
+    background-color: #f5f5dce6;
 }
 
 h1,
@@ -1487,14 +1488,14 @@ li {
 
 /* 내 css 설정 */
 
-.table-board {
+.free-board {
     margin: 0px 20%;
     margin-top: 50px;
-    padding: 15px;
+    padding: 30px;
     background-color: rgb(248, 248, 248)
 }
 
-.table-board table {
+.free-board table {
     clear: both;
     border: 1px solid #ddd;
     border-collapse: collapse;
@@ -1503,7 +1504,7 @@ li {
     font-size: small;
 }
 
-.table-board table th {
+.free-board table th {
     background-color: #1ac821;
     border: 1px solid #ddd;
     height: 35px;
@@ -1512,7 +1513,7 @@ li {
     color: white;
 }
 
-.table-board table td {
+.free-board table td {
     background-color: white;
     border: 1px solid #ddd;
     height: 35px;
@@ -1520,13 +1521,18 @@ li {
     text-align: center;
 }
 
-.table-board table td:nth-child(2) {
+.free-board table td:nth-child(2) {
     text-align: left;
+}
+
+.free-board .bottom-buttons {
+    float: right;
 }
 
 .page-number {
     width: fit-content;
     margin: 0px auto;
+    margin-top: 10px;
     text-align: center;
     font-size: large;
     color: #222;
@@ -1563,11 +1569,15 @@ li {
 
 .guest-board button {
     width: 10%;
-    background-color: gainsboro;
-    border-radius: 10px;
     display: block;
     margin: 0px auto;
     text-align: center;
+    background-color: rgba(255, 99, 71, 1);
+	color: white;
+	padding: 3px 8px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
 }
 
 .guest-board table {
@@ -1674,4 +1684,58 @@ li {
     font-size: x-small;
     width: 110px;
     line-height: 3;
+}
+
+.user-info {
+    margin: 0px 30%;
+    padding: 30px;
+    /* background-color: rgb(248, 248, 248); */
+}
+
+.user-info dl {
+    margin: 10px 0px;
+}
+
+.user-info dt, .user-info dd {
+    display: inline-block;
+}
+
+.user-info dt {
+    width: 49%;
+    text-align: right;
+    padding-right: 30px;
+    vertical-align: top;
+    position: relative;
+    top: 5px;
+}
+
+.user-info dd {
+    width: 49%;
+    margin-bottom: 0px;
+}
+
+.user-info dd input {
+    width: 100%;
+    display: inline-block;
+	padding: 3px 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.user-info dd label {
+    margin: 5px auto;
+}
+
+.user-info .user-submit {
+    text-align: center;
+}
+
+.user-info .user-submit input {
+    background-color: #1ac821;
+	color: white;
+	padding: 3px 8px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
 }
