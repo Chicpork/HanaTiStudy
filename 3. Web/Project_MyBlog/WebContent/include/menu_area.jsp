@@ -6,14 +6,14 @@
   <!-- Menu Area Start -->
   <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
     <ul class="navbar-nav" id="yummy-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="/" id="home">Home<span class="sr-only">(current)</span></a>
+      <li class="nav-item" id="home">
+        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/board/freeboard.jsp" id="freeboard">Free Board</a>
+      <li class="nav-item" id="freeboard">
+        <a class="nav-link" href="/board/freeboard.jsp">Free Board</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/guest/guestbook.jsp" id="guestbook">Guest Book</a>
+      <li class="nav-item" id="guestbook">
+        <a class="nav-link" href="/guest/guestbook.jsp">Guest Book</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" id="about">About</a>

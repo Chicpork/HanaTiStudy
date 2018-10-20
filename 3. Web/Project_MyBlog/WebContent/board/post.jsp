@@ -45,14 +45,6 @@ Article article = dao.read(articleId);
     <div class="yummy-load"></div>
   </div>
 
-  <!-- Background Pattern Swither -->
-  <div id="pattern-switcher">
-    Bg Pattern
-  </div>
-  <div id="patter-close">
-    <i class="fa fa-times" aria-hidden="true"></i>
-  </div>
-
   <!-- ****** Top Header Area Start ****** -->
   <jsp:include page="/include/top_header_area.jsp" />
   <%-- <%@ include file="/include/top_header_area.jsp"%> --%>
@@ -112,10 +104,16 @@ Article article = dao.read(articleId);
       <span>
         <form action="/board/checkpasswd.jsp" method="post">
           <input type="submit" value="글수정">
+          <input type="hidden" name="type" value="updateArticle">
           <input type="hidden" name="articleId" value="<%=articleId%>">
           <input type="hidden" name="srcURI" value="<%=request.getRequestURI()%>">
         </form>
-        <input type="button" value="글삭제">
+        <form action="/board/checkpasswd.jsp" method="post">
+          <input type="submit" value="글삭제">
+          <input type="hidden" name="type" value="deleteArticle">
+          <input type="hidden" name="articleId" value="<%=articleId%>">
+          <input type="hidden" name="srcURI" value="<%=request.getRequestURI()%>">
+        </form>
       </span>
     </div>
   </div>

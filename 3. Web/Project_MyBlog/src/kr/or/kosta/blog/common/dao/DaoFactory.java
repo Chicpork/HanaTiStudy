@@ -23,7 +23,7 @@ import kr.or.kosta.blog.user.dao.UserDao;
 public abstract class DaoFactory {
 	
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-	private static final String URL = "jdbc:oracle:thin:@192.168.137.1:1521";
+	private static final String URL = "jdbc:oracle:thin:@localhost:1521";
 	private static final String USERNAME = "hr";
 	private static final String PASSWORD = "hr";
 	private static final int INIT_SIZE = 2;

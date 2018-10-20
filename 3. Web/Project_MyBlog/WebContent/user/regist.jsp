@@ -21,21 +21,12 @@
   <!-- Responsive CSS -->
   <link href="/css/responsive/responsive.css" rel="stylesheet">
 
-  <script src="/js/login.js"></script>
 </head>
 
 <body>
   <!-- Preloader Start -->
   <div id="preloader">
     <div class="yummy-load"></div>
-  </div>
-
-  <!-- Background Pattern Swither -->
-  <div id="pattern-switcher">
-    Bg Pattern
-  </div>
-  <div id="patter-close">
-    <i class="fa fa-times" aria-hidden="true"></i>
   </div>
 
   <!-- ****** Top Header Area Start ****** -->
@@ -52,36 +43,36 @@
       <dl>
         <dt>아이디</dt>
         <dd>
-          <input type="text" name="id">
-          <label>아이디를 입력해주세요</label>
+          <input type="text" name="id" id="id" placeholder="아이디">
+          <iframe src="/user/checkDupleId.jsp" class="check-box" id="checkId" scrolling="no"></iframe>
         </dd>
       </dl>
       <dl>
         <dt>비밀번호</dt>
         <dd>
-            <input type="text" name="passwd">
-            <label>아이디를 입력해주세요</label>
+            <input type="password" name="passwd" id="passwd" placeholder="비밀번호">
+            <label class="check-box">비밀번호를 입력해주세요</label>
           </dd>
       </dl>
       <dl>
         <dt>비밀번호 확인</dt>
         <dd>
-            <input type="text">
-            <label>아이디를 입력해주세요</label>
+            <input type="password" name="passwd2" placeholder="비밀번호 확인">
+            <label class="check-box">비밀번호를 입력해주세요</label>
           </dd>
       </dl>
       <dl>
         <dt>이름</dt>
         <dd>
-            <input type="text" name="name">
-            <label>아이디를 입력해주세요</label>
+            <input type="text" name="name" placeholder="이름">
+            <label class="check-box">이름을 입력해주세요</label>
           </dd>
       </dl>
       <dl>
         <dt>이메일</dt>
         <dd>
-            <input type="text" name="email">
-            <label>아이디를 입력해주세요</label>
+            <input type="text" name="email" placeholder="이메일">
+            <label class="check-box">이메일을 입력해주세요</label>
           </dd>
       </dl>
       <div class="user-submit">
@@ -107,4 +98,8 @@
   <script src="/js/others/plugins.js"></script>
   <!-- Active JS -->
   <script src="/js/active.js"></script>
+
+  <script src="/js/regist.js"></script>
+
+  <script src="/js/validator.js"></script>
 </body>

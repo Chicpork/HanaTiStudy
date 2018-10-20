@@ -50,8 +50,8 @@
 					</div>
 					<!-- Search Form -->
 					<div class="search-hidden-form">
-						<form action="#" method="get">
-							<input type="search" name="search" id="search-anything" placeholder="Search Anything..."> <input type="submit"
+						<form action="https://www.google.co.kr/search" method="get">
+							<input type="search" name="search" class="search-anything" placeholder="Search Anything to Google"> <input type="submit"
 							 value="" class="d-none"> <span class="searchBtn"><i class="fa fa-times" aria-hidden="true"></i></span>
 						</form>
 					</div>

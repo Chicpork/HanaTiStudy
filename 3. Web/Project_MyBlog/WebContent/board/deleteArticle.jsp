@@ -1,17 +1,23 @@
-<%@page import="kr.or.kosta.blog.article.domain.Article"%>
 <%@page import="kr.or.kosta.blog.article.dao.ArticleDao"%>
 <%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
+<%@page import="kr.or.kosta.blog.article.domain.Article"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ include file="/user/getUserCookie.jsp"%>
 <%
-    request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("utf-8");
+	String srcURIBack = request.getParameter("srcURI");
 	if (userId == null) {
 		response.sendRedirect("/user/loginfail.jsp");
-		return;
 	}
-	String srcURIBack = request.getParameter("srcURI");
+	DaoFactory factory = (DaoFactory)application.getAttribute("factory");
+	ArticleDao dao = factory.getArticleDao();
+	String articleId = request.getParameter("articleId");
+	if(articleId == null) {
+        response.sendRedirect("board/freeboard.jsp");
+        return;
+    }
+    String passwd = request.getParameter("passwd");
 %>
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -22,16 +28,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<%
-	String articleId = null;
-	articleId = request.getParameter("articleId");
-	if(articleId == null) {
-%>
-		<script>window.history.back();</script>
-<%
-		return;
-	}
-%>
 	<!-- Title -->
 	<title>Yummy Blog - Food Blog Template</title>
 
@@ -65,63 +61,30 @@
 
 
 	<%-- ****** 메인 바디 작성 시작 ****** --%>
-	<%
-	DaoFactory factory = (DaoFactory) application.getAttribute("factory");
-	ArticleDao dao = factory.getArticleDao();
-
-	String dbWriter = dao.getWriter(articleId);
-	String editType = request.getParameter("type");
-	if(editType.equals("updateArticle")) {
-		if (!userId.equals(dbWriter)) {
-	%>
+    <%
+    if(dao.certify(articleId, userId, passwd)) {
+        dao.delete(articleId);
+    %>
 	<div class="info-page">
-		<form action="<%=srcURIBack%>" method="post">
-			<span>자신의 게시글만 수정할 수 있습니다.</span>
+        <form action="<%=srcURIBack%>" method="post">
+            <span>게시글 삭제 완료</span>
+            <input type="submit" value="뒤로가기">
+            <input type="hidden" name="articleId" value="<%=articleId%>">
+        </form>
+	</div>
+    <%
+    } else {
+    %>
+    <div class="info-page">
+		<form action="/board/freeboard.jsp" method="post">
+			<span>잘못된 비밀번호를 입력하셨습니다.</span>
 			<input type="submit" value="뒤로가기">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
 		</form>
 	</div>
-	<%
-		} else {
-		Article article = dao.read(articleId);
-	%>
-	<div class="check-password">
-		<form action="/board/editArticle.jsp" method="post">
-			<span>비밀번호를 입력하세요.</span>
-			<input type="password" name="passwd">
-			<input type="submit" value="확인">
-			<input type="hidden" name="articleId" value="<%=articleId%>">
-			<input type="hidden" name="srcURI" value="<%=srcURIBack%>">
-		</form>
-	</div>
-	<%
-		}
-	} else {
-		if (!userId.equals(dbWriter)) {
-	%>
-	<div class="info-page">
-		<form action="<%=srcURIBack%>" method="post">
-			<span>자신의 게시글만 삭제할 수 있습니다.</span>
-			<input type="submit" value="뒤로가기">
-			<input type="hidden" name="articleId" value="<%=articleId%>">
-		</form>
-	</div>
-	<%
-		} else {
-	%>
-	<div class="check-password">
-		<form action="/board/deleteArticle.jsp" method="post">
-			<span>비밀번호를 입력하세요.</span>
-			<input type="password" name="passwd">
-			<input type="submit" value="확인">
-			<input type="hidden" name="articleId" value="<%=articleId%>">
-			<input type="hidden" name="srcURI" value="<%=srcURIBack%>">
-		</form>
-	</div>
-	<%
-		}
-	}
-	%>
+    <%
+    }
+    %>
 	<%-- ****** 메인 바디 작성 끝 ****** --%>
 
 

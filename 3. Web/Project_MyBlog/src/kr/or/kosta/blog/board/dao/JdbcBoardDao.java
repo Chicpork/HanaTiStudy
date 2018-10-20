@@ -24,8 +24,37 @@ public class JdbcBoardDao implements BoardDao {
 	}
 
 	@Override
-	public List<Board> listAll() throws Exception {
-		return null;
+	public int countArticles(String searchType, String searchInput) throws Exception {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT Count(article_id) count \r\n" + 
+				"FROM   article \r\n" + 
+				"WHERE  board_id = 1 \r\n";
+		
+		int result = 0;
+		if (!(searchType == null || searchInput == null)) {
+			sql += "       AND "+searchType+" LIKE \'%"+searchInput+"%\'";
+		}
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result = rs.getInt("count");
+			}
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+			}
+		}
+		return result;
 	}
 
 	@Override
@@ -60,9 +89,8 @@ public class JdbcBoardDao implements BoardDao {
 				"                FROM   article \r\n" + 
 				"                WHERE  board_id = 1 \r\n"; 
 
-		boolean issearch = (searchType == null || searchInput == null);
-		if(!issearch) {
-			sql += "                    AND ?  LIKE '%?%'\r\n";
+		if(!(searchType == null || searchInput == null)) {
+			sql += "                    AND "+searchType+" LIKE \'%"+searchInput+"%\'\r\n";
 		}
 		sql +=	"                ORDER  BY group_no DESC, \r\n" + 
 				"                          order_no ASC)) \r\n" + 
@@ -71,15 +99,8 @@ public class JdbcBoardDao implements BoardDao {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, listNum);
-			if (!issearch) {
-				pstmt.setString(2, searchType);
-				pstmt.setString(3, searchInput);
-				pstmt.setString(4, pageNum);
-			} else {
-				pstmt.setString(2, pageNum);
-			}
-			pstmt.executeUpdate();
-			rs = pstmt.getResultSet();
+			pstmt.setString(2, pageNum);
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				board = createBoard(rs);
 				lists.add(board);

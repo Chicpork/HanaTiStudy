@@ -127,7 +127,24 @@ public class JdbcArticleDao implements ArticleDao {
 
 	@Override
 	public void delete(String articleId) throws Exception {
-
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM article \r\n" + 
+				"WHERE  article_id = ?";
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, articleId);
+			pstmt.executeQuery();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+			}
+		}
 	}
 	
 	@Override
@@ -161,7 +178,32 @@ public class JdbcArticleDao implements ArticleDao {
 	
 	@Override
 	public boolean certify(String articleId, String writer, String passwd) throws Exception {
-		return false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT writer, \r\n" + 
+				"       passwd \r\n" + 
+				"FROM   article \r\n" + 
+				"WHERE  article_id = ?";
+		boolean result = false;
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, articleId);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = (rs.getString("writer").equals(writer) && rs.getString("passwd").equals(passwd));
+			}
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+			}
+		}
+		return result;
 	}
 
 	@Override

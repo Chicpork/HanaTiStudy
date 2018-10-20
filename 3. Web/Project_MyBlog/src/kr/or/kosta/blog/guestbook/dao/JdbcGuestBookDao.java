@@ -27,12 +27,12 @@ public class JdbcGuestBookDao implements GuestBookDao {
 	public void create(GuestBook guestbook) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO guest_book \r\n" + 
-				"            (guest_book_id, \r\n" + 
+		String sql = "INSERT INTO guestbook \r\n" + 
+				"            (guestbook_id, \r\n" + 
 				"             board_id, \r\n" + 
 				"             writer, \r\n" + 
 				"             content) \r\n" + 
-				"VALUES      (guest_book_id_seq.NEXTVAL, \r\n" + 
+				"VALUES      (guestbook_seq.NEXTVAL, \r\n" + 
 				"             2, \r\n" + 
 				"             ?, \r\n" + 
 				"             ?)";
@@ -70,7 +70,7 @@ public class JdbcGuestBookDao implements GuestBookDao {
 		String sql = "SELECT writer, \r\n" + 
 				"       content, \r\n" + 
 				"       To_char(regdate, 'YYYY/MM/DD HH24:MI:SS') regdate \r\n" + 
-				"FROM   guest_book \r\n" + 
+				"FROM   guestbook \r\n" + 
 				"ORDER  BY regdate DESC";
 		try {
 			con = dataSource.getConnection();

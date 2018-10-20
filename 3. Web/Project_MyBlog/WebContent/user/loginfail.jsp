@@ -30,14 +30,6 @@
     <div class="yummy-load"></div>
   </div>
 
-  <!-- Background Pattern Swither -->
-  <div id="pattern-switcher">
-    Bg Pattern
-  </div>
-  <div id="patter-close">
-    <i class="fa fa-times" aria-hidden="true"></i>
-  </div>
-
   <!-- ****** Top Header Area Start ****** -->
   <%-- <jsp:include page="/include/top_header_area.jsp" /> --%>
   <%@ include file="/include/top_header_area.jsp"%>

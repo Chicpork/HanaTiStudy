@@ -6,7 +6,7 @@ import kr.or.kosta.blog.board.domain.Board;
 
 public interface BoardDao {
 
-	public List<Board> listAll() throws Exception;
+	public int countArticles(String searchType, String searchInput) throws Exception;
 	
 	public List<Board> listByPage(String pageNum, String listNum, String searchType, String searchInput) throws Exception;
 }
