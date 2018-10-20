@@ -1,4 +1,17 @@
+<%@page import="kr.or.kosta.blog.common.dao.JdbcDaoFactory"%>
+<%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
+<%@page import="kr.or.kosta.blog.user.dao.UserDao"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%request.setCharacterEncoding("utf-8"); %>
+<jsp:useBean id="user" class="kr.or.kosta.blog.user.domain.User"/>
+<jsp:setProperty property="*" name="user"/>
+
+<%
+DaoFactory factory = (DaoFactory)application.getAttribute("factory");
+UserDao dao = factory.getUserDao();
+dao.create(user);
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -42,53 +55,20 @@
   <jsp:include page="/include/top_header_area.jsp" />
   <%-- <%@ include file="/include/top_header_area.jsp"%> --%>
   <!-- ****** Top Header Area End ****** -->
+  <h2></h2>
   <div class="logo_area text-center">
     <label class="yummy-logo">R e g i s t</label>
   </div>
 
   <%-- ****** 메인 바디 작성 시작 ****** --%>
   <div class="user-info">
-    <form class="user-info-form" action="/user/regist_action.jsp"  method="post" id="registForm">
-      <dl>
-        <dt>아이디</dt>
-        <dd>
-          <input type="text" name="id">
-          <label>아이디를 입력해주세요</label>
-        </dd>
-      </dl>
-      <dl>
-        <dt>비밀번호</dt>
-        <dd>
-            <input type="text" name="passwd">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <dl>
-        <dt>비밀번호 확인</dt>
-        <dd>
-            <input type="text">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <dl>
-        <dt>이름</dt>
-        <dd>
-            <input type="text" name="name">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <dl>
-        <dt>이메일</dt>
-        <dd>
-            <input type="text" name="email">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <div class="user-submit">
-        <input type="button" value="가입" id="registMe">
-        <a href="/"><input type="button" value="취소"></a>
-      </div>
-    </form>
+    <p>회원 가입이 완료되었습니다.</p>
+    <p>가입하신 회원 정보는 아래와 같습니다.</p>
+    <p>아이디 : <%=user.getId()%></p>
+    <p>아이디 : <%=user.getName()%></p>
+    <p>아이디 : <%=user.getEmail()%></p>
+    <p>아래 홈으로 버튼을 누르면 홈으로 이동합니다.</p>
+    <a href="/"><input type="button" value="홈으로"></a>
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 

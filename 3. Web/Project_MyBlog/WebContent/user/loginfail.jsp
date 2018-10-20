@@ -13,15 +13,15 @@
   <title>Yummy Blog - Food Blog Template</title>
 
   <!-- Favicon -->
-  <link rel="icon" href="img/core-img/favicon.ico">
+  <link rel="icon" href="/img/core-img/favicon.ico">
 
   <!-- Core Stylesheet -->
-  <link href="style.css" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
 
   <!-- Responsive CSS -->
-  <link href="css/responsive/responsive.css" rel="stylesheet">
+  <link href="/css/responsive/responsive.css" rel="stylesheet">
 
-  <script src="js/mycommon.js"></script>
+  <script src="/js/mycommon.js"></script>
 </head>
 
 <body>
@@ -49,35 +49,16 @@
   <!-- ****** Header Area End ****** -->
 
   <%-- ****** 메인 바디 작성 시작 ****** --%>
-  <div class="guest-board">
-    <div class="guest-message">
-      <form action="" method="post">
-        <textarea cols="1" rows="1" name="message"></textarea>
-        <button>등록</button>
-      </form>
+    <div class="login-form">
+        <form action="/user/login_action.jsp" method="post">
+            <input type="text" name="id" id="userId" placeholder="Your id">
+            <input type="password" name="passwd" id="userPw" placeholder="Password">
+            <input type="submit" id="login-submit" value="Login">
+            <input type="checkbox" value="saveId">
+            <label>Save ID</label>
+        </form>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>작성자</th>
-          <th>내용</th>
-          <th>작성일</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>제목이다</td>
-          <td>정지원</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>제목이다</td>
-          <td>정지원</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 
   <!-- ****** Footer Menu Area Start ****** -->
@@ -85,13 +66,13 @@
   <!-- ****** Footer Menu Area End ****** -->
 
   <!-- Jquery-2.2.4 js -->
-  <script src="js/jquery/jquery-2.2.4.min.js"></script>
+  <script src="/js/jquery/jquery-2.2.4.min.js"></script>
   <!-- Popper js -->
-  <script src="js/bootstrap/popper.min.js"></script>
+  <script src="/js/bootstrap/popper.min.js"></script>
   <!-- Bootstrap-4 js -->
-  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <script src="/js/bootstrap/bootstrap.min.js"></script>
   <!-- All Plugins JS -->
-  <script src="js/others/plugins.js"></script>
+  <script src="/js/others/plugins.js"></script>
   <!-- Active JS -->
-  <script src="js/active.js"></script>
+  <script src="/js/active.js"></script>
 </body>

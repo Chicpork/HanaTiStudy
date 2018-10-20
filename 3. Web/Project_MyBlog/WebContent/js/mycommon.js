@@ -1,11 +1,12 @@
 function init() {
   const pathname = window.location.pathname.split('/');
-  let filename = pathname[pathname.length - 1];
-  if (filename.length === 0) {
+  const name = pathname[1];
+  if (name.length === 0) {
     document.getElementById('home').parentElement.classList.toggle('active');
-  } else {
-    filename = filename.slice(0, filename.length - 4);
-    document.getElementById(filename).parentElement.classList.toggle('active');
+  } else if (name === 'board') {
+    document.getElementById('freeboard').parentElement.classList.toggle('active');
+  } else if (name === 'guest') {
+    document.getElementById('guestbook').parentElement.classList.toggle('active');
   }
 }
 

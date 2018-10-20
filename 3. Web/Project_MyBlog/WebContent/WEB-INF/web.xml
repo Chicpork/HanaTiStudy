@@ -5,4 +5,9 @@
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>InitDao</servlet-name>
+    <jsp-file>/inits/initDao.jsp</jsp-file>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
 </web-app>
