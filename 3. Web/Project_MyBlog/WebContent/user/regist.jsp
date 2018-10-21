@@ -43,14 +43,14 @@
       <dl>
         <dt>아이디</dt>
         <dd>
-          <input type="text" name="id" id="id" placeholder="아이디">
+          <input type="text" name="id" id="id" placeholder="아이디" title="3 ~ 10자 길이의 영문자, 숫자로 이루어진 아이디를 사용해주세요">
           <iframe src="/user/checkDupleId.jsp" class="check-box" id="checkId" scrolling="no"></iframe>
         </dd>
       </dl>
       <dl>
         <dt>비밀번호</dt>
         <dd>
-            <input type="password" name="passwd" id="passwd" placeholder="비밀번호">
+            <input type="password" name="passwd" id="passwd" placeholder="비밀번호" title="8자 이상의 영문자, 숫자, 특수문자로 이루어진 비밀번호를 사용해주세요">
             <label class="check-box">비밀번호를 입력해주세요</label>
           </dd>
       </dl>
@@ -64,15 +64,15 @@
       <dl>
         <dt>이름</dt>
         <dd>
-            <input type="text" name="name" placeholder="이름">
+            <input type="text" name="name" placeholder="이름" title="영문자, 한글, 숫자만 사용가능합니다.">
             <label class="check-box">이름을 입력해주세요</label>
           </dd>
       </dl>
       <dl>
         <dt>이메일</dt>
         <dd>
-            <input type="text" name="email" placeholder="이메일">
-            <label class="check-box">이메일을 입력해주세요</label>
+            <input type="text" name="email" id="email" placeholder="이메일" title="이메일 형식으로 입력해주세요!">
+            <iframe src="/user/checkDupleEmail.jsp" class="check-box" id="checkEmail" scrolling="no"></iframe>
           </dd>
       </dl>
       <div class="user-submit">

@@ -9,7 +9,7 @@
 		response.sendRedirect("/user/loginfail.jsp");
 		return;
 	}
-	String srcURIBack = request.getParameter("srcURI");
+	String pageNum = request.getParameter("pageNum");
 %>
 
 <!DOCTYPE html>
@@ -71,17 +71,22 @@
 
 	String dbWriter = dao.getWriter(articleId);
 	String editType = request.getParameter("type");
+	String searchType = request.getParameter("searchType");
+	String searchInput = request.getParameter("searchInput");
+	if (searchType == null || searchInput == null) {
 	if(editType.equals("updateArticle")) {
 		if (!userId.equals(dbWriter)) {
-	%>
+			
+    %>
 	<div class="info-page">
-		<form action="<%=srcURIBack%>" method="post">
+		<form action="/board/post.jsp" method="post">
 			<span>자신의 게시글만 수정할 수 있습니다.</span>
-			<input type="submit" value="뒤로가기">
+			<input type="submit" value="뒤로가기" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
 		</form>
 	</div>
-	<%
+	<%			
 		} else {
 		Article article = dao.read(articleId);
 	%>
@@ -89,9 +94,9 @@
 		<form action="/board/editArticle.jsp" method="post">
 			<span>비밀번호를 입력하세요.</span>
 			<input type="password" name="passwd">
-			<input type="submit" value="확인">
+			<input type="submit" value="확인" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
-			<input type="hidden" name="srcURI" value="<%=srcURIBack%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
 		</form>
 	</div>
 	<%
@@ -100,10 +105,11 @@
 		if (!userId.equals(dbWriter)) {
 	%>
 	<div class="info-page">
-		<form action="<%=srcURIBack%>" method="post">
+		<form action="/board/post.jsp" method="post">
 			<span>자신의 게시글만 삭제할 수 있습니다.</span>
-			<input type="submit" value="뒤로가기">
+			<input type="submit" value="뒤로가기" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
 		</form>
 	</div>
 	<%
@@ -113,13 +119,67 @@
 		<form action="/board/deleteArticle.jsp" method="post">
 			<span>비밀번호를 입력하세요.</span>
 			<input type="password" name="passwd">
-			<input type="submit" value="확인">
+			<input type="submit" value="확인" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
-			<input type="hidden" name="srcURI" value="<%=srcURIBack%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
 		</form>
 	</div>
 	<%
 		}
+	}
+} else {
+	if(editType.equals("updateArticle")) {
+		if (!userId.equals(dbWriter)) {
+    %>
+	<div class="info-page">
+	<form action="/board/post.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+			<span>자신의 게시글만 수정할 수 있습니다.</span>
+			<input type="submit" value="뒤로가기" class="button-my">
+			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
+		</form>
+	</div>
+	<%			
+		} else {
+		Article article = dao.read(articleId);
+	%>
+	<div class="check-password">
+		<form action="/board/editArticle.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+			<span>비밀번호를 입력하세요.</span>
+			<input type="password" name="passwd">
+			<input type="submit" value="확인" class="button-my">
+			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
+		</form>
+	</div>
+	<%
+		}
+	} else {
+		if (!userId.equals(dbWriter)) {
+	%>
+	<div class="info-page">
+		<form action="/board/post.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+			<span>자신의 게시글만 삭제할 수 있습니다.</span>
+			<input type="submit" value="뒤로가기" class="button-my">
+			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
+		</form>
+	</div>
+	<%
+		} else {
+	%>
+	<div class="check-password">
+		<form action="/board/deleteArticle.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+			<span>비밀번호를 입력하세요.</span>
+			<input type="password" name="passwd">
+			<input type="submit" value="확인" class="button-my">
+			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
+		</form>
+	</div>
+	<%
+		}
+	}
 	}
 	%>
 	<%-- ****** 메인 바디 작성 끝 ****** --%>

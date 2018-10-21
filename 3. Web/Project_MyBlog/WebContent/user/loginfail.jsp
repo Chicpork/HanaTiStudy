@@ -45,7 +45,7 @@
         <form action="/user/login_action.jsp" method="post">
             <input type="text" name="id" id="userId" placeholder="Your id">
             <input type="password" name="passwd" id="userPw" placeholder="Password">
-            <input type="submit" id="login-submit" value="Login">
+            <input type="submit" id="login-submit" value="Login" class="button-my">
             <input type="checkbox" value="saveId">
             <label>Save ID</label>
         </form>

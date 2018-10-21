@@ -1,3 +1,4 @@
+<%@page import="kr.or.kosta.blog.common.MyPageBuilder"%>
 <%@page import="kr.or.kosta.blog.board.domain.Board"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.kosta.blog.board.dao.BoardDao"%>
@@ -23,19 +24,21 @@
 		maxArticleColNum = Integer.parseInt(tempNum);
 	}
 	
-	int totalPageNum = (int) Math.ceil((double)totalArticles/maxArticleColNum);	// 게시판 전체 목록 개수
+	MyPageBuilder pageBuilder = new MyPageBuilder(totalArticles, maxPageRowNum, maxArticleColNum);
 	
 	String pageNum = request.getParameter("pageNum");
 	if (pageNum == null || Integer.parseInt(pageNum) <= 0) {
 		pageNum = "1";
 	}
+	pageBuilder.build(Integer.parseInt(pageNum));
+	
+	int totalPageNum = pageBuilder.getTotalPageNum(); // 게시판 전체 목록 개수
 	int pageNumInt = Integer.parseInt(pageNum);
 	
 	// 한 페이지 게시판 목록 시작과 마지막 값 계산
-	int startPageRowNum = maxPageRowNum*((pageNumInt-1)/maxPageRowNum) + 1;
-	int lastPageRowNum =  maxPageRowNum*((pageNumInt-1)/maxPageRowNum + 1) > totalPageNum ? totalPageNum : maxPageRowNum*((pageNumInt-1)/maxPageRowNum + 1);
-	
-	
+	int startPageRowNum = pageBuilder.getStartPageRowNum();
+	int lastPageRowNum = pageBuilder.getLastPageRowNum();
+	int articleNum = pageBuilder.getArticleNum();
 	// 페이지 목록 얻어오기
 	List<Board> lists = dao.listByPage(pageNum, String.valueOf(maxArticleColNum), searchType, searchInput);
 %>
@@ -85,8 +88,8 @@
 		<div class="search-board">
 			<form>
 				<select name="searchType">
-					<option name="subject" value="subject">제목</option>
-					<option name="writer" value="writer">작성자</option>
+					<option value="subject">제목</option>
+					<option value="writer">작성자</option>
 				</select>
 				<input type="search" name="searchInput" class="search-anything" placeholder="search" title="2글자 이상 입력하셔야 합니다.">
 				<button><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -123,13 +126,17 @@
 			</thead>
 			<tbody>
 				<%
+					int count = 0;
 					for (Board board : lists) {
 				%>
 				<tr class="article">
 					<td style="display: none;">
 						<%=board.getArticleId()%>
 					</td>
-					<td>1</td>
+					<td style="display: none;">
+						<%=pageNum%>
+					</td>
+					<td><%=articleNum - count++%></td>
 					<td>
 						<%
 					if(board.getLevelNo() != 0) {
@@ -166,7 +173,14 @@
 				<%=totalArticles%>
 			</span>
 			<div class="bottom-buttons">
-				<a href="/"><input type="button" value="홈으로"></a> <a href="/board/newpost.jsp"><input type="button" value="글 쓰기"></a>
+				<a href="/"><input type="button" value="홈으로" class="button-my"></a>
+				<%
+				if (userId != null) {
+				%>
+				<a href="/board/newpost.jsp"><input type="button" value="글 쓰기" class="button-my"></a>
+				<%
+				}
+				%>
 			</div>
 			<div class="page-number">
 				<%
@@ -209,7 +223,7 @@
 			}
 			%>
 				<%
-			if (pageNumInt != totalPageNum) {
+			if (pageNumInt < totalPageNum) {
 			%>
 				<form action="" method="post">
 					<input type="hidden" name="pageNum" value="<%=pageNumInt+1%>">

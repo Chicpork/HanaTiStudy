@@ -27,12 +27,20 @@ function post(path, params, method) {
 
 function sendArticleColNum() {
   const articleColNum = document.getElementById('articleColNum').value;
-  post('/board/freeboard.jsp', { maxArticleColNum: articleColNum });
+  const urls = window.location.href.split('/');
+  post(`/board/${urls[urls.length - 1]}`, { maxArticleColNum: articleColNum });
 }
 
 function sendArticleId(e) {
   const articleIdSrc = e.target.parentElement.children[0].textContent.trim();
-  post('/board/post.jsp', { articleId: articleIdSrc });
+  const pageNumSrc = e.target.parentElement.children[1].textContent.trim();
+  const urls = window.location.href.split('/');
+  const query = urls[urls.length - 1].split('?')[1];
+  if (query === undefined) {
+    post('/board/post.jsp', { articleId: articleIdSrc, pageNum: pageNumSrc });
+  } else {
+    post(`/board/post.jsp?${query}`, { articleId: articleIdSrc, pageNum: pageNumSrc });
+  }
 }
 
 function makeLinkArticle() {

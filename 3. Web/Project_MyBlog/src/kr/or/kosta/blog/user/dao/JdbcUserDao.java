@@ -87,6 +87,41 @@ public class JdbcUserDao implements UserDao {
 		}
 		return user;
 	}
+	
+	@Override
+	public boolean isExistEmail(String email) throws Exception {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boolean result = true;
+		String sql = "SELECT Count(email) count \r\n" + 
+				"FROM   users \r\n" + 
+				"WHERE  email = ?";
+		
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt("count") == 0) {
+					result = false;
+				}
+			}
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+			}
+		}
+		
+		return result;
+	}
 
 	@Override
 	public void update(User user) throws Exception {

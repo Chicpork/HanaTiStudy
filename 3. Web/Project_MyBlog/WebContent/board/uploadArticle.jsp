@@ -56,7 +56,6 @@
 	article.setIp(ip);
 	article.setPasswd(request.getParameter("passwd"));
 	
-	
 	dao.create(article);
 	response.sendRedirect("/board/freeboard.jsp");
 %>

@@ -5,6 +5,7 @@
 <%
 String articleId = null;
 articleId = request.getParameter("articleId");
+String pageNum = request.getParameter("pageNum");
 if(articleId == null || articleId.trim().isEmpty()){
 	response.sendRedirect("/");
 	return;
@@ -12,7 +13,7 @@ if(articleId == null || articleId.trim().isEmpty()){
 DaoFactory factory = (DaoFactory) application.getAttribute("factory");
 ArticleDao dao = factory.getArticleDao();
 dao.increaseHitCount(articleId);
-Article article = dao.read(articleId);
+pageContext.setAttribute("article", dao.read(articleId));
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -46,13 +47,13 @@ Article article = dao.read(articleId);
   </div>
 
   <!-- ****** Top Header Area Start ****** -->
-  <jsp:include page="/include/top_header_area.jsp" />
-  <%-- <%@ include file="/include/top_header_area.jsp"%> --%>
+  <%--<jsp:include page="/include/top_header_area.jsp" /> --%>
+  <%@ include file="/include/top_header_area.jsp"%>
   <!-- ****** Top Header Area End ****** -->
 
   <!-- ****** Header Area Start ****** -->
-  <jsp:include page="/include/header_area.jsp" />
-  <%-- <%@ include file="/include/header_area.jsp"%> --%>
+  <%-- <jsp:include page="/include/header_area.jsp" /> --%>
+  <%@ include file="/include/header_area.jsp"%>
   <!-- ****** Header Area End ****** -->
 
 
@@ -62,59 +63,116 @@ Article article = dao.read(articleId);
       <div class="upper">
         <dl>
           <dt>제목</dt>
-          <dd><%=article.getSubject()%></dd>
+          <dd>${article.subject}</dd>
         </dl>
         <div>
           <dl>
             <dt>작성자</dt>
-            <dd><%=article.getWriter()%></dd>
+            <dd>${article.writer}</dd>
           </dl>
           <dl>
             <dt>작성일</dt>
-            <dd><%=article.getRegdate()%></dd>
+            <dd>${article.regdate}</dd>
           </dl>
         </div>
         <div>
           <dl>
             <dt>아이피</dt>
-            <dd><%String[] ips = article.getIp().split("\\.");%><%=ips[0] + "." + ips[1]%>.xxx.xxx</dd>
+            <dd>${article.ip}</dd>
           </dl>
           <dl>
             <dt>조회수</dt>
-            <dd><%=article.getHitcount()%></dd>
+            <dd>${article.hitcount}</dd>
           </dl>
         </div>
       </div>
       <div class="main">
         <dl>
           <dt>내용</dt>
-          <dd><%=article.getContent()%></dd>
+          <dd>${article.content}</dd>
         </dl>
       </div>
     </div>
     <div class="bottom">
-      <input type="button" value="글목록">
-      
-      <form action="/board/newpost.jsp" method="post">
-     	<input type="submit" value="답글쓰기">
-      	<input type="hidden" name="groupNo" value="<%=article.getGroupNo()%>">
-        <input type="hidden" name="levelNo" value="<%=article.getLevelNo()%>">
-        <input type="hidden" name="orderNo" value="<%=article.getOrderNo()%>">
+    <%
+    String searchType = request.getParameter("searchType");
+    String searchInput = request.getParameter("searchInput");
+    if (searchType == null || searchInput == null) {
+    %>
+      <form action="/board/freeboard.jsp" method="post">
+        <input type="submit" value="글목록" class="button-my">
+        <input type="hidden" name="pageNum" value="<%=pageNum%>">
       </form>
-      <span>
+            <form action="/board/newpost.jsp" method="post">
+     	<input type="submit" value="답글쓰기" class="button-my">
+      	<input type="hidden" name="groupNo" value="${article.groupNo}">
+        <input type="hidden" name="levelNo" value="${article.levelNo}">
+        <input type="hidden" name="orderNo" value="${article.orderNo}">
+        <input type="hidden" name="pageNum" value="<%=pageNum%>">
+      </form>
+      <%
+      if(userId != null) {
+      		if(((Article)pageContext.getAttribute("article")).getWriter().equals(userId)) {
+      %>
+      <div style="display:inline-block;">
         <form action="/board/checkpasswd.jsp" method="post">
-          <input type="submit" value="글수정">
+          <input type="submit" value="글수정" class="button-my">
           <input type="hidden" name="type" value="updateArticle">
           <input type="hidden" name="articleId" value="<%=articleId%>">
           <input type="hidden" name="srcURI" value="<%=request.getRequestURI()%>">
+          <input type="hidden" name="pageNum" value="<%=pageNum%>">
         </form>
         <form action="/board/checkpasswd.jsp" method="post">
-          <input type="submit" value="글삭제">
+          <input type="submit" value="글삭제" class="button-my">
           <input type="hidden" name="type" value="deleteArticle">
           <input type="hidden" name="articleId" value="<%=articleId%>">
           <input type="hidden" name="srcURI" value="<%=request.getRequestURI()%>">
+          <input type="hidden" name="pageNum" value="<%=pageNum%>">
         </form>
-      </span>
+      </div>
+      <%
+      		}
+   		}
+      %>
+    <%
+    } else {  
+    %>
+      <form action="/board/freeboard.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+        <input type="submit" value="글목록" class="button-my">
+        <input type="hidden" name="pageNum" value="<%=pageNum%>">
+      </form>
+      <form action="/board/newpost.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+     	<input type="submit" value="답글쓰기" class="button-my">
+      	<input type="hidden" name="groupNo" value="${article.groupNo}">
+        <input type="hidden" name="levelNo" value="${article.levelNo}">
+        <input type="hidden" name="orderNo" value="${article.orderNo}">
+        <input type="hidden" name="pageNum" value="<%=pageNum%>">
+      </form>
+      <%
+      if(userId != null) {
+      		if(((Article)pageContext.getAttribute("article")).getWriter().equals(userId)) {
+      %>
+      <div style="display:inline-block;">
+        <form action="/board/checkpasswd.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+          <input type="submit" value="글수정" class="button-my">
+          <input type="hidden" name="type" value="updateArticle">
+          <input type="hidden" name="articleId" value="<%=articleId%>">
+          <input type="hidden" name="srcURI" value="<%=request.getRequestURI()%>">
+          <input type="hidden" name="pageNum" value="<%=pageNum%>">
+        </form>
+        <form action="/board/checkpasswd.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+          <input type="submit" value="글삭제" class="button-my">
+          <input type="hidden" name="type" value="deleteArticle">
+          <input type="hidden" name="articleId" value="<%=articleId%>">
+          <input type="hidden" name="srcURI" value="<%=request.getRequestURI()%>">
+          <input type="hidden" name="pageNum" value="<%=pageNum%>">
+        </form>
+      </div>
+      <%
+      	  	}
+   		  }
+      }
+      %>
     </div>
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>

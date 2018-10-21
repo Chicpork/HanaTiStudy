@@ -1577,7 +1577,7 @@ li {
     text-align: center;
 }
 
-.free-board table td:nth-child(3) {
+.free-board table td:nth-child(4) {
     text-align: left;
 }
 
@@ -1884,7 +1884,8 @@ li {
 .top_header_area .signup-search-area .login-form label {
     font-size: x-small;
     width: 110px;
-    line-height: 3;
+    position: relative;
+    top: 8px;
 }
 
 .user-info {
@@ -1926,7 +1927,7 @@ li {
 }
 
 .user-info dd .check-box {
-    margin: 5px auto;
+    margin: 5px 0px;
     color: red;
 }
 
@@ -1955,6 +1956,7 @@ li {
     border: none;
     display: none;
     height: 24px;
+    width: 100%;
 }
 
 .button-my {
@@ -1965,4 +1967,8 @@ li {
     border-radius: 14px;
     cursor: pointer;
     width: fit-content;
+}
+
+.bottom form {
+    display: inline-block;
 }

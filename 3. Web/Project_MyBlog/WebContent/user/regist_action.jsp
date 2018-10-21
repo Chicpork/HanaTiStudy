@@ -59,7 +59,7 @@ dao.create(user);
     <p>아이디 : <%=user.getName()%></p>
     <p>아이디 : <%=user.getEmail()%></p>
     <p>아래 홈으로 버튼을 누르면 홈으로 이동합니다.</p>
-    <a href="/"><input type="button" value="홈으로"></a>
+    <a href="/"><input type="button" value="홈으로" class="button-my"></a>
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 

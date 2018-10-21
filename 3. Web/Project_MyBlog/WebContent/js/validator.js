@@ -3,11 +3,11 @@
  */
 
 /**
- * 영문자와 숫자로 이루어진 6 ~ 10자리 아이디
+ * 영문자와 숫자로 이루어진 3 ~ 10자리 아이디
  * @param {*} value 유효성 검증이 필요한 값
  */
 function isValidId(value) { // eslint-disable-line no-unused-vars
-  const pattern = /^\w{6,10}$/;
+  const pattern = /^\w{3,10}$/;
   return pattern.test(value);
 }
 
@@ -35,6 +35,6 @@ function isValidPasswd(value) { // eslint-disable-line no-unused-vars
  * @param {*} value 유효성 검증이 필요한 값
  */
 function isValidEmail(value) { // eslint-disable-line no-unused-vars
-  const pattern = /\w{1,}@[a-zA-Z]{1,}.[a-zA-Z]{1,}$/;
+  const pattern = /^\w{1,}@[a-zA-Z]{1,}\.[a-zA-Z]{1,}$/;
   return pattern.test(value);
 }

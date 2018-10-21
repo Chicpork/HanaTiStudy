@@ -76,8 +76,8 @@
 				<textarea cols="1" rows="1" name="content"></textarea>
 			</div>
 			<div class="bottom">
-				<input type="submit" value="올리기">
-				<a href="/board/freeboard.jsp"><input type="button" value="취소"></a>
+				<input type="submit" value="올리기" class="button-my">
+				<a href="/board/freeboard.jsp"><input type="button" value="취소" class="button-my"></a>
 			</div>
 			<div class="hidden" style="display: hidden;">
 				<input type="hidden" name="groupNo" value="<%=groupNo%>">

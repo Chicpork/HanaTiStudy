@@ -16,6 +16,8 @@ public interface UserDao {
 	
 	public User read(String id) throws Exception;
 	
+	public boolean isExistEmail(String email) throws Exception;
+	
 	public void update(User user) throws Exception;
 	
 	public void delete(String id) throws Exception;

@@ -58,7 +58,8 @@ public class Article {
 	}
 
 	public void setIp(String ip) {
-		this.ip = ip;
+		String[] ips = ip.split("\\.");
+		this.ip = ips[0] + "." + ips[1] + ".xxx.xxx";
 	}
 
 	public String getHitcount() {

@@ -5,7 +5,7 @@
 <%@ include file="/user/getUserCookie.jsp"%>
 <%
 	request.setCharacterEncoding("utf-8");
-	String srcURIBack = request.getParameter("srcURI");
+	String pageNum = request.getParameter("pageNum");
 	if (userId == null) {
 		response.sendRedirect("/user/loginfail.jsp");
 	}
@@ -66,23 +66,40 @@
         dao.delete(articleId);
     %>
 	<div class="info-page">
-        <form action="<%=srcURIBack%>" method="post">
+        <form action="/board/freeboard.jsp" method="post">
             <span>게시글 삭제 완료</span>
-            <input type="submit" value="뒤로가기">
+            <input type="submit" value="뒤로가기" class="button-my">
             <input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
         </form>
 	</div>
     <%
     } else {
+		String searchType = request.getParameter("searchType");
+		String searchInput = request.getParameter("searchInput");
+		if (searchType == null || searchInput == null) {
     %>
     <div class="info-page">
-		<form action="/board/freeboard.jsp" method="post">
+		<form action="/board/post.jsp" method="post">
 			<span>잘못된 비밀번호를 입력하셨습니다.</span>
-			<input type="submit" value="뒤로가기">
+			<input type="submit" value="뒤로가기" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
 		</form>
 	</div>
     <%
+		} else {
+	%>
+    <div class="info-page">
+		<form action="/board/post.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+			<span>잘못된 비밀번호를 입력하셨습니다.</span>
+			<input type="submit" value="뒤로가기" class="button-my">
+			<input type="hidden" name="articleId" value="<%=articleId%>">
+			<input type="hidden" name="pageNum" value="<%=pageNum%>">
+		</form>
+	</div>	
+	<%		
+		}
     }
     %>
 	<%-- ****** 메인 바디 작성 끝 ****** --%>

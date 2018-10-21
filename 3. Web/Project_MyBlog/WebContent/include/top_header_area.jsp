@@ -15,19 +15,44 @@
         <%@ include file="/user/getUserCookie.jsp"%>
 		<%
         if (userId == null) {
+			String saveId = null;
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (cookie.getName().equals("saveId")) {
+						saveId = cookie.getValue();
+						break;
+					}
+				}
+			}
+			if (saveId == null) {
         %>
 				<div class="login-form">
 					<form action="/user/login_action.jsp" method="post">
 						<input type="text" name="id" id="userId" placeholder="Your id">
 						<input type="password" name="passwd" id="userPw" placeholder="Password"> <input type="submit" id="login-submit"
-						 value="Login"> <input type="checkbox" value="saveId"> <label>Save ID</label>
+						 value="Login"> <input type="checkbox" value="saveId" id="saveId"> <label>Save ID</label>
 					</form>
 				</div>
 				<div class="login_register_area d-flex">
 					<div class="login">
 						<a href="#">Sign in</a>
 					</div>
-					<%
+		<%
+			} else {
+		%>
+				<div class="login-form">
+					<form action="/user/login_action.jsp" method="post">
+						<input type="text" name="id" id="userId" placeholder="Your id" value="<%=saveId%>">
+						<input type="password" name="passwd" id="userPw" placeholder="Password"> <input type="submit" id="login-submit"
+						 value="Login"> <input type="checkbox" value="saveId" id="saveId" checked> <label>Save ID</label>
+					</form>
+				</div>
+				<div class="login_register_area d-flex">
+					<div class="login">
+						<a href="#">Sign in</a>
+					</div>
+		<%	
+			}
         } else {
         %>
 					<label>
