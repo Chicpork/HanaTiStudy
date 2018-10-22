@@ -19,7 +19,7 @@ function eventRegist() {
   }
 }
 
-function init() {
+function changeColor() {
   const pathname = window.location.pathname.split('/');
   const name = pathname[1];
   if (name.length === 0) {
@@ -32,6 +32,6 @@ function init() {
 }
 
 window.onload = (() => {
-  init();
   eventRegist();
+  changeColor();
 });

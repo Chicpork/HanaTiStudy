@@ -9,29 +9,7 @@
 	if (groupNo != null) {
 		levelNo = request.getParameter("levelNo");
 		orderNo = request.getParameter("orderNo");
-	}
-	String ip = request.getHeader("X-Forwarded-For");
-	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = request.getHeader("Proxy-Client-IP");
-	}
-	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = request.getHeader("WL-Proxy-Client-IP");
-	}
-	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = request.getHeader("HTTP_CLIENT_IP");
-	}
-	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-	}
-	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = request.getHeader("X-Real-IP");
-	}
-	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = request.getHeader("X-RealIP");
-	}
-	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-		ip = request.getRemoteAddr();
-	}
+	} 
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -86,36 +64,19 @@
 	<%-- ****** 메인 바디 작성 시작 ****** --%>
 	<div class="new-post">
 		<form action="/board/uploadArticle.jsp" method="post">
-			<div class="my-border">
-				<div class="upper">
-					<div>
-					<dl>
-						<dt>제목</dt>
-						<dd><input type="text" name="subject"></dd>
-					</dl>
-					<dl>
-						<dt>비밀번호</dt>
-						<dd><input type="password" name="passwd"></dd>
-					</dl>
-					</div>
-					<div>
-					<dl>
-						<dt>작성자</dt>
-						<dd><input type="text" name="writer" value="<%=userId%>" disabled></dd>
-					</dl>
-					<dl>
-						<dt>아이피</dt>
-						<dd><div><%=ip%></div></dd>
-					</dl>
-					</div>
+			<div class="upper">
+				<div class="title">
+					<span>제목</span> <input type="text" name="subject">
 				</div>
-				<div class="main">
-					<dl>
-						<dt>내용</dt>
-						<dd><textarea cols="1" rows="1" name="content"></textarea></dd>
-					</dl>
-					
+				<div>
+					<span>작성자</span> <input type="text" name="writer" value="<%=userId%>" disabled>
 				</div>
+				<div class="passwd">
+					<span>비밀번호</span> <input type="password" name="passwd">
+				</div>
+			</div>
+			<div class="main">
+				<textarea cols="1" rows="1" name="content"></textarea>
 			</div>
 			<div class="bottom">
 				<input type="submit" value="올리기" class="button-my">

@@ -76,7 +76,7 @@ lists = dao.listAll();
     <%
     } else {
     %>
-      <form action="" method="post">
+      <form>
         <textarea cols="1" rows="1" name="message" disabled>로그인 시만 이용할 수 있습니다.</textarea>
         <button disabled style="cursor:default;">등록</button>
         <input type="hidden" value="putMessage" name="putMessage">

@@ -129,7 +129,9 @@ public class JdbcArticleDao implements ArticleDao {
 	public void delete(String articleId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM article \r\n" + 
+		String sql = "UPDATE article \r\n" + 
+				"SET    subject = '삭제된 게시글입니다.', \r\n" + 
+				"       content = '삭제된 게시글입니다.(@$^*)[DELETED]' \r\n" + 
 				"WHERE  article_id = ?";
 		try {
 			con = dataSource.getConnection();

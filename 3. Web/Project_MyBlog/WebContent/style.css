@@ -1636,35 +1636,92 @@ li {
     border-radius: 22px;
 }
 
+.new-post .my-border {
+    margin: 0;
+    padding: 0;
+    border: 2px solid #e9ecef;
+}
+
+.new-post .upper dl {
+    margin: 0px;
+    border: 2px solid #e9ecef;
+    border-bottom: none;
+    padding: 8px 15px;
+}
+
+.new-post .upper dd {
+    margin: 0px;
+}
+
+.new-post .upper dd input , .new-post .upper dd div {
+    border: none;
+    border-bottom: black;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: transparent;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.new-post .upper dd input:focus {
+    background-color: white;
+}
+
+.new-post .upper dt {
+    font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
+}
+
+.new-post .upper div {
+    display: flex;
+}
+
+.new-post .upper div dl {
+    display: inline-block;
+    width: 50%;
+}
+
+ .new-post .upper div dl:nth-child(1) {
+    border-right: none;
+}
+
 .new-post .main {
     height: 350px;
 }
 
-.new-post .title {
-    display: inline-block;
-    width: 60%;
+.new-post .main dl {
+    margin: 0px;
+    border: 2px solid #e9ecef;
+    padding: 8px 15px;
+    height: 100%;
 }
 
-.new-post .title input {
-    width: 80%;
+.new-post .main dt {
+    font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
 }
 
-.new-post .passwd {
-    float: right;
+.new-post .main dd {
+    margin: 0px;
+    height: 90%;
 }
 
-.new-post .passwd input {
-    width: 20%;
-}
-
-.new-post .main textarea {
+.new-post .main dd textarea {
     width: 100%;
     height: 100%;
+    border: 2px solid #e9ecef;
+    resize: none;
+    display: block;
+    padding: 5px 10px;
 }
 
 .new-post .bottom {
     text-align: right;
+    margin-top: 10px;
 }
+
 
 .post {
     margin: 0px 20%;
@@ -1692,6 +1749,8 @@ li {
 
 .post .upper dt {
     font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
 }
 
 .post .upper div dl {
@@ -1718,6 +1777,8 @@ li {
 
 .post .main dt {
     font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
 }
 
 .post .main dd {
@@ -1757,7 +1818,7 @@ li {
     resize: none;
     display: block;
     float: left;
-    padding: 5px;
+    padding: 5px 10px;
 }
 
 .guest-board button {
@@ -1827,7 +1888,7 @@ li {
     color: #fc6c3f;
 }
 
-.top_header_area .signup-search-area .login a {
+.top_header_area .signup-search-area .login a, .top_header_area .signup-search-area .logout a {
     margin-right: 13px;
     border-right: 2px solid #c2c2c2;
     padding-right: 13px;
@@ -1865,7 +1926,7 @@ li {
 
 .top_header_area .signup-search-area .login-form input[type=text]:focus, .top_header_area .signup-search-area .login-form input[type=password]:focus {
     outline: none;
-    box-shadow: 0px 0px 2px blue;
+    box-shadow: 0px 0px 5px red;
 }
 
 .top_header_area .signup-search-area .login-form #login-submit {
@@ -1971,4 +2032,95 @@ li {
 
 .bottom form {
     display: inline-block;
+}
+
+.login-fail {
+    margin: 0px 35%;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    text-align: center;
+}
+
+.login-fail form {
+    width: 70%;
+    margin: 0px auto;
+}
+
+.login-fail input[type=text], .login-fail input[type=password] {
+    display: block;
+    margin: 10px auto;
+    border: 2px solid #e9ecef;
+    padding: 5px 20px;
+    font-size: large;
+    border-radius: 22px;
+    width: 100%;
+}
+
+.login-fail input[type=text]:focus, .login-fail input[type=password]:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px red;
+}
+
+.login-fail .message {
+    margin: 10px auto;
+    font-size: x-large;
+    text-align: center;
+    font-weight: 800;
+}
+
+.background-gray body {
+    background-color: dimgray;
+}
+
+.background-gray .top_header_area {
+    border-bottom: 1px solid dimgray;
+}
+
+.background-gray .signup-search-area .login a {
+    border-right: 2px solid dimgray;
+}
+
+.background-gray .signup-search-area .login-form.login-form-open label {
+    color: white;
+}
+
+.check-password {
+    margin: 0px 35%;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    text-align: center;
+}
+
+.check-password span {
+    display: block;
+    font-size: x-large;
+}
+
+.check-password input[type=password] {
+    display: inline-block;
+    margin: 10px auto;
+    border: 2px solid #e9ecef;
+    padding: 5px 20px;
+    font-size: large;
+    border-radius: 22px;
+}
+
+.check-password input[type=password]:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px red;
+}
+
+.check-password .button-my {
+    background-color: #fc6c3f87;
+    color: white;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    width: fit-content;
+    font-size: larger;
 }

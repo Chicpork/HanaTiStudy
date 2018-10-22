@@ -2,18 +2,13 @@
 <%@page import="kr.or.kosta.blog.article.dao.ArticleDao"%>
 <%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ include file="/user/getUserCookie.jsp"%>
 <%
     request.setCharacterEncoding("utf-8");
-	if (userId == null) {
-		response.sendRedirect("/user/loginfail.jsp");
-		return;
-	}
 	String pageNum = request.getParameter("pageNum");
 %>
 
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="background-gray">
 
 <head>
 	<meta charset="UTF-8">
@@ -54,15 +49,22 @@
 	</div>
 
 	<!-- ****** Top Header Area Start ****** -->
-	<jsp:include page="/include/top_header_area.jsp" />
-	<%-- <%@ include file="/include/top_header_area.jsp"%> --%>
+	<%-- <jsp:include page="/include/top_header_area.jsp" /> --%>
+	<%@ include file="/include/top_header_area.jsp"%>
 	<!-- ****** Top Header Area End ****** -->
 
 	<!-- ****** Header Area Start ****** -->
-	<jsp:include page="/include/header_area.jsp" />
-	<%-- <%@ include file="/include/header_area.jsp"%> --%>
+	<%-- <jsp:include page="/include/header_area.jsp" /> --%>
+	<%@ include file="/include/header_area.jsp"%>
 	<!-- ****** Header Area End ****** -->
 
+<%
+	if (userId == null) {
+		request.setAttribute("loginMessage", "로그인이 필요합니다.");
+		response.sendRedirect("/user/loginfail.jsp");
+		return;
+	}
+%>
 
 	<%-- ****** 메인 바디 작성 시작 ****** --%>
 	<%

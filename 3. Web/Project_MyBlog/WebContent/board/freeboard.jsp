@@ -169,7 +169,7 @@
 			</tbody>
 		</table>
 		<div class="board-bottom">
-			<span>총 페이지 수 :
+			<span>총 게시글 수 :
 				<%=totalArticles%>
 			</span>
 			<div class="bottom-buttons">
@@ -266,4 +266,5 @@
 	<script src="/js/mycommon.js"></script>
 
 	<script src="/js/board.js"></script>
+	<script>changeColor()</script>
 </body>

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="background-gray">
 
 <head>
   <meta charset="UTF-8">
@@ -41,16 +41,96 @@
   <!-- ****** Header Area End ****** -->
 
   <%-- ****** 메인 바디 작성 시작 ****** --%>
-    <div class="login-form">
-        <form action="/user/login_action.jsp" method="post">
-            <input type="text" name="id" id="userId" placeholder="Your id">
-            <input type="password" name="passwd" id="userPw" placeholder="Password">
-            <input type="submit" id="login-submit" value="Login" class="button-my">
-            <input type="checkbox" value="saveId">
-            <label>Save ID</label>
-        </form>
+  <script>
+    function saveIdCookie2() {
+      if (document.getElementById('saveId2').checked) {
+        setCookie('saveId', document.getElementById('userId2').value, 30);
+      } else {
+        setCookie('saveId', '', -1);
+      }
+    }
+  </script>
+  <%
+  String saveId = null;
+  if (cookies != null) {
+    for (Cookie cookie : cookies) {
+      if (cookie.getName().equals("saveId")) {
+        saveId = cookie.getValue();
+        break;
+      }
+    }
+  }
+  System.out.println(request.getAttribute("loginMessage"));
+  String loginMessage = (String)request.getAttribute("loginMessage");
+  if (loginMessage == null) {
+    if (saveId == null) {
+    %>
+    <div class="login-fail">
+      <div class="message">
+        아이디와 비밀번호를 확인하고<br>다시 로그인 해주세요!
+      </div>
+      <form action="/user/login_action.jsp" method="post">
+        <input type="text" name="id" id="userId2" placeholder="Your id">
+        <input type="password" name="passwd" id="userPw2" placeholder="Password">
+        <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
+        <input type="checkbox" value="saveId" id="saveId2">
+        <label>Save ID</label>
+      </form>
     </div>
-
+    <%
+    } else { 
+    %>
+    <div class="login-fail">
+        <div class="message">
+          아이디와 비밀번호를 확인하고<br>다시 로그인 해주세요!
+        </div>
+        <form action="/user/login_action.jsp" method="post">
+          <input type="text" name="id" id="userId2" placeholder="Your id" value="<%=saveId%>">
+          <input type="password" name="passwd" id="userPw2" placeholder="Password">
+          <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
+          <input type="checkbox" value="saveId" id="saveId2" checked>
+          <label>Save ID</label>
+        </form>
+      </div>
+    <%
+    }
+  } else {
+    if (saveId == null) {
+    %>
+    <div class="login-fail">
+      <div class="message">
+        <%=loginMessage%>
+      </div>
+      <form action="/user/login_action.jsp" method="post">
+        <input type="text" name="id" id="userId2" placeholder="Your id">
+        <input type="password" name="passwd" id="userPw2" placeholder="Password">
+        <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
+        <input type="checkbox" value="saveId" id="saveId2">
+        <label>Save ID</label>
+      </form>
+    </div>
+    <%
+    } else { 
+    %>
+    <div class="login-fail">
+        <div class="message">
+          <%=loginMessage%>
+        </div>
+        <form action="/user/login_action.jsp" method="post">
+          <input type="text" name="id" id="userId2" placeholder="Your id" value="<%=saveId%>">
+          <input type="password" name="passwd" id="userPw2" placeholder="Password">
+          <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
+          <input type="checkbox" value="saveId" id="saveId2" checked>
+          <label>Save ID</label>
+        </form>
+      </div>
+  <%
+    }
+  }
+  %>
+  <script>
+  	document.getElementById('userId2').focus();
+  </script>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 
   <!-- ****** Footer Menu Area Start ****** -->

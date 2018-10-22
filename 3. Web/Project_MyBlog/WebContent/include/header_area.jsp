@@ -11,7 +11,8 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <jsp:include page="/include/menu_area.jsp"/>
+        <%-- <jsp:include page="/include/menu_area.jsp"/> --%>
+        <%@ include file="/include//menu_area.jsp"%>
       </div>
     </div>
   </div>

@@ -89,10 +89,48 @@ pageContext.setAttribute("article", dao.read(articleId));
       <div class="main">
         <dl>
           <dt>내용</dt>
+          <%
+          String[] articleStatus = ((Article)pageContext.getAttribute("article")).getContent().split("\\(@\\$\\^\\*\\)");
+          if (articleStatus.length == 2 && articleStatus[1].equals("[DELETED]")) {
+          %>
+          <dd><%=articleStatus[0]%></dd>
+          <%
+          } else {
+          %>
           <dd>${article.content}</dd>
+          <%
+          }
+          %>
         </dl>
       </div>
     </div>
+    <%
+    if (articleStatus.length == 2 && articleStatus[1].equals("[DELETED]")) {
+    %>
+    <div class="bottom">
+    <%
+    String searchType = request.getParameter("searchType");
+    String searchInput = request.getParameter("searchInput");
+    if (searchType == null || searchInput == null) {
+    %>
+      <form action="/board/freeboard.jsp" method="post">
+        <input type="submit" value="글목록" class="button-my">
+        <input type="hidden" name="pageNum" value="<%=pageNum%>">
+      </form>
+   	<%
+    } else {  
+    %>
+      <form action="/board/freeboard.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
+        <input type="submit" value="글목록" class="button-my">
+        <input type="hidden" name="pageNum" value="<%=pageNum%>">
+      </form>
+      <%
+      }
+      %>
+    </div>
+    <%
+    } else {
+    %>
     <div class="bottom">
     <%
     String searchType = request.getParameter("searchType");
@@ -174,6 +212,10 @@ pageContext.setAttribute("article", dao.read(articleId));
       }
       %>
     </div>
+    
+    <%
+    }
+    %>
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 

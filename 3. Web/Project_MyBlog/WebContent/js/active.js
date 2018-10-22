@@ -36,6 +36,11 @@
     // my code
     $(".login").on('click', function () {
         $(".login-form").toggleClass("login-form-open");
+        const urls = window.location.href.split('/');
+        if (urls[urls.length - 1].split('?')[0] !== 'loginfail.jsp') {
+            $("html").toggleClass("background-gray");
+        }
+        document.getElementById('userId').focus();
     });
 
 })(jQuery);
