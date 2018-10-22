@@ -260,48 +260,6 @@ public class JdbcUserDao implements UserDao {
 		return user;
 	}
 
-	@Override
-	public List<Map<String, String>> employeeList() throws Exception {
-		List<Map<String, String>> lists = new ArrayList<Map<String, String>>();
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "SELECT e.employee_id eid, \r\n" + 
-				"       e.last_name eln, \r\n" + 
-				"       e.salary es, \r\n" + 
-				"       d.department_name ddn, \r\n" + 
-				"       l.city lc \r\n" + 
-				"FROM   employees e \r\n" + 
-				"       left outer join departments d USING(department_id) \r\n" + 
-				"       left outer join locations l USING(location_id)";
-		
-		try {
-			con = dataSource.getConnection();
-			stmt = con.prepareStatement(sql);
-			rs = stmt.executeQuery(sql);
-			ResultSetMetaData rsmd = rs.getMetaData();
-			while(rs.next()) {
-				Map<String, String> map = new HashMap<>();
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					map.put(rsmd.getColumnLabel(i), rs.getString(rsmd.getColumnLabel(i)));
-				}
-				lists.add(map);
-			}
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (stmt != null)
-					stmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-			}
-		}
-		
-		return lists;
-	}
-	
 	private User createUser(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setId(rs.getString("id"));

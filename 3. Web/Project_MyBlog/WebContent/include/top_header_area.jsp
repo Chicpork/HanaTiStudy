@@ -40,6 +40,9 @@
 					<div class="login">
 						<a href="#">Sign in</a>
 					</div>
+					<div class="register">
+						<a href="/user/regist.jsp">Sign up</a>
+					</div>
 					<%
 						} else {
 					%>
@@ -57,6 +60,9 @@
 						<div class="login">
 							<a href="#">Sign in</a>
 						</div>
+						<div class="register">
+							<a href="/user/regist.jsp">Sign up</a>
+						</div>
 						<%
 							}
 							} else {
@@ -70,9 +76,6 @@
 							<%
 								}
 							%>
-							<div class="register">
-								<a href="/user/regist.jsp">Sign up</a>
-							</div>
 						</div>
 						<!-- Search Button Area -->
 						<div class="search_button">
@@ -82,7 +85,7 @@
 						<!-- Search Form -->
 						<div class="search-hidden-form">
 							<form action="https://www.google.co.kr/search" method="get">
-								<input type="search" name="search" class="search-anything"
+								<input type="search" name="q" class="search-anything"
 									placeholder="Search Anything to Google"> <input
 									type="submit" value="" class="d-none"> <span
 									class="searchBtn"><i class="fa fa-times"

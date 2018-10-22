@@ -118,6 +118,98 @@ public class JdbcBoardDao implements BoardDao {
 		}
 		return lists;
 	}
+	
+	@Override
+	public List<Board> newArticles(int number) throws Exception {
+		List<Board> lists = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Board board = null;
+		String sql = "SELECT article_id, \r\n" + 
+				"       subject, \r\n" + 
+				"       writer, \r\n" + 
+				"       To_char(regdate, 'YYYY-MM-DD HH24:MI') regdate \r\n" + 
+				"FROM   (SELECT article_id, \r\n" + 
+				"               subject, \r\n" + 
+				"               writer, \r\n" + 
+				"               regdate \r\n" + 
+				"        FROM   article \r\n" + 
+				"        WHERE  level_no = 0 \r\n" + 
+				"        ORDER  BY regdate DESC) \r\n" + 
+				"WHERE  ROWNUM <= ?";
+
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, number);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				board = new Board();
+				board.setArticleId(rs.getString("article_id"));
+				board.setSubject(rs.getString("subject"));
+				board.setWriter(rs.getString("writer"));
+				board.setRegdate(rs.getString("regdate"));
+				lists.add(board);
+			}
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+			}
+		}
+		return lists;
+	}
+	
+	@Override
+	public List<Board> hotArticles(int number) throws Exception {
+		List<Board> lists = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Board board = null;
+		String sql = "SELECT article_id, \r\n" + 
+				"       subject, \r\n" + 
+				"       writer, \r\n" + 
+				"       To_char(regdate, 'YYYY-MM-DD HH24:MI') regdate \r\n" + 
+				"FROM   (SELECT article_id, \r\n" + 
+				"               subject, \r\n" + 
+				"               writer, \r\n" + 
+				"               regdate \r\n" + 
+				"        FROM   article \r\n" + 
+				"        ORDER  BY hitcount DESC) \r\n" + 
+				"WHERE  ROWNUM <= ?";
+		try {
+			con = dataSource.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, number);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				board = new Board();
+				board.setArticleId(rs.getString("article_id"));
+				board.setSubject(rs.getString("subject"));
+				board.setWriter(rs.getString("writer"));
+				board.setRegdate(rs.getString("regdate"));
+				lists.add(board);
+			}
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+			}
+		}
+		return lists;
+	}
 
 	private Board createBoard(ResultSet rs) throws SQLException {
 		Board board = new Board();

@@ -1,5 +1,10 @@
 package kr.or.kosta.blog.guestbook.domain;
 
+/**
+ * 방명록을 추상화한 클래스
+ * @author 정지원
+ *
+ */
 public class GuestBook {
 	private String writer;
 	private String content;

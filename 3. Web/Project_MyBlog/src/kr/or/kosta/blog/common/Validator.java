@@ -1,11 +1,16 @@
 package kr.or.kosta.blog.common;
 
+/**
+ * 정규 표현식을 이용해 유효성 검증을 해주는 클래스
+ * @author 정지원
+ *
+ */
 public class Validator {
 	
 	/**
 	 * 아이디 유효성 검증
 	 * 영문과숫자조합으로 8~10자 아이디
-	 * ex) bangry313
+	 * ex) jiwon313
 	 * @param id
 	 * @return
 	 */
@@ -15,7 +20,7 @@ public class Validator {
 
 	/**
 	 * 이메일 유효성 검증
-	 * ex) bangry313@gmail.com
+	 * ex) jiwon@gmail.com
 	 * @param email
 	 * @return
 	 */
@@ -23,7 +28,4 @@ public class Validator {
 		return email.trim().matches("^\\w{1,}@[a-zA-Z]{1,}\\.[a-zA-Z]{1,}$");
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(isValidEmail("ak@nav."));
-	}
 }

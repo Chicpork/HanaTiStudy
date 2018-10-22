@@ -28,6 +28,8 @@ function changeColor() {
     document.getElementById('freeboard').classList.toggle('active');
   } else if (name === 'guest') {
     document.getElementById('guestbook').classList.toggle('active');
+  } else if (name === 'about_blog') {
+    document.getElementById('about').classList.toggle('active');
   }
 }
 

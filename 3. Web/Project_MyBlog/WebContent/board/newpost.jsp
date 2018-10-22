@@ -45,7 +45,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title -->
-<title>Yummy Blog - Food Blog Template</title>
+<title>Jiwon Blog - New Article</title>
 
 <!-- Favicon -->
 <link rel="icon" href="/img/core-img/favicon.ico">
@@ -91,17 +91,17 @@
 					<div>
 					<dl>
 						<dt>제목</dt>
-						<dd><input type="text" name="subject"></dd>
+						<dd><input type="text" name="subject" required autofocus></dd>
 					</dl>
 					<dl>
 						<dt>비밀번호</dt>
-						<dd><input type="password" name="passwd"></dd>
+						<dd><input type="password" name="passwd" required></dd>
 					</dl>
 					</div>
 					<div>
 					<dl>
 						<dt>작성자</dt>
-						<dd><input type="text" name="writer" value="<%=userId%>" disabled></dd>
+						<dd><input type="text" name="writer" value="<%=userId%>" disabled readonly></dd>
 					</dl>
 					<dl>
 						<dt>아이피</dt>
@@ -112,19 +112,55 @@
 				<div class="main">
 					<dl>
 						<dt>내용</dt>
-						<dd><textarea cols="1" rows="1" name="content"></textarea></dd>
+						<dd><textarea cols="1" rows="1" name="content" required></textarea></dd>
 					</dl>
 					
 				</div>
 			</div>
 			<div class="bottom">
 				<input type="submit" value="올리기" class="button-my">
+				<%
+			    String searchType = request.getParameter("searchType");
+			    String searchInput = request.getParameter("searchInput");
+			    String pageNum = request.getParameter("pageNum");
+				String articleId = null;
+				articleId = request.getParameter("articleId");
+				if (articleId == null) {
+				%>
 				<a href="/board/freeboard.jsp"><input type="button" value="취소" class="button-my"></a>
+				<%
+				} else if (pageNum == null) {
+				%>
+				<a href="/board/post.jsp?articleId=<%=articleId%>"><input type="button" value="취소" class="button-my"></a>
+				<%
+				} else if (searchType == null || searchInput == null) {
+				%>
+				<a href="/board/post.jsp?articleId=<%=articleId%>&pageNum=<%=pageNum%>"><input type="button" value="취소" class="button-my"></a>
+				<%	
+				} else {
+				%>
+				<a href="/board/post.jsp?articleId=<%=articleId%>&pageNum=<%=pageNum%>&searchType=<%=searchType%>&searchInput=<%=searchInput%>"><input type="button" value="취소" class="button-my"></a>
+				<%	
+				}
+				%>
 			</div>
 			<div class="hidden" style="display: hidden;">
 				<input type="hidden" name="groupNo" value="<%=groupNo%>">
 				<input type="hidden" name="levelNo" value="<%=levelNo%>">
 				<input type="hidden" name="orderNo" value="<%=orderNo%>">
+			<%
+			if (pageNum != null) {
+			%>
+				<input type="hidden" name="pageNum" value="<%=pageNum%>">
+			<%
+			}
+			if (searchType != null && searchInput != null) {
+			%>
+				<input type="hidden" name="searchType" value="<%=searchType%>">
+				<input type="hidden" name="searchInput" value="<%=searchInput%>">
+			<%
+			}
+			%>
 			</div>
 		</form>
 	</div>

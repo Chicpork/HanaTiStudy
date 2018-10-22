@@ -1,5 +1,10 @@
 package kr.or.kosta.blog.user.domain;
 
+/**
+ * 블로그 사용자를 추상화해 놓은 클래스
+ * @author 정지원
+ *
+ */
 public class User {
 	
 	private String id;
@@ -9,11 +14,9 @@ public class User {
 	private String regdate;
 	
 	public User() {
-		super();
 	}
 	
 	public User(String id, String name, String passwd, String email, String regdate) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.passwd = passwd;

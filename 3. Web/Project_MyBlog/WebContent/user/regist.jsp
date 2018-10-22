@@ -10,7 +10,7 @@
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Yummy Blog - Food Blog Template</title>
+  <title>Jiwon Blog - Regist</title>
 
   <!-- Favicon -->
   <link rel="icon" href="/img/core-img/favicon.ico">
@@ -43,7 +43,7 @@
       <dl>
         <dt>아이디</dt>
         <dd>
-          <input type="text" name="id" id="id" placeholder="아이디" title="3 ~ 10자 길이의 영문자, 숫자로 이루어진 아이디를 사용해주세요">
+          <input type="text" name="id" id="id" placeholder="아이디" title="3 ~ 10자 길이의 영문자, 숫자로 이루어진 아이디를 사용해주세요" autofocus>
           <iframe src="/user/checkDupleId.jsp" class="check-box" id="checkId" scrolling="no"></iframe>
         </dd>
       </dl>

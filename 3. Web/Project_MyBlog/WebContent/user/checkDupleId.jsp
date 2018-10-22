@@ -17,7 +17,7 @@ pageContext.setAttribute("checkParam", "false");
 if (id == null) {
 } else if(!Validator.isValidId(id)) {
 %>
-    <label style="color:red;">아이디는 3 ~ 10자 사이로 해주세요</label>
+    <label style="color:red;">아이디 형식을 맞춰주세요</label>
     <script>
         parent.document.getElementById('checkId').style.display = 'block'
         parent.document.getElementById('id').focus();

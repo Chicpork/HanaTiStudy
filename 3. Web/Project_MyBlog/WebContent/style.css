@@ -1536,13 +1536,20 @@ li {
     font-size: large;
 }
 
-.free-board .page-row-num {
+.page-row-num {
     float: right;
 }
 
-.free-board .page-row-num span {
+.page-row-num span {
     position: relative;
-    top: 2px;
+    top: 1px;
+}
+
+.page-row-num select {
+    height: 30px;
+    border: 1px solid #ddd;
+    font-size: small;
+    padding: 0px 5px;
 }
 
 .free-board table {
@@ -1581,7 +1588,7 @@ li {
     text-align: left;
 }
 
-.free-board .board-bottom {
+.board-bottom {
     margin-top: 10px;
 }
 
@@ -1821,7 +1828,7 @@ li {
     padding: 5px 10px;
 }
 
-.guest-board button {
+.guest-board .guest-message button {
     width: 10%;
     display: block;
     margin: 0px auto;
@@ -1860,7 +1867,7 @@ li {
     text-align: center;
 }
 
-.guest-board table td:nth-child(2) {
+.guest-board table td:nth-child(3) {
     text-align: left;
 }
 
@@ -1888,10 +1895,14 @@ li {
     color: #fc6c3f;
 }
 
-.top_header_area .signup-search-area .login a, .top_header_area .signup-search-area .logout a {
+.top_header_area .signup-search-area .login a {
     margin-right: 13px;
-    border-right: 2px solid #c2c2c2;
+    border-right: 2px solid dimgray;
     padding-right: 13px;
+}
+
+.top_header_area .signup-search-area .logout a {
+    border-right: none;
 }
 
 .top_header_area .signup-search-area .search_button {
@@ -2044,8 +2055,20 @@ li {
 }
 
 .login-fail form {
-    width: 70%;
+    width: 100%;
     margin: 0px auto;
+}
+
+.login-fail div div {
+    width: 69%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.login-fail div:nth-child(2) {
+    position: relative;
+    top: -15px;
+    left: -125px;
 }
 
 .login-fail input[type=text], .login-fail input[type=password] {
@@ -2068,6 +2091,13 @@ li {
     font-size: x-large;
     text-align: center;
     font-weight: 800;
+}
+
+.login-fail input[type=submit] {
+    height: 86px;
+    position: relative;
+    top: -26px;
+    font-size: larger;
 }
 
 .background-gray body {
@@ -2123,4 +2153,68 @@ li {
     cursor: pointer;
     width: fit-content;
     font-size: larger;
+}
+
+.info-page {
+    text-align: center;
+    padding: 50px 0px;
+    margin: 80px auto;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    width: fit-content;
+}
+
+.info-page form span {
+    display: inline-block;
+    font-size: x-large;
+    font-weight: 700;
+    position: relative;
+    top: 4px;
+    margin: 0px 30px;
+}
+
+.info-page form .button-my {
+    margin-right: 30px;
+}
+
+.index-main {
+    width: 90%;
+    text-align: center;
+    margin: 30px auto;
+}
+
+.index-main .upper, .index-main .lower {
+    display: flex;
+    text-align: center;
+}
+
+.index-main .upper .free-board, .index-main .lower .free-board {
+    width: 50%;
+    display: inline-block;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    margin : 0px 20px;
+}
+
+.index-main .upper div, .index-main .lower div {
+    margin-bottom: 10px;
+    font-size: x-large;
+}
+
+.index-main .upper .free-board table td, .index-main .lower .free-board table td {
+    text-align: center;
+}
+
+.index-main .upper .free-board table td:nth-child(2), .index-main .lower .free-board table td:nth-child(2) {
+    text-align: left;
+}
+
+.index-main .lower {
+    margin: 30px 0px;
+}
+
+.index-main .lower .free-board {
+    width: 47%;
 }

@@ -12,7 +12,8 @@ String userId = request.getParameter("id");
 String userPw = request.getParameter("passwd");
 
 if(userId == null || userPw == null) {
-    response.sendRedirect("/user/loginfail.jsp");
+	request.setAttribute("loginMessage", "로그인이 필요합니다.");
+	request.getRequestDispatcher("/user/loginfail.jsp").forward(request, response);
 } else{
     User user = dao.certify(userId, userPw);
     if(user == null) {

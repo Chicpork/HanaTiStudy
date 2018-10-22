@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="kr.or.kosta.blog.article.dao.ArticleDao"%>
 <%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
 <%@page import="kr.or.kosta.blog.article.domain.Article"%>
@@ -57,5 +58,23 @@
 	article.setPasswd(request.getParameter("passwd"));
 	
 	dao.create(article);
-	response.sendRedirect("/board/freeboard.jsp");
+
+	String searchType = request.getParameter("searchType");
+    String searchInput = request.getParameter("searchInput");
+	String pageNum = request.getParameter("pageNum");
+	response.setCharacterEncoding("utf-8");
+    if (searchType == null || searchInput == null) {
+		if (pageNum == null){
+			response.sendRedirect("/board/freeboard.jsp");
+		} else {
+			response.sendRedirect("/board/freeboard.jsp?pageNum="+pageNum);
+		}
+	} else {
+		searchInput = URLEncoder.encode(searchInput);
+		if (pageNum == null){
+			response.sendRedirect("/board/freeboard.jsp?searchType="+searchType+"&searchInput="+searchInput);
+		} else {
+			response.sendRedirect("/board/freeboard.jsp?searchType="+searchType+"&searchInput="+searchInput+"&pageNum="+pageNum);
+		}
+	}
 %>

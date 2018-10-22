@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%
+request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html>
 <html lang="ko" class="background-gray">
 
@@ -10,7 +13,7 @@
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Yummy Blog - Food Blog Template</title>
+  <title>Jiwon Blog - Game Review</title>
 
   <!-- Favicon -->
   <link rel="icon" href="/img/core-img/favicon.ico">
@@ -60,77 +63,75 @@
       }
     }
   }
-  System.out.println(request.getAttribute("loginMessage"));
   String loginMessage = (String)request.getAttribute("loginMessage");
-  if (loginMessage == null) {
     if (saveId == null) {
     %>
     <div class="login-fail">
+      <%
+      if (loginMessage == null) {
+      %>
       <div class="message">
         아이디와 비밀번호를 확인하고<br>다시 로그인 해주세요!
       </div>
+      <%
+      } else {
+      %>
+      <div class="message">
+          <%=loginMessage%>
+      </div>
+      <%
+      }
+      %>
       <form action="/user/login_action.jsp" method="post">
-        <input type="text" name="id" id="userId2" placeholder="Your id">
-        <input type="password" name="passwd" id="userPw2" placeholder="Password">
-        <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
-        <input type="checkbox" value="saveId" id="saveId2">
-        <label>Save ID</label>
+        <div>
+          <div>
+            <input type="text" name="id" id="userId2" placeholder="Your id" autofocus>
+            <input type="password" name="passwd" id="userPw2" placeholder="Password">
+          </div>
+          <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
+        </div>
+        <div>
+          <input type="checkbox" value="saveId" id="saveId2">
+          <label>Save ID</label>
+        </div>
       </form>
     </div>
     <%
     } else { 
     %>
     <div class="login-fail">
+        <%
+        if (loginMessage == null) {
+        %>
         <div class="message">
           아이디와 비밀번호를 확인하고<br>다시 로그인 해주세요!
         </div>
-        <form action="/user/login_action.jsp" method="post">
-          <input type="text" name="id" id="userId2" placeholder="Your id" value="<%=saveId%>">
-          <input type="password" name="passwd" id="userPw2" placeholder="Password">
-          <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
-          <input type="checkbox" value="saveId" id="saveId2" checked>
-          <label>Save ID</label>
-        </form>
-      </div>
-    <%
-    }
-  } else {
-    if (saveId == null) {
-    %>
-    <div class="login-fail">
-      <div class="message">
-        <%=loginMessage%>
-      </div>
-      <form action="/user/login_action.jsp" method="post">
-        <input type="text" name="id" id="userId2" placeholder="Your id">
-        <input type="password" name="passwd" id="userPw2" placeholder="Password">
-        <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
-        <input type="checkbox" value="saveId" id="saveId2">
-        <label>Save ID</label>
-      </form>
-    </div>
-    <%
-    } else { 
-    %>
-    <div class="login-fail">
+        <%
+        } else {
+        %>
         <div class="message">
-          <%=loginMessage%>
+            <%=loginMessage%>
         </div>
+        <%
+        }
+        %>
         <form action="/user/login_action.jsp" method="post">
-          <input type="text" name="id" id="userId2" placeholder="Your id" value="<%=saveId%>">
-          <input type="password" name="passwd" id="userPw2" placeholder="Password">
-          <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
-          <input type="checkbox" value="saveId" id="saveId2" checked>
-          <label>Save ID</label>
+           <div>
+             <div>
+               <input type="text" name="id" id="userId2" placeholder="Your id" value="<%=saveId%>" autofocus>
+               <input type="password" name="passwd" id="userPw2" placeholder="Password">
+             </div>
+             <input type="submit" id="login-submit2" value="Login" class="button-my" onclick="saveIdCookie2()">
+           </div>
+	        <div>
+	          <input type="checkbox" value="saveId" id="saveId2" checked>
+	          <label>Save ID</label>
+	        </div>
         </form>
       </div>
-  <%
+    <%
     }
-  }
-  %>
-  <script>
-  	document.getElementById('userId2').focus();
-  </script>
+    %>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 
   <!-- ****** Footer Menu Area Start ****** -->

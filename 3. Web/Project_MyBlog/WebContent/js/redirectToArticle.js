@@ -1,9 +1,3 @@
-/**
- * sends a request to the specified url from a form. this will change the window location.
- * @param {string} path the path to send the post request to
- * @param {object} params the paramiters to add to the url
- * @param {string} [method=post] the method to use on the form
- */
 function post(path, params, method) {
   const methodType = method || 'post'; // Set method to post by default if not specified.
 
@@ -25,22 +19,9 @@ function post(path, params, method) {
   form.submit();
 }
 
-function sendArticleColNum() {
-  const articleColNum = document.getElementById('articleColNum').value;
-  const urls = window.location.href.split('/');
-  post(`/${urls[urls.length - 2]}/${urls[urls.length - 1]}`, { maxArticleColNum: articleColNum });
-}
-
 function sendArticleId(e) {
   const articleIdSrc = e.target.parentElement.children[0].textContent.trim();
-  const pageNumSrc = e.target.parentElement.children[1].textContent.trim();
-  const urls = window.location.href.split('/');
-  const query = urls[urls.length - 1].split('?')[1];
-  if (query === undefined) {
-    post('/board/post.jsp', { articleId: articleIdSrc, pageNum: pageNumSrc });
-  } else {
-    post(`/board/post.jsp?${query}`, { articleId: articleIdSrc, pageNum: pageNumSrc });
-  }
+  post('/board/post.jsp', { articleId: articleIdSrc, pageNum: 1 });
 }
 
 function makeLinkArticle() {
@@ -51,15 +32,10 @@ function makeLinkArticle() {
   }
 }
 
-function eventRegist() {
-  document.getElementById('articleColNum').onchange = sendArticleColNum;
-}
-
 function init() {
   makeLinkArticle();
 }
 
 window.onload = () => {
   init();
-  eventRegist();
 };

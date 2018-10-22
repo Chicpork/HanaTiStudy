@@ -7,11 +7,34 @@
 	String pageNum = request.getParameter("pageNum");
 	String articleId = null;
     articleId = request.getParameter("articleId");
-    System.out.println(articleId);
     if (articleId == null) {
         response.sendRedirect("/");
         return;
     }
+
+	String ip = request.getHeader("X-Forwarded-For");
+	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = request.getHeader("Proxy-Client-IP");
+	}
+	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = request.getHeader("WL-Proxy-Client-IP");
+	}
+	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = request.getHeader("HTTP_CLIENT_IP");
+	}
+	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+	}
+	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = request.getHeader("X-Real-IP");
+	}
+	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = request.getHeader("X-RealIP");
+	}
+	if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+		ip = request.getRemoteAddr();
+	}
+
     DaoFactory factory = (DaoFactory) application.getAttribute("factory");
     ArticleDao dao = factory.getArticleDao();
 %>
@@ -27,7 +50,7 @@
 <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Title -->
-<title>Yummy Blog - Food Blog Template</title>
+<title>Jiwon Blog - Game Review</title>
 
 <!-- Favicon -->
 <link rel="icon" href="/img/core-img/favicon.ico">
@@ -59,7 +82,8 @@
 
 <%
 	if (userId == null) {
-		response.sendRedirect("/user/loginfail.jsp");
+		request.setAttribute("loginMessage", "로그인이 필요합니다.");
+		request.getRequestDispatcher("/user/loginfail.jsp").forward(request, response);
 		return;
 	}
 %>
@@ -78,7 +102,7 @@
 	if (searchType == null || searchInput == null) {
 	if (!dao.certify(articleId, userId, passwd)) {
 	%>
-	<div class="wrong-page">
+	<div class="info-page">
 		<form action="/board/post.jsp" method="post">
 			<span>잘못된 비밀번호를 입력하셨습니다.</span>
 			<input type="submit" value="뒤로가기" class="button-my">
@@ -92,26 +116,41 @@
 	%>
 	<div class="new-post">
 		<form action="/board/updateArticle.jsp" method="post">
-			<div class="upper">
-				<div class="title">
-					<span>제목</span> <input type="text" name="subject"
-						value="<%=article.getSubject()%>">
+			<div class="my-border">
+				<div class="upper">
+					<div>
+					<dl>
+						<dt>제목</dt>
+						<dd><input type="text" name="subject" value="<%=article.getSubject()%>" required autofocus></dd>
+					</dl>
+					<dl>
+						<dt>비밀번호</dt>
+						<dd><input type="password" name="passwd" required></dd>
+					</dl>
+					</div>
+					<div>
+					<dl>
+						<dt>작성자</dt>
+						<dd><input type="text" name="writer" value="<%=userId%>" value="<%=userId%>" disabled readonly></dd>
+					</dl>
+					<dl>
+						<dt>아이피</dt>
+						<dd><div><%=ip%></div></dd>
+					</dl>
+					</div>
 				</div>
-				<div>
-					<span>작성자</span> <input type="text" name="writer"
-						value="<%=userId%>" disabled readonly>
+				<div class="main">
+					<dl>
+						<dt>내용</dt>
+						<dd><textarea cols="1" rows="1" name="content" required><%=article.getContent()%></textarea></dd>
+					</dl>
+					
 				</div>
-				<div class="passwd">
-					<span>비밀번호</span> <input type="password" name="passwd">
-				</div>
-			</div>
-			<div class="main">
-				<textarea cols="1" rows="1" name="content"><%=article.getContent()%></textarea>
 			</div>
 			<div class="bottom">
 				<input type="submit" value="올리기" class="button-my">
-                <a href="/board/freeboard.jsp"><input type="button" value="취소" class="button-my"></a>
-                <input type="hidden" name="articleId" value="<%=articleId%>">
+				<a href="/board/freeboard.jsp"><input type="button" value="취소" class="button-my"></a>
+				<input type="hidden" name="articleId" value="<%=articleId%>">
 				<input type="hidden" name="pageNum" value="<%=pageNum%>">
 			</div>
 		</form>
@@ -121,7 +160,7 @@
 	} else {
 		if (!dao.certify(articleId, userId, passwd)) {
 	%>
-	<div class="wrong-page">
+	<div class="info-page">
 		<form action="/board/post.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
 			<span>잘못된 비밀번호를 입력하셨습니다.</span>
 			<input type="submit" value="뒤로가기" class="button-my">
@@ -135,26 +174,41 @@
 	%>
 	<div class="new-post">
 		<form action="/board/updateArticle.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
-			<div class="upper">
-				<div class="title">
-					<span>제목</span> <input type="text" name="subject"
-						value="<%=article.getSubject()%>">
+			<div class="my-border">
+				<div class="upper">
+					<div>
+					<dl>
+						<dt>제목</dt>
+						<dd><input type="text" name="subject" value="<%=article.getSubject()%>" required></dd>
+					</dl>
+					<dl>
+						<dt>비밀번호</dt>
+						<dd><input type="password" name="passwd" required></dd>
+					</dl>
+					</div>
+					<div>
+					<dl>
+						<dt>작성자</dt>
+						<dd><input type="text" name="writer" value="<%=userId%>" value="<%=userId%>" disabled readonly></dd>
+					</dl>
+					<dl>
+						<dt>아이피</dt>
+						<dd><div><%=ip%></div></dd>
+					</dl>
+					</div>
 				</div>
-				<div>
-					<span>작성자</span> <input type="text" name="writer"
-						value="<%=userId%>" disabled readonly>
+				<div class="main">
+					<dl>
+						<dt>내용</dt>
+						<dd><textarea cols="1" rows="1" name="content" required><%=article.getContent()%></textarea></dd>
+					</dl>
+					
 				</div>
-				<div class="passwd">
-					<span>비밀번호</span> <input type="password" name="passwd">
-				</div>
-			</div>
-			<div class="main">
-				<textarea cols="1" rows="1" name="content"><%=article.getContent()%></textarea>
 			</div>
 			<div class="bottom">
 				<input type="submit" value="올리기" class="button-my">
-                <a href="/board/freeboard.jsp"><input type="button" value="취소" class="button-my"></a>
-                <input type="hidden" name="articleId" value="<%=articleId%>">
+				<a href="/board/freeboard.jsp"><input type="button" value="취소" class="button-my"></a>
+				<input type="hidden" name="articleId" value="<%=articleId%>">
 				<input type="hidden" name="pageNum" value="<%=pageNum%>">
 			</div>
 		</form>

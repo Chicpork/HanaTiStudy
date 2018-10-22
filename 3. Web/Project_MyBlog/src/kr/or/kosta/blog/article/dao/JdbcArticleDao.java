@@ -94,17 +94,13 @@ public class JdbcArticleDao implements ArticleDao {
 		}
 		return article;
 	}
-	
+
 	@Override
 	public void update(String articleId, String subject, String passwd, String ip, String content) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE article \r\n" + 
-				"SET    subject = ?, \r\n" + 
-				"       passwd = ?, \r\n" + 
-				"       ip = ?, \r\n" + 
-				"       content = ? \r\n" + 
-				"WHERE  article_id = ?";
+		String sql = "UPDATE article \r\n" + "SET    subject = ?, \r\n" + "       passwd = ?, \r\n"
+				+ "       ip = ?, \r\n" + "       content = ? \r\n" + "WHERE  article_id = ?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -129,10 +125,8 @@ public class JdbcArticleDao implements ArticleDao {
 	public void delete(String articleId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE article \r\n" + 
-				"SET    subject = '삭제된 게시글입니다.', \r\n" + 
-				"       content = '삭제된 게시글입니다.(@$^*)[DELETED]' \r\n" + 
-				"WHERE  article_id = ?";
+		String sql = "UPDATE article \r\n" + "SET    subject = '삭제된 게시글입니다.', \r\n"
+				+ "       content = '삭제된 게시글입니다.(@$^*)[DELETED]' \r\n" + "WHERE  article_id = ?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -148,15 +142,13 @@ public class JdbcArticleDao implements ArticleDao {
 			}
 		}
 	}
-	
+
 	@Override
 	public String getWriter(String articleId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT writer \r\n" + 
-				"FROM   article \r\n" + 
-				"WHERE  article_id = ?";
+		String sql = "SELECT writer \r\n" + "FROM   article \r\n" + "WHERE  article_id = ?";
 		String result = null;
 		try {
 			con = dataSource.getConnection();
@@ -177,16 +169,13 @@ public class JdbcArticleDao implements ArticleDao {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public boolean certify(String articleId, String writer, String passwd) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT writer, \r\n" + 
-				"       passwd \r\n" + 
-				"FROM   article \r\n" + 
-				"WHERE  article_id = ?";
+		String sql = "SELECT writer, \r\n" + "       passwd \r\n" + "FROM   article \r\n" + "WHERE  article_id = ?";
 		boolean result = false;
 		try {
 			con = dataSource.getConnection();
@@ -246,29 +235,38 @@ public class JdbcArticleDao implements ArticleDao {
 	}
 
 	public String buildOrderNo(String groupNo, String levelNo, String orderNo) throws Exception {
+		int result = 99999;
+		int orderNoTemp = result;
+		for (int i = Integer.parseInt(levelNo); i >= 1; i--) {
+			orderNoTemp = searchOrderNo(groupNo, i, orderNo);
+			if(orderNoTemp > 0) {
+				result = orderNoTemp < result ? orderNoTemp : result;
+			}
+		}
+		if (result < 0 || result == 99999) {
+			result = searchMaxOrderNo(groupNo);
+		} else {
+			updateOrderNo(groupNo, String.valueOf(result));
+		}
+		return String.valueOf(result);
+	}
+
+	private int searchOrderNo(String groupNo, int levelNo, String orderNo) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT Min(order_no) order_no \r\n" + 
-				"FROM   article \r\n" + 
-				"WHERE  group_no = ? \r\n" + 
-				"       AND level_no = ? \r\n" + 
-				"       AND order_no > ?";
-		String result = null;
+		String sql = "SELECT Min(order_no) order_no \r\n" + "FROM   article \r\n" + "WHERE  group_no = ? \r\n"
+				+ "       AND level_no = ? \r\n" + "       AND order_no > ?";
+		int result = 99999;
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, groupNo);
-			pstmt.setString(2, levelNo);
+			pstmt.setInt(2, levelNo);
 			pstmt.setString(3, orderNo);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				result = rs.getString("order_no");
-			}
-			if (result == null) {
-				result = searchMaxOrderNo(groupNo);
-			} else {
-				updateOrderNo(groupNo, result);
+				result = rs.getInt("order_no");
 			}
 		} finally {
 			try {
@@ -284,20 +282,18 @@ public class JdbcArticleDao implements ArticleDao {
 		return result;
 	}
 
-	private String searchMaxOrderNo(String groupNo) throws Exception {
+	private int searchMaxOrderNo(String groupNo) throws Exception {
 		Connection con = dataSource.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT Max(order_no) + 1 order_no \r\n" + 
-				"FROM   article \r\n" + 
-				"WHERE  group_no = ?";
-		String result = null;
+		String sql = "SELECT Max(order_no) + 1 order_no \r\n" + "FROM   article \r\n" + "WHERE  group_no = ?";
+		int result = 0;
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, groupNo);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				result = rs.getString("order_no");
+				result = rs.getInt("order_no");
 			}
 		} finally {
 			if (rs != null)
@@ -313,11 +309,8 @@ public class JdbcArticleDao implements ArticleDao {
 	private void updateOrderNo(String groupNo, String orderNo) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE article \r\n"
-		+ "SET    order_no = order_no + 1 \r\n"
-				+ "WHERE  board_id = 1 \r\n"
-				+ "       AND group_no = ? \r\n"
-				+ "       AND order_no >= ?";
+		String sql = "UPDATE article \r\n" + "SET    order_no = order_no + 1 \r\n" + "WHERE  board_id = 1 \r\n"
+				+ "       AND group_no = ? \r\n" + "       AND order_no >= ?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);

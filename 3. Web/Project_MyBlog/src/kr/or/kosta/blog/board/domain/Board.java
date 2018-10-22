@@ -1,5 +1,10 @@
 package kr.or.kosta.blog.board.domain;
 
+/**
+ * 게시판을 추상화한 클래스
+ * @author 정지원
+ *
+ */
 public class Board {
 
 	private String articleId;

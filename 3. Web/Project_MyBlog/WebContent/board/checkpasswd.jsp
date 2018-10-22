@@ -28,7 +28,7 @@
 	}
 %>
 	<!-- Title -->
-	<title>Yummy Blog - Food Blog Template</title>
+	<title>Jiwon Blog - Game Review</title>
 
 	<!-- Favicon -->
 	<link rel="icon" href="/img/core-img/favicon.ico">
@@ -61,7 +61,7 @@
 <%
 	if (userId == null) {
 		request.setAttribute("loginMessage", "로그인이 필요합니다.");
-		response.sendRedirect("/user/loginfail.jsp");
+		request.getRequestDispatcher("/user/loginfail.jsp").forward(request, response);
 		return;
 	}
 %>
@@ -95,7 +95,7 @@
 	<div class="check-password">
 		<form action="/board/editArticle.jsp" method="post">
 			<span>비밀번호를 입력하세요.</span>
-			<input type="password" name="passwd">
+			<input type="password" name="passwd" autofocus>
 			<input type="submit" value="확인" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
 			<input type="hidden" name="pageNum" value="<%=pageNum%>">
@@ -120,7 +120,7 @@
 	<div class="check-password">
 		<form action="/board/deleteArticle.jsp" method="post">
 			<span>비밀번호를 입력하세요.</span>
-			<input type="password" name="passwd">
+			<input type="password" name="passwd" autofocus>
 			<input type="submit" value="확인" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
 			<input type="hidden" name="pageNum" value="<%=pageNum%>">
@@ -148,7 +148,7 @@
 	<div class="check-password">
 		<form action="/board/editArticle.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
 			<span>비밀번호를 입력하세요.</span>
-			<input type="password" name="passwd">
+			<input type="password" name="passwd" autofocus>
 			<input type="submit" value="확인" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
 			<input type="hidden" name="pageNum" value="<%=pageNum%>">
@@ -173,7 +173,7 @@
 	<div class="check-password">
 		<form action="/board/deleteArticle.jsp?searchType=<%=searchType%>&searchInput=<%=searchInput%>" method="post">
 			<span>비밀번호를 입력하세요.</span>
-			<input type="password" name="passwd">
+			<input type="password" name="passwd" autofocus>
 			<input type="submit" value="확인" class="button-my">
 			<input type="hidden" name="articleId" value="<%=articleId%>">
 			<input type="hidden" name="pageNum" value="<%=pageNum%>">

@@ -1,5 +1,10 @@
 package kr.or.kosta.blog.article.domain;
 
+/**
+ * 게시판 게시글을 추상화한 클래스
+ * @author 정지원
+ *
+ */
 public class Article {
 	private String subject;
 	private String writer;

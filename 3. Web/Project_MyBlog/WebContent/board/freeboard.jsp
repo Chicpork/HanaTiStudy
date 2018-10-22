@@ -7,6 +7,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	response.setCharacterEncoding("utf-8");
 	DaoFactory factory = (DaoFactory) application.getAttribute("factory");
 	BoardDao dao = factory.getBoardDao();
 	String searchType = null;
@@ -53,7 +54,7 @@
 	<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<!-- Title -->
-	<title>Yummy Blog - Food Blog Template</title>
+	<title>Jiwon Blog - Free Board</title>
 
 	<!-- Favicon -->
 	<link rel="icon" href="/img/core-img/favicon.ico">
@@ -126,6 +127,8 @@
 			</thead>
 			<tbody>
 				<%
+					if (lists == null || lists.size() == 0){
+					} else {
 					int count = 0;
 					for (Board board : lists) {
 				%>
@@ -165,6 +168,7 @@
 				</tr>
 				<%
 					}
+				}
 				%>
 			</tbody>
 		</table>

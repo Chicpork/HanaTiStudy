@@ -53,7 +53,7 @@
 	<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<!-- Title -->
-	<title>Yummy Blog - Food Blog Template</title>
+	<title>Jiwon Blog - Game Review</title>
 
 	<!-- Favicon -->
 	<link rel="icon" href="/img/core-img/favicon.ico">
@@ -85,7 +85,8 @@
 
 <%
 	if (userId == null) {
-		response.sendRedirect("/user/loginfail.jsp");
+		request.setAttribute("loginMessage", "로그인이 필요합니다.");
+		request.getRequestDispatcher("/user/loginfail.jsp").forward(request, response);
 		return;
 	}
 %>

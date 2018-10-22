@@ -3,6 +3,7 @@
 <%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
+request.setCharacterEncoding("utf-8");
 String articleId = null;
 articleId = request.getParameter("articleId");
 String pageNum = request.getParameter("pageNum");
@@ -26,7 +27,7 @@ pageContext.setAttribute("article", dao.read(articleId));
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Yummy Blog - Food Blog Template</title>
+  <title>Jiwon Blog - ${article.subject}</title>
 
   <!-- Favicon -->
   <link rel="icon" href="/img/core-img/favicon.ico">
@@ -184,6 +185,7 @@ pageContext.setAttribute("article", dao.read(articleId));
       	<input type="hidden" name="groupNo" value="${article.groupNo}">
         <input type="hidden" name="levelNo" value="${article.levelNo}">
         <input type="hidden" name="orderNo" value="${article.orderNo}">
+        <input type="hidden" name="articleId" value="<%=articleId%>">
         <input type="hidden" name="pageNum" value="<%=pageNum%>">
       </form>
       <%

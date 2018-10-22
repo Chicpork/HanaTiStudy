@@ -15,11 +15,8 @@
       <li class="nav-item" id="guestbook">
         <a class="nav-link" href="/guest/guestbook.jsp">Guest Book</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" id="about">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/" id="contactme">Contact Me</a>
+      <li class="nav-item" id="about">
+        <a class="nav-link" href="/about_blog/about.jsp" id="about">About</a>
       </li>
     </ul>
   </div>

@@ -23,7 +23,7 @@ dao.create(user);
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Yummy Blog - Food Blog Template</title>
+  <title>Jiwon Blog - Regist</title>
 
   <!-- Favicon -->
   <link rel="icon" href="/img/core-img/favicon.ico">
@@ -55,11 +55,11 @@ dao.create(user);
   <div class="user-info">
     <p>회원 가입이 완료되었습니다.</p>
     <p>가입하신 회원 정보는 아래와 같습니다.</p>
-    <p>아이디 : <%=user.getId()%></p>
-    <p>아이디 : <%=user.getName()%></p>
-    <p>아이디 : <%=user.getEmail()%></p>
+    <p style="text-align: center;">아이디 : <%=user.getId()%></p>
+    <p style="text-align: center;">이름 : <%=user.getName()%></p>
+    <p style="text-align: center;">이메일 : <%=user.getEmail()%></p>
     <p>아래 홈으로 버튼을 누르면 홈으로 이동합니다.</p>
-    <a href="/"><input type="button" value="홈으로" class="button-my"></a>
+    <div style="text-align:center;"><a href="/"><input type="button" value="홈으로" class="button-my"></a></div>
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 

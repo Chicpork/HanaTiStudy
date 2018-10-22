@@ -15,7 +15,7 @@
     String passwd = request.getParameter("passwd");
 %>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="background-gray">
 
 <head>
 	<meta charset="UTF-8">
@@ -25,7 +25,7 @@
 	<!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 	<!-- Title -->
-	<title>Yummy Blog - Food Blog Template</title>
+	<title>Jiwon Blog - Game Review</title>
 
 	<!-- Favicon -->
 	<link rel="icon" href="/img/core-img/favicon.ico">
@@ -58,7 +58,7 @@
 <%
 	if (userId == null) {
 		request.setAttribute("loginMessage", "로그인이 필요합니다.");
-		response.sendRedirect("/user/loginfail.jsp");
+		request.getRequestDispatcher("/user/loginfail.jsp").forward(request, response);
 		return;
 	}
 %>

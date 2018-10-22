@@ -5,7 +5,7 @@
       <!-- Logo Area Start -->
       <div class="col-12">
         <div class="logo_area text-center">
-          <a href="/" class="yummy-logo">Jiwon Blog</a>
+          <a href="/" class="yummy-logo">Jiwon's Game Blog</a>
         </div>
       </div>
     </div>
