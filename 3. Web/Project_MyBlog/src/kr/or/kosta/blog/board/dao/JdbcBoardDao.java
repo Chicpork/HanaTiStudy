@@ -31,11 +31,14 @@ public class JdbcBoardDao implements BoardDao {
 		String sql = "SELECT Count(article_id) count \r\n" + 
 				"FROM   article \r\n" + 
 				"WHERE  board_id = 1 \r\n";
-		
 		int result = 0;
 		if (!(searchType == null || searchInput == null)) {
-			sql += "       AND "+searchType+" LIKE \'%"+searchInput+"%\'";
+			sql +=	"       AND group_no IN(SELECT group_no \r\n" + 
+					"                       FROM   article \r\n" + 
+					"                       WHERE  board_id = 1 \r\n" + 
+					"                              AND "+searchType+" LIKE \'%"+searchInput+"%\')";
 		}
+		
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -64,33 +67,41 @@ public class JdbcBoardDao implements BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Board board = null;
-		String sql = "SELECT article_id, \r\n" + 
+		String 	sql = "SELECT article_id, \r\n" + 
 				"       subject, \r\n" + 
 				"       writer, \r\n" + 
-				"       regdate, \r\n" + 
+				"       To_char(regdate, 'YYYY-MM-DD HH24:MI') regdate, \r\n" + 
 				"       ip, \r\n" + 
 				"       hitcount, \r\n" + 
-				"       level_no \r\n" + 
+				"       level_no, \r\n" + 
+				"       group_no, \r\n" + 
+				"       order_no \r\n" + 
 				"FROM   (SELECT Ceil(ROWNUM / ?) request_page, \r\n" + 
 				"               article_id, \r\n" + 
 				"               subject, \r\n" + 
 				"               writer, \r\n" + 
-				"               To_char(regdate, 'YYYY-MM-DD HH24:MI') regdate, \r\n" + 
+				"               regdate, \r\n" + 
 				"               ip, \r\n" + 
 				"               hitcount, \r\n" + 
-				"               level_no \r\n" + 
+				"               group_no, \r\n" + 
+				"               level_no, \r\n" + 
+				"               order_no \r\n" + 
 				"        FROM   (SELECT article_id, \r\n" + 
 				"                       subject, \r\n" + 
 				"                       writer, \r\n" + 
 				"                       regdate, \r\n" + 
 				"                       ip, \r\n" + 
 				"                       hitcount, \r\n" + 
-				"                       level_no \r\n" + 
+				"                       group_no, \r\n" + 
+				"                       level_no, \r\n" + 
+				"                       order_no \r\n" + 
 				"                FROM   article \r\n" + 
-				"                WHERE  board_id = 1 \r\n"; 
-
+				"                WHERE  board_id = 1 \r\n";
 		if(!(searchType == null || searchInput == null)) {
-			sql += "                    AND "+searchType+" LIKE \'%"+searchInput+"%\'\r\n";
+			sql +=	"                       AND group_no IN(SELECT group_no \r\n" + 
+					"                                       FROM   article \r\n" + 
+					"                                       WHERE  board_id = 1 \r\n" + 
+					"                                              AND "+searchType+" LIKE \'%"+searchInput+"%\') \r\n";
 		}
 		sql +=	"                ORDER  BY group_no DESC, \r\n" + 
 				"                          order_no ASC)) \r\n" + 

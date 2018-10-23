@@ -91,11 +91,11 @@
 					<div>
 					<dl>
 						<dt>제목</dt>
-						<dd><input type="text" name="subject" required autofocus></dd>
+						<dd><input type="text" name="subject" required autofocus maxlength="400"></dd>
 					</dl>
 					<dl>
 						<dt>비밀번호</dt>
-						<dd><input type="password" name="passwd" required></dd>
+						<dd><input type="password" name="passwd" required maxlength="8"></dd>
 					</dl>
 					</div>
 					<div>
@@ -112,9 +112,8 @@
 				<div class="main">
 					<dl>
 						<dt>내용</dt>
-						<dd><textarea cols="1" rows="1" name="content" required></textarea></dd>
+						<dd><textarea cols="1" rows="1" name="content" required maxlength="4000"></textarea></dd>
 					</dl>
-					
 				</div>
 			</div>
 			<div class="bottom">

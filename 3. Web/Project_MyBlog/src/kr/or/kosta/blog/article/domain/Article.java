@@ -59,12 +59,12 @@ public class Article {
 	}
 
 	public String getIp() {
-		return ip;
+		String[] ips = ip.split("\\.");
+		return ips[0] + "." + ips[1] + "." + ips[2] + ".xxx";
 	}
 
 	public void setIp(String ip) {
-		String[] ips = ip.split("\\.");
-		this.ip = ips[0] + "." + ips[1] + ".xxx.xxx";
+		this.ip = ip;
 	}
 
 	public String getHitcount() {

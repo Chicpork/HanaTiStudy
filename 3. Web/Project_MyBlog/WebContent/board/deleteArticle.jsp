@@ -1,3 +1,4 @@
+<%-- 게시글 삭제를 처리해주는 페이지 --%>
 <%@page import="kr.or.kosta.blog.article.dao.ArticleDao"%>
 <%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
 <%@page import="kr.or.kosta.blog.article.domain.Article"%>

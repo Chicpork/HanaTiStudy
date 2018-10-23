@@ -94,7 +94,7 @@ lists = dao.listAll(pageNum, String.valueOf(maxArticleColNum));
     if (userId != null) {
     %>
       <form action="" method="post">
-        <textarea cols="1" rows="1" name="message" required autofocus></textarea>
+        <textarea cols="1" rows="1" name="message" required autofocus maxlength="4000"></textarea>
         <button>등록</button>
         <input type="hidden" value="putMessage" name="putMessage">
       </form>
@@ -149,7 +149,7 @@ lists = dao.listAll(pageNum, String.valueOf(maxArticleColNum));
         <tr>
           <td><%=guestBookNum - count++%></td>
           <td><%=guestBook.getWriter()%></td>
-          <td><%=guestBook.getContent()%></td>
+          <td><pre><%=guestBook.getContent()%></pre></td>
           <td><%=guestBook.getRegdate()%></td>
         </tr>
       <%

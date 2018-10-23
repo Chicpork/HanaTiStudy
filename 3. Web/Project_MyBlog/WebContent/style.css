@@ -1790,6 +1790,13 @@ li {
 
 .post .main dd {
     margin: 0px;
+    width: 100%;
+    height: fit-content;
+}
+
+.post .main dd div {
+    height: 100%;
+    word-break: break-all;
 }
 
 .post .bottom {
@@ -2217,4 +2224,22 @@ li {
 
 .index-main .lower .free-board {
     width: 47%;
+}
+
+.index-main .lower .free-board table tr:hover td {
+    background: initial;
+    color: initial;
+    cursor: initial;
+}
+
+table td pre, .main pre {
+	margin: 0px;
+	font-family: 'Poppins', sans-serif;
+	font-size: 1rem;
+    font-weight: 400;
+    white-space: pre-wrap; /* CSS3*/
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-all; /* Internet Explorer 5.5+ */ 
 }

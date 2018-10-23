@@ -1,3 +1,5 @@
+<%-- 게시글 삭제나 수정시 비밀번호 확인을 위한 페이지 --%>
+
 <%@page import="kr.or.kosta.blog.article.domain.Article"%>
 <%@page import="kr.or.kosta.blog.article.dao.ArticleDao"%>
 <%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>

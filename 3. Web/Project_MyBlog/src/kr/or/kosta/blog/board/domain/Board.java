@@ -63,7 +63,8 @@ public class Board {
 	}
 
 	public String getIp() {
-		return ip;
+		String[] ips = this.ip.split("\\.");
+		return ips[0] + "." + ips[1] + ".xxx.xxx";
 	}
 
 	public void setIp(String ip) {

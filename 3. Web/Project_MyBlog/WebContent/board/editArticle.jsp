@@ -1,3 +1,4 @@
+<%-- 게시글 수정을 위한 페이지 --%>
 <%@page import="kr.or.kosta.blog.article.dao.ArticleDao"%>
 <%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
 <%@page import="kr.or.kosta.blog.article.domain.Article"%>
@@ -121,11 +122,11 @@
 					<div>
 					<dl>
 						<dt>제목</dt>
-						<dd><input type="text" name="subject" value="<%=article.getSubject()%>" required autofocus></dd>
+						<dd><input type="text" name="subject" value="<%=article.getSubject()%>" required autofocus maxlength="400"></dd>
 					</dl>
 					<dl>
 						<dt>비밀번호</dt>
-						<dd><input type="password" name="passwd" required></dd>
+						<dd><input type="password" name="passwd" required maxlength="8"></dd>
 					</dl>
 					</div>
 					<div>
@@ -142,7 +143,7 @@
 				<div class="main">
 					<dl>
 						<dt>내용</dt>
-						<dd><textarea cols="1" rows="1" name="content" required><%=article.getContent()%></textarea></dd>
+						<dd><textarea cols="1" rows="1" name="content" required maxlength="4000"><%=article.getContent()%></textarea></dd>
 					</dl>
 					
 				</div>

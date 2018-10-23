@@ -98,7 +98,7 @@ pageContext.setAttribute("article", dao.read(articleId));
           <%
           } else {
           %>
-          <dd>${article.content}</dd>
+          <dd><div><pre>${article.content}</pre></div></dd>
           <%
           }
           %>

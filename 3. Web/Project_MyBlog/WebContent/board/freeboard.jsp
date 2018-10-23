@@ -1,3 +1,4 @@
+<%-- 자유 게시판을 보여주기 위한 페이지 --%>
 <%@page import="kr.or.kosta.blog.common.MyPageBuilder"%>
 <%@page import="kr.or.kosta.blog.board.domain.Board"%>
 <%@page import="java.util.List"%>
@@ -91,6 +92,7 @@
 				<select name="searchType">
 					<option value="subject">제목</option>
 					<option value="writer">작성자</option>
+					<option value="content">글 내용</option>
 				</select>
 				<input type="search" name="searchInput" class="search-anything" placeholder="search" title="2글자 이상 입력하셔야 합니다.">
 				<button><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -160,8 +162,7 @@
 						<%=board.getRegdate()%>
 					</td>
 					<td>
-						<%String[] ips = board.getIp().split("\\.");%>
-						<%=ips[0] + "." + ips[1]%>.xxx.xxx</td>
+						<%=board.getIp()%></td>
 					<td>
 						<%=board.getHitcount()%>
 					</td>
