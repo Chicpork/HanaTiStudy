@@ -1,0 +1,96 @@
+package kr.or.kosta.shoppingmall.common.controller;
+
+import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.kosta.shoppingmall.common.view.View;
+import kr.or.kosta.shoppingmall.common.view.ViewResolver;
+
+/**
+ * 모든 브라우저 요청에 대한 단일 진입점 역할의 프론트 컨트롤러 서블릿(메인 컨트롤러)
+ * 
+ * @author 김기정
+ */
+public class SimpleFrontControllerServlet_V4 extends HttpServlet {
+	private String controllerMapperLocation;
+	
+	private ControllerFactory controllerFactory;
+	private ViewResolver viewResolver;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		controllerMapperLocation = config.getInitParameter("controllerMapperLocation");
+		controllerFactory = new ControllerFactory(controllerMapperLocation);
+		viewResolver = new ViewResolver();
+	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		process(request, response);
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		process(request, response);
+	}
+
+	public void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+		/** 모든 세부 컨트롤러들에 대한 공통 기능 처리 */
+
+		// 모든 요청파라메터에 대한 한글 인코딩 처리
+		//request.setCharacterEncoding("utf-8");
+
+		// #1.웹 클라이언트 요청(브라우저 명령) 분석
+		String uri = request.getRequestURI();
+
+		// 확장자 형식 매핑시..
+		// /appName/some.mall -> /some
+		// /appName/board/some.do -> /board/some
+		String contextPath = request.getContextPath();
+		uri = uri.substring(contextPath.length(), uri.lastIndexOf("."));
+		System.out.println("[Info] : 요청 URI: " + uri);
+
+		// #2. 웹 클라이언트 요청에 대한 모델 세부 컨트롤러 실행 및 응답 - Command Pattern 적용
+		Controller controller = null;
+		ModelAndView mav = null;
+		View view = null;
+
+		// ControllerFactory에서 요청 uri에 대한 컨트롤러 검색
+		controller = controllerFactory.getController(uri);
+		
+		if(controller == null){
+//			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//			return;
+			// 등록된 세부 컨트롤러가 없을 경우 uri에 해당하는 jsp로 단순 포워드
+			view = viewResolver.resolve(uri+".jsp");
+			view.execute(request, response);
+			return;
+		}
+
+		// 일관된 메소드 호출을 통한 세부컨트롤러 실행(커맨드패턴)
+		mav = controller.handleRequest(request, response);
+		if(mav == null){
+			return;
+		}
+
+		// request 컨텍스트 객체에 View에서 필요로 하는 결과정보 저장
+		Map<String, Object> map = mav.getModel();
+		Set<String> keySet = map.keySet();
+		for (String key : keySet) {
+			Object value = map.get(key);
+			request.setAttribute(key, value);
+		}
+		
+		//  ViewResolver로 부터 View 선택 및 실행
+		String viewPath = mav.getView();
+		view = viewResolver.resolve(viewPath);
+		view.execute(request, response);
+	}
+
+}
