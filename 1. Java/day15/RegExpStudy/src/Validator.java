@@ -24,7 +24,7 @@ public class Validator {
 	 * @return
 	 */
 	public static boolean isValidId(String id){
-		return id.trim().matches("(\\w){8,10}");
+		return id.trim().matches("^(\\w){8,10}");
 	}
 
 	/**

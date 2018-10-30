@@ -50,6 +50,7 @@ body {
     font-family: 'Poppins', sans-serif;
     position: relative;
     z-index: auto;
+    background-color: #f5f5dce6;
 }
 
 h1,
@@ -391,7 +392,7 @@ li {
     display: inline-block;
 }
 
-.search-hidden-form #search-anything {
+.search-hidden-form .search-anything {
     width: 100%;
     height: 30px;
     border: 1px solid #ddd;
@@ -1487,53 +1488,320 @@ li {
 
 /* 내 css 설정 */
 
-.table-board {
+.free-board {
     margin: 0px 20%;
     margin-top: 50px;
-    padding: 15px;
-    background-color: rgb(248, 248, 248)
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
 }
 
-.table-board table {
-    clear: both;
+.free-board .search-board {
+    margin-top: 3px;
+    margin-bottom: 8px;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+
+.free-board .search-board form {
+    display: inline;
+}
+
+.free-board .search-board select {
+    height: 30px;
     border: 1px solid #ddd;
+    font-size: small;
+    padding: 0px 5px;
+}
+
+.free-board .search-anything {
+    width: 30%;
+    height: 30px;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    font-size: small;
+}
+
+.free-board .search-board button {
+    visibility: hidden;
+    margin-left: 10px;
+}
+
+.free-board .search-board button:hover {
+    cursor: pointer;
+}
+
+.free-board .search-board i {
+    visibility: visible;
+    font-size: large;
+}
+
+.page-row-num {
+    float: right;
+}
+
+.page-row-num span {
+    position: relative;
+    top: 1px;
+}
+
+.page-row-num select {
+    height: 30px;
+    border: 1px solid #ddd;
+    font-size: small;
+    padding: 0px 5px;
+}
+
+.free-board table {
+    clear: both;
+    border: 2px solid #e9ecef;
     border-collapse: collapse;
 	font: normal 1em helvetica, verdana, arial, sans-serif;
     width: 100%;
     font-size: small;
 }
 
-.table-board table th {
-    background-color: #1ac821;
-    border: 1px solid #ddd;
+.free-board table tbody tr:hover td {
+    background: #3f3f3f8f;
+    color: white;
+    cursor: pointer;
+}
+
+.free-board table th {
+    background-color: #fc6c3f87;
+    border: 2px solid #e9ecef;
     height: 35px;
     padding: 10px;
     text-align: center;
     color: white;
 }
 
-.table-board table td {
+.free-board table td {
     background-color: white;
-    border: 1px solid #ddd;
+    border: 2px solid #e9ecef;
     height: 35px;
     padding: 10px;
     text-align: center;
 }
 
-.table-board table td:nth-child(2) {
+.free-board table td:nth-child(4) {
     text-align: left;
+}
+
+.board-bottom {
+    margin-top: 10px;
+}
+
+.free-board .bottom-buttons {
+    float: right;
 }
 
 .page-number {
     width: fit-content;
     margin: 0px auto;
+    padding-top: 10px;
     text-align: center;
     font-size: large;
     color: #222;
 }
 
-.page-number a {
-    margin: 1px 3px;
+.page-number form {
+    display: inline;
+}
+
+.page-number button {
+    visibility: hidden;
+}
+
+.page-number button:hover {
+    color: #fc6c3f;
+    cursor: pointer;
+}
+
+.page-number button span {
+    visibility: visible;
+}
+
+.page-number button .active {
+    color: #fc6c3f;
+}
+
+.page-number i {
+    visibility: visible;
+}
+
+.page-number i:hover {
+    color: #fc6c3f;
+    cursor: pointer;
+}
+
+.new-post {
+    margin: 0px 20%;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+}
+
+.new-post .my-border {
+    margin: 0;
+    padding: 0;
+    border: 2px solid #e9ecef;
+}
+
+.new-post .upper dl {
+    margin: 0px;
+    border: 2px solid #e9ecef;
+    border-bottom: none;
+    padding: 8px 15px;
+}
+
+.new-post .upper dd {
+    margin: 0px;
+}
+
+.new-post .upper dd input , .new-post .upper dd div {
+    border: none;
+    border-bottom: black;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: transparent;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.new-post .upper dd input:focus {
+    background-color: white;
+}
+
+.new-post .upper dt {
+    font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
+}
+
+.new-post .upper div {
+    display: flex;
+}
+
+.new-post .upper div dl {
+    display: inline-block;
+    width: 50%;
+}
+
+ .new-post .upper div dl:nth-child(1) {
+    border-right: none;
+}
+
+.new-post .main {
+    height: 350px;
+}
+
+.new-post .main dl {
+    margin: 0px;
+    border: 2px solid #e9ecef;
+    padding: 8px 15px;
+    height: 100%;
+}
+
+.new-post .main dt {
+    font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
+}
+
+.new-post .main dd {
+    margin: 0px;
+    height: 90%;
+}
+
+.new-post .main dd textarea {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #e9ecef;
+    resize: none;
+    display: block;
+    padding: 5px 10px;
+}
+
+.new-post .bottom {
+    text-align: right;
+    margin-top: 10px;
+}
+
+
+.post {
+    margin: 0px 20%;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+}
+
+.post .my-border {
+    margin: none;
+    padding: none;
+    border: 2px solid #e9ecef;
+}
+
+.post .upper dl {
+    margin: 0px;
+    border: 2px solid #e9ecef;
+    padding: 8px 15px;
+}
+
+.post .upper dd {
+    margin: 0px;
+}
+
+.post .upper dt {
+    font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
+}
+
+.post .upper div dl {
+    display: inline-block;
+    width: 50%;
+}
+
+.post .upper div dl:nth-child(1) {
+    border-top: none;
+    border-right: none;
+}
+
+.post .upper div dl:nth-child(2) {
+    float: right;
+    border-top: none;
+}
+
+.post .main dl {
+    margin: 0px;
+    border: 2px solid #e9ecef;
+    border-top: none;
+    padding: 8px 15px;
+}
+
+.post .main dt {
+    font-size: large;
+    color: mediumseagreen;
+    font-weight: bolder;
+}
+
+.post .main dd {
+    margin: 0px;
+    width: 100%;
+    height: fit-content;
+}
+
+.post .main dd div {
+    height: 100%;
+    word-break: break-all;
+}
+
+.post .bottom {
+    text-align: right;
+    margin-top: 10px;
 }
 
 .guest-board {
@@ -1541,6 +1809,7 @@ li {
     margin-top: 50px;
     padding: 30px;
     background-color: rgb(248, 248, 248);
+    border-radius: 22px;
 }
 
 .guest-board .guest-message {
@@ -1552,27 +1821,36 @@ li {
     height: 100px;
 }
 
+.guest-board .guest-message button {
+    height: 100%;
+}
+
 .guest-board textarea {
     width: 85%;
     height: 100%;
-    border: 1px solid #ddd;
+    border: 2px solid #e9ecef;
     resize: none;
     display: block;
     float: left;
+    padding: 5px 10px;
 }
 
-.guest-board button {
+.guest-board .guest-message button {
     width: 10%;
-    background-color: gainsboro;
-    border-radius: 10px;
     display: block;
     margin: 0px auto;
     text-align: center;
+    background-color: rgba(255, 99, 71, 1);
+	color: white;
+	padding: 3px 8px;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
 }
 
 .guest-board table {
     clear: both;
-    border: 1px solid #ddd;
+    border: 2px solid #e9ecef;
     border-collapse: collapse;
 	font: normal 1em helvetica, verdana, arial, sans-serif;
     width: 100%;
@@ -1580,8 +1858,8 @@ li {
 }
 
 .guest-board table th {
-    background-color: #1ac821;
-    border: 1px solid #ddd;
+    background-color: #fc6c3f87;
+    border: 2px solid #e9ecef;
     height: 35px;
     padding: 10px;
     text-align: center;
@@ -1590,13 +1868,13 @@ li {
 
 .guest-board table td {
     background-color: white;
-    border: 1px solid #ddd;
+    border: 2px solid #e9ecef;
     height: 35px;
     padding: 10px;
     text-align: center;
 }
 
-.guest-board table td:nth-child(2) {
+.guest-board table td:nth-child(3) {
     text-align: left;
 }
 
@@ -1605,6 +1883,14 @@ li {
     position: relative;
     float: right;
     z-index: 3;
+}
+
+.top_header_area .signup-search-area label {
+    margin: 0px;
+    margin-right: 15px;
+    font-size: small;
+    position: relative;
+    top: 2px;
 }
 
 .top_header_area .signup-search-area a {
@@ -1618,8 +1904,12 @@ li {
 
 .top_header_area .signup-search-area .login a {
     margin-right: 13px;
-    border-right: 2px solid #c2c2c2;
+    border-right: 2px solid dimgray;
     padding-right: 13px;
+}
+
+.top_header_area .signup-search-area .logout a {
+    border-right: none;
 }
 
 .top_header_area .signup-search-area .search_button {
@@ -1645,7 +1935,7 @@ li {
 .top_header_area .signup-search-area .login-form input {
     width: 100%;
     height: 30px;
-    border: 1px solid #ddd;
+    border: 2px solid #e9ecef;
     padding: 5px 10px;
     font-size: small;
     margin-right: 10px;
@@ -1654,13 +1944,13 @@ li {
 
 .top_header_area .signup-search-area .login-form input[type=text]:focus, .top_header_area .signup-search-area .login-form input[type=password]:focus {
     outline: none;
-    box-shadow: 0px 0px 2px blue;
+    box-shadow: 0px 0px 5px red;
 }
 
 .top_header_area .signup-search-area .login-form #login-submit {
     width: fit-content;
     height: 30px;
-    border: 1px solid #ddd;
+    border: 2px solid #e9ecef;
     padding: 5px 10px;
     cursor: pointer;
 }
@@ -1673,5 +1963,283 @@ li {
 .top_header_area .signup-search-area .login-form label {
     font-size: x-small;
     width: 110px;
-    line-height: 3;
+    position: relative;
+    top: 8px;
+}
+
+.user-info {
+    margin: 0px 30%;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+}
+
+.user-info dl {
+    margin: 10px 0px;
+}
+
+.user-info dt, .user-info dd {
+    display: inline-block;
+}
+
+.user-info dt {
+    width: 49%;
+    text-align: right;
+    padding-right: 30px;
+    vertical-align: top;
+    position: relative;
+    top: 5px;
+}
+
+.user-info dd {
+    width: 49%;
+    margin-bottom: 0px;
+}
+
+.user-info dd input {
+    width: 100%;
+    display: inline-block;
+	padding: 3px 6px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.user-info dd .check-box {
+    margin: 5px 0px;
+    color: red;
+}
+
+.user-info .user-submit {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.user-info .user-submit input {
+    background-color: #fc6c3f87;
+	color: white;
+	padding: 3px 10px;
+	border: none;
+	border-radius: 13px;
+    cursor: pointer;
+    width: fit-content;
+    font-size: x-large;
+}
+
+.user-info-form label {
+    display: none;
+}
+
+.user-info-form iframe {
+    border-color: transparent;
+    border: none;
+    display: none;
+    height: 24px;
+    width: 100%;
+}
+
+.button-my {
+    background-color: #fc6c3f87;
+    color: white;
+    padding: 3px 10px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.bottom form {
+    display: inline-block;
+}
+
+.login-fail {
+    margin: 0px 35%;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    text-align: center;
+}
+
+.login-fail form {
+    width: 100%;
+    margin: 0px auto;
+}
+
+.login-fail div div {
+    width: 69%;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.login-fail div:nth-child(2) {
+    position: relative;
+    top: -15px;
+    left: -125px;
+}
+
+.login-fail input[type=text], .login-fail input[type=password] {
+    display: block;
+    margin: 10px auto;
+    border: 2px solid #e9ecef;
+    padding: 5px 20px;
+    font-size: large;
+    border-radius: 22px;
+    width: 100%;
+}
+
+.login-fail input[type=text]:focus, .login-fail input[type=password]:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px red;
+}
+
+.login-fail .message {
+    margin: 10px auto;
+    font-size: x-large;
+    text-align: center;
+    font-weight: 800;
+}
+
+.login-fail input[type=submit] {
+    height: 86px;
+    position: relative;
+    top: -26px;
+    font-size: larger;
+}
+
+.background-gray body {
+    background-color: dimgray;
+}
+
+.background-gray .top_header_area {
+    border-bottom: 1px solid dimgray;
+}
+
+.background-gray .signup-search-area .login a {
+    border-right: 2px solid dimgray;
+}
+
+.background-gray .signup-search-area .login-form.login-form-open label {
+    color: white;
+}
+
+.check-password {
+    margin: 0px 35%;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    text-align: center;
+}
+
+.check-password span {
+    display: block;
+    font-size: x-large;
+}
+
+.check-password input[type=password] {
+    display: inline-block;
+    margin: 10px auto;
+    border: 2px solid #e9ecef;
+    padding: 5px 20px;
+    font-size: large;
+    border-radius: 22px;
+}
+
+.check-password input[type=password]:focus {
+    outline: none;
+    box-shadow: 0px 0px 5px red;
+}
+
+.check-password .button-my {
+    background-color: #fc6c3f87;
+    color: white;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    width: fit-content;
+    font-size: larger;
+}
+
+.info-page {
+    text-align: center;
+    padding: 50px 0px;
+    margin: 80px auto;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    width: fit-content;
+}
+
+.info-page form span {
+    display: inline-block;
+    font-size: x-large;
+    font-weight: 700;
+    position: relative;
+    top: 4px;
+    margin: 0px 30px;
+}
+
+.info-page form .button-my {
+    margin-right: 30px;
+}
+
+.index-main {
+    width: 90%;
+    text-align: center;
+    margin: 30px auto;
+}
+
+.index-main .upper, .index-main .lower {
+    display: flex;
+    text-align: center;
+}
+
+.index-main .upper .free-board, .index-main .lower .free-board {
+    width: 50%;
+    display: inline-block;
+    margin-top: 50px;
+    padding: 30px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 22px;
+    margin : 0px 20px;
+}
+
+.index-main .upper div, .index-main .lower div {
+    margin-bottom: 10px;
+    font-size: x-large;
+}
+
+.index-main .upper .free-board table td, .index-main .lower .free-board table td {
+    text-align: center;
+}
+
+.index-main .upper .free-board table td:nth-child(2), .index-main .lower .free-board table td:nth-child(2) {
+    text-align: left;
+}
+
+.index-main .lower {
+    margin: 30px 0px;
+}
+
+.index-main .lower .free-board {
+    width: 47%;
+}
+
+.index-main .lower .free-board table tr:hover td {
+    background: initial;
+    color: initial;
+    cursor: initial;
+}
+
+table td pre, .main pre {
+	margin: 0px;
+	font-family: 'Poppins', sans-serif;
+	font-size: 1rem;
+    font-weight: 400;
+    white-space: pre-wrap; /* CSS3*/
+	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+	white-space: -pre-wrap; /* Opera 4-6 */
+	white-space: -o-pre-wrap; /* Opera 7 */
+	word-wrap: break-all; /* Internet Explorer 5.5+ */ 
 }

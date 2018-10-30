@@ -1,14 +1,39 @@
-function init() {
-  const pathname = window.location.pathname.split('/');
-  let filename = pathname[pathname.length - 1];
-  if (filename.length === 0) {
-    document.getElementById('home').parentElement.classList.toggle('active');
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  const expires = `expires=${d.toUTCString()}`;
+  document.cookie = `${cname}=${cvalue};${expires};path=/`;
+}
+
+function saveIdCookie() {
+  if (document.getElementById('saveId').checked) {
+    setCookie('saveId', document.getElementById('userId').value, 30);
   } else {
-    filename = filename.slice(0, filename.length - 4);
-    document.getElementById(filename).parentElement.classList.toggle('active');
+    setCookie('saveId', '', -1);
   }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  init();
+function eventRegist() {
+  if (document.getElementById('login-submit') !== null) {
+    document.getElementById('login-submit').onclick = saveIdCookie;
+  }
+}
+
+function changeColor() {
+  const pathname = window.location.pathname.split('/');
+  const name = pathname[1];
+  if (name.length === 0) {
+    document.getElementById('home').classList.toggle('active');
+  } else if (name === 'board') {
+    document.getElementById('freeboard').classList.toggle('active');
+  } else if (name === 'guest') {
+    document.getElementById('guestbook').classList.toggle('active');
+  } else if (name === 'about_blog') {
+    document.getElementById('about').classList.toggle('active');
+  }
+}
+
+window.onload = (() => {
+  eventRegist();
+  changeColor();
 });

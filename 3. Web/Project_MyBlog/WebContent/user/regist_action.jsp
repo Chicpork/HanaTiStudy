@@ -1,4 +1,17 @@
+<%@page import="kr.or.kosta.blog.common.dao.JdbcDaoFactory"%>
+<%@page import="kr.or.kosta.blog.common.dao.DaoFactory"%>
+<%@page import="kr.or.kosta.blog.user.dao.UserDao"%>
 <%@ page contentType="text/html; charset=utf-8"%>
+<%request.setCharacterEncoding("utf-8"); %>
+<jsp:useBean id="user" class="kr.or.kosta.blog.user.domain.User"/>
+<jsp:setProperty property="*" name="user"/>
+
+<%
+DaoFactory factory = (DaoFactory)application.getAttribute("factory");
+UserDao dao = factory.getUserDao();
+dao.create(user);
+%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -10,7 +23,7 @@
   <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <!-- Title -->
-  <title>Yummy Blog - Food Blog Template</title>
+  <title>Jiwon Blog - Regist</title>
 
   <!-- Favicon -->
   <link rel="icon" href="/img/core-img/favicon.ico">
@@ -29,14 +42,6 @@
     <div class="yummy-load"></div>
   </div>
 
-  <!-- Background Pattern Swither -->
-  <div id="pattern-switcher">
-    Bg Pattern
-  </div>
-  <div id="patter-close">
-    <i class="fa fa-times" aria-hidden="true"></i>
-  </div>
-
   <!-- ****** Top Header Area Start ****** -->
   <jsp:include page="/include/top_header_area.jsp" />
   <%-- <%@ include file="/include/top_header_area.jsp"%> --%>
@@ -48,47 +53,13 @@
 
   <%-- ****** 메인 바디 작성 시작 ****** --%>
   <div class="user-info">
-    <form class="user-info-form">
-      <dl>
-        <dt>아이디</dt>
-        <dd>
-          <input type="text">
-          <label>아이디를 입력해주세요</label>
-        </dd>
-      </dl>
-      <dl>
-        <dt>비밀번호</dt>
-        <dd>
-            <input type="text">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <dl>
-        <dt>비밀번호 확인</dt>
-        <dd>
-            <input type="text">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <dl>
-        <dt>이름</dt>
-        <dd>
-            <input type="text">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <dl>
-        <dt>이메일</dt>
-        <dd>
-            <input type="text">
-            <label>아이디를 입력해주세요</label>
-          </dd>
-      </dl>
-      <div class="user-submit">
-        <input type="submit" value="가입">
-        <a href="/"><input type="button" value="취소"></a>
-      </div>
-    </form>
+    <p>회원 가입이 완료되었습니다.</p>
+    <p>가입하신 회원 정보는 아래와 같습니다.</p>
+    <p style="text-align: center;">아이디 : <%=user.getId()%></p>
+    <p style="text-align: center;">이름 : <%=user.getName()%></p>
+    <p style="text-align: center;">이메일 : <%=user.getEmail()%></p>
+    <p>아래 홈으로 버튼을 누르면 홈으로 이동합니다.</p>
+    <div style="text-align:center;"><a href="/"><input type="button" value="홈으로" class="button-my"></a></div>
   </div>
   <%-- ****** 메인 바디 작성 끝 ****** --%>
 
